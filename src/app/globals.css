@@ -1,27 +1,41 @@
 @import 'tailwindcss';
 
 :root {
-  --bg: #000000;
-  --fg: #ffffff;
-  --text-muted: #a1a1aa; /* zinc-400 */
+  --bg-primary: #ffffff;
+  --bg-secondary: #606060;
+  --text-primary: #000000;
+  --text-secondary: #606060;
+  --accent: #f5a623;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --bg: #ffffff;
-    --fg: #000000;
-    --text-muted: #71717a; /* zinc-500 */
+    --bg-primary: #000000;
+    --bg-secondary: #2e2e2e;
+    --text-primary: #ffffff;
+    --text-secondary: #606060;
+    --accent: #f5a623;
   }
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--bg);
-  color: var(--fg);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 body {
   @apply antialiased;
-  background-color: var(--bg);
-  color: var(--fg);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+:root {
+  --grid-line: rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --grid-line: rgba(255, 255, 255, 0.08);
+  }
 }

@@ -117,7 +117,7 @@ export default function ServicesPage() {
                   <Icon className="h-7 w-7 text-yellow-400" />
                 </div>
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-white">{service.title}</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold">{service.title}</h2>
                   <p className="text-yellow-400 font-medium mt-1">{service.tagline}</p>
                 </div>
               </div>
@@ -134,10 +134,10 @@ export default function ServicesPage() {
                       return (
                         <div
                           key={sub.label}
-                          className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 text-center"
+                          className="border border-zinc-800 rounded-lg p-4 text-center"
                         >
                           <SubIcon className="h-5 w-5 text-yellow-400 mx-auto mb-2" />
-                          <p className="text-white font-semibold text-sm">{sub.label}</p>
+                          <p className="font-semibold text-sm">{sub.label}</p>
                           <p className="text-zinc-500 text-xs mt-1">{sub.desc}</p>
                         </div>
                       );
@@ -146,7 +146,7 @@ export default function ServicesPage() {
 
                   <Button
                     asChild
-                    className="bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition-colors"
+                    className="bg-yellow-500 font-bold hover:bg-yellow-400 transition-colors"
                   >
                     <Link href="/contact">
                       Get a {service.title} Quote
@@ -156,16 +156,14 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Checklist */}
-                <Card className="bg-zinc-900 border-zinc-800">
+                <Card className="border-zinc-800">
                   <CardContent className="p-6">
-                    <h3 className="text-white font-semibold mb-5 text-base">
-                      What&apos;s included
-                    </h3>
+                    <h3 className="font-semibold mb-5 text-base">What&apos;s included</h3>
                     <ul className="flex flex-col gap-3">
                       {service.offerings.map((item) => (
                         <li key={item} className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 text-yellow-500 shrink-0 mt-0.5" />
-                          <span className="text-zinc-300 text-sm leading-snug">{item}</span>
+                          <span className="text-sm leading-snug">{item}</span>
                         </li>
                       ))}
                     </ul>

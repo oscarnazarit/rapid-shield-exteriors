@@ -81,11 +81,11 @@ export default function HomePage() {
       <section className="relative overflow-hidden">
         {/* Subtle grid texture */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0"
           style={{
             backgroundImage:
-              'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
+              'linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)',
+            backgroundSize: '30px 30px',
           }}
         />
         {/* Gold accent line */}
@@ -96,7 +96,7 @@ export default function HomePage() {
             <Badge className="mb-5 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium tracking-wide uppercase text-xs">
               Licensed &amp; Insured Contractors
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
               Protect Your Home.
               <br />
               <span className="text-yellow-400">Trust the Shield.</span>
@@ -120,7 +120,7 @@ export default function HomePage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-zinc-700 text-white hover:bg-zinc-900 hover:text-white text-base"
+                className="border-zinc-700 hover:bg-yellow-400 text-base"
               >
                 <Link href="/services">View Our Services</Link>
               </Button>
@@ -162,14 +162,14 @@ export default function HomePage() {
               return (
                 <Card
                   key={service.title}
-                  className="bg-zinc-900 border-zinc-800 hover:border-yellow-500/40 transition-colors group"
+                  className="border-zinc-800 hover:border-yellow-500/40 transition-colors group"
                 >
                   <CardContent className="p-6 flex flex-col gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-yellow-500/10 border border-yellow-500/20 group-hover:bg-yellow-500/20 transition-colors">
                       <Icon className="h-6 w-6 text-yellow-400" />
                     </div>
                     <div>
-                      <h3 className="text-white font-semibold text-lg mb-2">{service.title}</h3>
+                      <h3 className="font-semibold text-lg mb-2">{service.title}</h3>
                       <p className="text-zinc-400 text-sm leading-relaxed">{service.description}</p>
                     </div>
                     <Link
@@ -194,7 +194,7 @@ export default function HomePage() {
               <Badge className="mb-4 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium uppercase text-xs tracking-wide">
                 Why Rapid Shield
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 The standard for exterior work in the area
               </h2>
               <p className="text-zinc-400 leading-relaxed mb-8">
@@ -204,7 +204,7 @@ export default function HomePage() {
               </p>
               <Button
                 asChild
-                className="bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition-colors"
+                className="bg-yellow-500 font-bold hover:bg-yellow-400 transition-colors"
               >
                 <Link href="/contact">Schedule a Free Estimate</Link>
               </Button>
@@ -213,10 +213,10 @@ export default function HomePage() {
               {reasons.map((reason) => (
                 <div
                   key={reason}
-                  className="flex items-start gap-3 bg-zinc-950 border border-zinc-800 rounded-lg p-4"
+                  className="flex items-start gap-3 border border-zinc-800 rounded-lg p-4"
                 >
                   <CheckCircle2 className="h-5 w-5 text-yellow-500 shrink-0 mt-0.5" />
-                  <span className="text-zinc-300 text-sm leading-snug">{reason}</span>
+                  <span className="text-zinc-400 text-sm leading-snug">{reason}</span>
                 </div>
               ))}
             </div>
@@ -231,22 +231,22 @@ export default function HomePage() {
             <Badge className="mb-4 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium uppercase text-xs tracking-wide">
               Testimonials
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">What our customers say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">What our customers say</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <Card key={t.name} className="bg-zinc-900 border-zinc-800">
+              <Card key={t.name} className="border-zinc-800">
                 <CardContent className="p-6 flex flex-col gap-4">
                   <div className="flex gap-0.5">
                     {Array.from({ length: t.rating }).map((_, i) => (
                       <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-zinc-300 text-sm leading-relaxed italic">
+                  <p className="text-zinc-600 text-sm leading-relaxed italic">
                     &ldquo;{t.text}&rdquo;
                   </p>
                   <div className="mt-auto pt-2 border-t border-zinc-800">
-                    <p className="text-white font-semibold text-sm">{t.name}</p>
+                    <p className="font-semibold text-sm">{t.name}</p>
                     <p className="text-zinc-500 text-xs">{t.location}</p>
                   </div>
                 </CardContent>

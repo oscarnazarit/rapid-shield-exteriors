@@ -23,7 +23,7 @@ export default function Navbar() {
       <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="flex items-center justify-center rounded bg-yellow-500 group-hover:bg-yellow-400 transition-colors">
+          <div className="flex items-center justify-center rounded transition-colors">
             <Image
               src="/rse_logo.jpg"
               alt="Rapid Shield Exteriors Logo"

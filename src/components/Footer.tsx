@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Shield, Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -9,10 +10,16 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2 w-fit group">
-              <div className="flex h-8 w-8 items-center justify-center rounded bg-yellow-500">
-                <Shield className="h-4 w-4 text-black" strokeWidth={2.5} />
+              <div className="flex h-8 w-8 items-center justify-center rounded">
+                <Image
+                  src="/rse_logo.jpg"
+                  alt="Rapid Shield Exteriors Logo"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                />
               </div>
-              <span className="text-white font-bold text-base tracking-tight leading-none">
+              <span className="font-bold text-base tracking-tight leading-none">
                 Rapid Shield
                 <span className="block text-yellow-500 text-xs font-semibold tracking-widest uppercase">
                   Exteriors
@@ -27,9 +34,7 @@ export default function Footer() {
 
           {/* Links */}
           <div>
-            <h3 className="text-white font-semibold text-sm mb-4 uppercase tracking-widest">
-              Navigation
-            </h3>
+            <h3 className="font-semibold text-sm mb-4 uppercase tracking-widest">Navigation</h3>
             <ul className="flex flex-col gap-2 text-sm">
               {[
                 { label: 'Home', href: '/' },
@@ -48,9 +53,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-white font-semibold text-sm mb-4 uppercase tracking-widest">
-              Contact
-            </h3>
+            <h3 className="font-semibold text-sm mb-4 uppercase tracking-widest">Contact</h3>
             <ul className="flex flex-col gap-3 text-sm">
               <li className="flex items-start gap-2">
                 <Phone className="h-4 w-4 text-yellow-500 mt-0.5 shrink-0" />

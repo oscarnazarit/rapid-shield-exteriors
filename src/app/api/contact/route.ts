@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     const { name, email, phone, service, message } = await req.json();
 
     await transporter.sendMail({
-      from: `"Rapid Shield Website"`,
+      from: `"Rapid Shield Website" <${process.env.GMAIL_USER}>`,
       to: process.env.CLIENT_EMAIL,
       replyTo: email,
       subject: `New Quote Request — ${service || 'General Inquiry'}`,

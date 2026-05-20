@@ -117,7 +117,7 @@ export default function ContactPage() {
           <Badge className="mb-4 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium uppercase text-xs tracking-wide">
             Contact Us
           </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Get a Free Quote</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Get a Free Quote</h1>
           <p className="text-zinc-400 text-lg max-w-xl leading-relaxed">
             Fill out the form and we&apos;ll get back to you within one business day. No obligation,
             no pressure.
@@ -132,7 +132,7 @@ export default function ContactPage() {
             {/* Contact info column */}
             <div className="flex flex-col gap-6">
               <div>
-                <h2 className="text-white font-bold text-xl mb-1">Reach us directly</h2>
+                <h2 className="font-bold text-xl mb-1">Reach us directly</h2>
                 <p className="text-zinc-400 text-sm">
                   Prefer to talk? Give us a call or send an email.
                 </p>
@@ -150,7 +150,7 @@ export default function ContactPage() {
                         <p className="text-zinc-500 text-xs font-medium uppercase tracking-wide">
                           {info.label}
                         </p>
-                        <p className="text-white text-sm font-medium">{info.value}</p>
+                        <p className="text-sm font-medium">{info.value}</p>
                         <p className="text-zinc-500 text-xs">{info.sub}</p>
                       </div>
                     </div>
@@ -159,9 +159,9 @@ export default function ContactPage() {
               </div>
 
               {/* Trust signals */}
-              <Card className="bg-zinc-900 border-zinc-800 mt-2">
+              <Card className="border-zinc-800 mt-2">
                 <CardContent className="p-5">
-                  <h3 className="text-white font-semibold text-sm mb-4">Our commitment to you</h3>
+                  <h3 className="font-semibold text-sm mb-4">Our commitment to you</h3>
                   <ul className="flex flex-col gap-2.5">
                     {[
                       'Free on-site estimate',
@@ -171,7 +171,7 @@ export default function ContactPage() {
                     ].map((item) => (
                       <li key={item} className="flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-yellow-500 shrink-0" />
-                        <span className="text-zinc-300 text-sm">{item}</span>
+                        <span className="text-zinc-400 text-sm">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -181,7 +181,7 @@ export default function ContactPage() {
 
             {/* Form column */}
             <div className="lg:col-span-2">
-              <Card className="bg-zinc-900 border-zinc-800">
+              <Card className="border-zinc-800">
                 <CardContent className="p-6 md:p-8">
                   {submitted ? (
                     <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
@@ -189,7 +189,7 @@ export default function ContactPage() {
                         <CheckCircle2 className="h-8 w-8 text-yellow-400" />
                       </div>
                       <div>
-                        <h3 className="text-white font-bold text-2xl mb-2">Message received!</h3>
+                        <h3 className="font-bold text-2xl mb-2">Message received!</h3>
                         <p className="text-zinc-400 max-w-sm">
                           Thanks for reaching out. We&apos;ll review your request and get back to
                           you within one business day.
@@ -207,7 +207,7 @@ export default function ContactPage() {
                           });
                         }}
                         variant="outline"
-                        className="mt-2 border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-white"
+                        className="mt-2 border-zinc-700 text-zinc-300 hover:bg-zinc-800"
                       >
                         Submit another request
                       </Button>
@@ -226,7 +226,7 @@ export default function ContactPage() {
                             onChange={handleChange}
                             required
                             placeholder="John Smith"
-                            className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20"
+                            className="border-zinc-700 placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20"
                           />
                         </div>
                         <div className="flex flex-col gap-1.5">
@@ -241,7 +241,7 @@ export default function ContactPage() {
                             onChange={handleChange}
                             required
                             placeholder="john@example.com"
-                            className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20"
+                            className="border-zinc-700 placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20"
                           />
                         </div>
                       </div>
@@ -259,7 +259,7 @@ export default function ContactPage() {
                             onChange={handleChange}
                             onBlur={(e) => setPhoneError(validatePhone(e.target.value))}
                             placeholder="(515) 000-0000"
-                            className={`bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20 ${
+                            className={`border-zinc-700 placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20 ${
                               phoneError ? 'border-red-500' : ''
                             }`}
                           />
@@ -268,7 +268,7 @@ export default function ContactPage() {
                         <div className="flex flex-col gap-1.5">
                           <Label className="text-zinc-300 text-sm">Service Needed</Label>
                           <Select value={form.service} onValueChange={handleServiceChange}>
-                            <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white focus:border-yellow-500/50 focus:ring-yellow-500/20">
+                            <SelectTrigger className="border-zinc-700 focus:border-yellow-500/50 focus:ring-yellow-500/20">
                               <SelectValue placeholder="Select a service" />
                             </SelectTrigger>
                             <SelectContent className="bg-zinc-800 border-zinc-700 text-white">
@@ -295,14 +295,14 @@ export default function ContactPage() {
                           required
                           rows={5}
                           placeholder="Describe the issue or project, your property type, and any other details that would help us give you an accurate quote..."
-                          className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20 resize-none"
+                          className="border-zinc-700 placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20 resize-none"
                         />
                       </div>
 
                       <Button
                         type="submit"
                         disabled={loading}
-                        className="bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition-colors w-full sm:w-auto sm:self-start"
+                        className="bg-yellow-500 font-bold hover:bg-yellow-400 transition-colors w-full sm:w-auto sm:self-start"
                         size="lg"
                       >
                         {loading ? (
