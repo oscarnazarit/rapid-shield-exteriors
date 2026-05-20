@@ -9,7 +9,20 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+const submittedIPs = new Map<string, number>();
+
 export async function POST(req: Request) {
+  const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
+  const last = submittedIPs.get(ip) ?? 0;
+
+  if (Date.now() - last < 60_000) {
+    return NextResponse.json(
+      { error: 'Please wait a minute before submitting again.' },
+      { status: 429 }
+    );
+  }
+
+  submittedIPs.set(ip, Date.now());
   try {
     const { name, email, phone, service, message } = await req.json();
 

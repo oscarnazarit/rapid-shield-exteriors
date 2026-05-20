@@ -61,6 +61,7 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -72,6 +73,7 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('form submitted', form);
     setLoading(true);
 
     try {
@@ -290,6 +292,7 @@ export default function ContactPage() {
                             <Send className="ml-2 h-4 w-4" />
                           </>
                         )}
+                        {error && <p className="text-red-400 text-sm">{error}</p>}
                       </Button>
                       <p className="text-zinc-500 text-xs">
                         By submitting this form you agree to be contacted about your request. We
