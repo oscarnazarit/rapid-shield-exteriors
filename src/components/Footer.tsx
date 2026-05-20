@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { Shield, Phone, Mail, MapPin } from "lucide-react";
+import Link from 'next/link';
+import { Shield, Phone, Mail, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -20,8 +20,8 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm leading-relaxed text-zinc-500">
-              Professional roofing, siding, and gutter services you can trust.
-              Serving your community with quality craftsmanship.
+              Professional roofing, siding, and gutter services you can trust. Serving your
+              community with quality craftsmanship.
             </p>
           </div>
 
@@ -32,16 +32,13 @@ export default function Footer() {
             </h3>
             <ul className="flex flex-col gap-2 text-sm">
               {[
-                { label: "Home", href: "/" },
-                { label: "Services", href: "/services" },
-                { label: "Contact", href: "/contact" },
-                { label: "Get a Free Quote", href: "/contact" },
+                { label: 'Home', href: '/' },
+                { label: 'Services', href: '/services' },
+                { label: 'Contact', href: '/contact' },
+                { label: 'Get a Free Quote', href: '/contact' },
               ].map((link) => (
                 <li key={link.href + link.label}>
-                  <Link
-                    href={link.href}
-                    className="hover:text-yellow-400 transition-colors"
-                  >
+                  <Link href={link.href} className="hover:text-yellow-400 transition-colors">
                     {link.label}
                   </Link>
                 </li>

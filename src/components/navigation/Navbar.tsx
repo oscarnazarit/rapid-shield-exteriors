@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Shield } from "lucide-react";
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Menu, Shield } from 'lucide-react';
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -41,8 +41,8 @@ export default function Navbar() {
               href={link.href}
               className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
                 pathname === link.href
-                  ? "text-yellow-400"
-                  : "var(--text-default) hover:text-yellow-400"
+                  ? 'text-yellow-400'
+                  : 'var(--text-default) hover:text-yellow-400'
               }`}
             >
               {link.label}
@@ -62,10 +62,10 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         <Sheet open={open} onOpenChange={setOpen}>
-				  <SheetTrigger className="md:hidden text-white hover:bg-zinc-800 p-2 rounded-md">
-					  <Menu className="h-5 w-5" />
-					  <span className="sr-only">Toggle menu</span>
-				  </SheetTrigger>
+          <SheetTrigger className="md:hidden text-white hover:bg-zinc-800 p-2 rounded-md">
+            <Menu className="h-5 w-5" />
+            <span className="sr-only">Toggle menu</span>
+          </SheetTrigger>
           <SheetContent side="right" className="bg-zinc-950 border-zinc-800 w-72">
             <div className="flex flex-col gap-1 mt-8">
               {navLinks.map((link) => (
@@ -75,8 +75,8 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className={`px-4 py-3 rounded text-base font-medium transition-colors ${
                     pathname === link.href
-                      ? "text-yellow-400 bg-zinc-900"
-                      : "text-zinc-300 hover:text-white hover:bg-zinc-900"
+                      ? 'text-yellow-400 bg-zinc-900'
+                      : 'text-zinc-300 hover:text-white hover:bg-zinc-900'
                   }`}
                 >
                   {link.label}

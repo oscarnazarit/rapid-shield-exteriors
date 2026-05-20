@@ -1,45 +1,45 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from "lucide-react";
+} from '@/components/ui/select';
+import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from 'lucide-react';
 
 const contactInfo = [
   {
     icon: Phone,
-    label: "Phone",
-    value: "(555) 123-4567",
-    sub: "Mon–Fri, 7am–6pm",
+    label: 'Phone',
+    value: '(555) 123-4567',
+    sub: 'Mon–Fri, 7am–6pm',
   },
   {
     icon: Mail,
-    label: "Email",
-    value: "info@rapidshieldexteriors.com",
-    sub: "We respond within 24 hours",
+    label: 'Email',
+    value: 'info@rapidshieldexteriors.com',
+    sub: 'We respond within 24 hours',
   },
   {
     icon: MapPin,
-    label: "Service Area",
-    value: "Greater Metro Area",
-    sub: "Contact us to confirm your location",
+    label: 'Service Area',
+    value: 'Greater Metro Area',
+    sub: 'Contact us to confirm your location',
   },
   {
     icon: Clock,
-    label: "Hours",
-    value: "Mon–Fri: 7am – 6pm",
-    sub: "Sat: 8am – 2pm",
+    label: 'Hours',
+    value: 'Mon–Fri: 7am – 6pm',
+    sub: 'Sat: 8am – 2pm',
   },
 ];
 
@@ -53,23 +53,21 @@ type FormState = {
 
 export default function ContactPage() {
   const [form, setForm] = useState<FormState>({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
+    name: '',
+    email: '',
+    phone: '',
+    service: '',
+    message: '',
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleServiceChange = (value: string | null) => {
-    setForm((prev) => ({ ...prev, service: value ?? "" }));
+    setForm((prev) => ({ ...prev, service: value ?? '' }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -89,12 +87,10 @@ export default function ContactPage() {
           <Badge className="mb-4 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium uppercase text-xs tracking-wide">
             Contact Us
           </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Get a Free Quote
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Get a Free Quote</h1>
           <p className="text-zinc-400 text-lg max-w-xl leading-relaxed">
-            Fill out the form and we&apos;ll get back to you within one business day.
-            No obligation, no pressure.
+            Fill out the form and we&apos;ll get back to you within one business day. No obligation,
+            no pressure.
           </p>
         </div>
       </section>
@@ -106,9 +102,7 @@ export default function ContactPage() {
             {/* Contact info column */}
             <div className="flex flex-col gap-6">
               <div>
-                <h2 className="text-white font-bold text-xl mb-1">
-                  Reach us directly
-                </h2>
+                <h2 className="text-white font-bold text-xl mb-1">Reach us directly</h2>
                 <p className="text-zinc-400 text-sm">
                   Prefer to talk? Give us a call or send an email.
                 </p>
@@ -126,9 +120,7 @@ export default function ContactPage() {
                         <p className="text-zinc-500 text-xs font-medium uppercase tracking-wide">
                           {info.label}
                         </p>
-                        <p className="text-white text-sm font-medium">
-                          {info.value}
-                        </p>
+                        <p className="text-white text-sm font-medium">{info.value}</p>
                         <p className="text-zinc-500 text-xs">{info.sub}</p>
                       </div>
                     </div>
@@ -139,15 +131,13 @@ export default function ContactPage() {
               {/* Trust signals */}
               <Card className="bg-zinc-900 border-zinc-800 mt-2">
                 <CardContent className="p-5">
-                  <h3 className="text-white font-semibold text-sm mb-4">
-                    Our commitment to you
-                  </h3>
+                  <h3 className="text-white font-semibold text-sm mb-4">Our commitment to you</h3>
                   <ul className="flex flex-col gap-2.5">
                     {[
-                      "Free on-site estimate",
-                      "No hidden costs",
-                      "Fully licensed & insured",
-                      "Same-day response",
+                      'Free on-site estimate',
+                      'No hidden costs',
+                      'Fully licensed & insured',
+                      'Same-day response',
                     ].map((item) => (
                       <li key={item} className="flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-yellow-500 shrink-0" />
@@ -169,23 +159,21 @@ export default function ContactPage() {
                         <CheckCircle2 className="h-8 w-8 text-yellow-400" />
                       </div>
                       <div>
-                        <h3 className="text-white font-bold text-2xl mb-2">
-                          Message received!
-                        </h3>
+                        <h3 className="text-white font-bold text-2xl mb-2">Message received!</h3>
                         <p className="text-zinc-400 max-w-sm">
-                          Thanks for reaching out. We&apos;ll review your request and
-                          get back to you within one business day.
+                          Thanks for reaching out. We&apos;ll review your request and get back to
+                          you within one business day.
                         </p>
                       </div>
                       <Button
                         onClick={() => {
                           setSubmitted(false);
                           setForm({
-                            name: "",
-                            email: "",
-                            phone: "",
-                            service: "",
-                            message: "",
+                            name: '',
+                            email: '',
+                            phone: '',
+                            service: '',
+                            message: '',
                           });
                         }}
                         variant="outline"
@@ -244,13 +232,8 @@ export default function ContactPage() {
                           />
                         </div>
                         <div className="flex flex-col gap-1.5">
-                          <Label className="text-zinc-300 text-sm">
-                            Service Needed
-                          </Label>
-                          <Select
-                            value={form.service}
-                            onValueChange={handleServiceChange}
-                          >
+                          <Label className="text-zinc-300 text-sm">Service Needed</Label>
+                          <Select value={form.service} onValueChange={handleServiceChange}>
                             <SelectTrigger className="bg-zinc-800 border-zinc-700 text-white focus:border-yellow-500/50 focus:ring-yellow-500/20">
                               <SelectValue placeholder="Select a service" />
                             </SelectTrigger>
@@ -258,15 +241,9 @@ export default function ContactPage() {
                               <SelectItem value="roofing">Roofing</SelectItem>
                               <SelectItem value="siding">Siding</SelectItem>
                               <SelectItem value="gutters">Gutters</SelectItem>
-                              <SelectItem value="inspection">
-                                Inspection / Assessment
-                              </SelectItem>
-                              <SelectItem value="multiple">
-                                Multiple Services
-                              </SelectItem>
-                              <SelectItem value="other">
-                                Other / Not sure
-                              </SelectItem>
+                              <SelectItem value="inspection">Inspection / Assessment</SelectItem>
+                              <SelectItem value="multiple">Multiple Services</SelectItem>
+                              <SelectItem value="other">Other / Not sure</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -274,8 +251,7 @@ export default function ContactPage() {
 
                       <div className="flex flex-col gap-1.5">
                         <Label htmlFor="message" className="text-zinc-300 text-sm">
-                          Tell us about your project{" "}
-                          <span className="text-yellow-500">*</span>
+                          Tell us about your project <span className="text-yellow-500">*</span>
                         </Label>
                         <Textarea
                           id="message"
@@ -296,7 +272,7 @@ export default function ContactPage() {
                         size="lg"
                       >
                         {loading ? (
-                          "Sending..."
+                          'Sending...'
                         ) : (
                           <>
                             Send Request
@@ -305,8 +281,8 @@ export default function ContactPage() {
                         )}
                       </Button>
                       <p className="text-zinc-500 text-xs">
-                        By submitting this form you agree to be contacted about
-                        your request. We never share your information.
+                        By submitting this form you agree to be contacted about your request. We
+                        never share your information.
                       </p>
                     </form>
                   )}
