@@ -1,6 +1,3 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -20,33 +17,6 @@ const FACEBOOK_PAGE_URL =
   'https://www.facebook.com/people/Rapid-Shield-Exteriors-LLC/61577167798202/';
 
 export default function OurWorkPage() {
-  const fbRootRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (window.FB) {
-      window.FB.XFBML.parse();
-      return;
-    }
-
-    window.fbAsyncInit = function () {
-      window.FB?.init({
-        xfbml: true,
-        version: 'v19.0',
-      });
-    };
-
-    const script = document.createElement('script');
-    script.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0';
-    script.async = true;
-    script.defer = true;
-    script.crossOrigin = 'anonymous';
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   return (
     <div className="flex flex-col">
       {/* Page header */}
@@ -83,21 +53,22 @@ export default function OurWorkPage() {
       {/* Facebook feed */}
       <section className="py-16 md:py-20 flex-1" style={{ backgroundColor: 'var(--bg-primary)' }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
-          <div ref={fbRootRef} id="fb-root" />
+          <div id="fb-root" />
 
           <div className="flex flex-col items-center gap-6">
             {/* Facebook Page Plugin */}
-            <div
-              className="fb-page w-full overflow-hidden rounded-lg"
-              data-href={FACEBOOK_PAGE_URL}
-              data-tabs="timeline"
-              data-width="800"
-              data-height="800"
-              data-small-header="false"
-              data-adapt-container-width="true"
-              data-hide-cover="false"
-              data-show-facepile="true"
-            />
+            <div className="w-full flex justify-center">
+              <iframe
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fpeople%2FRapid-Shield-Exteriors-LLC%2F61577167798202%2F&tabs=timeline&width=800&height=800&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+                width="800"
+                height="800"
+                style={{ border: 'none', overflow: 'hidden', maxWidth: '100%' }}
+                scrolling="no"
+                frameBorder="0"
+                allowFullScreen
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              />
+            </div>
 
             <p className="text-sm text-center" style={{ color: 'var(--text-secondary)' }}>
               Posts not loading?{' '}
