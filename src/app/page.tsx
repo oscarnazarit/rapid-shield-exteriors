@@ -282,9 +282,9 @@ export default function HomePage() {
               variant="outline"
               className="border-black text-black bg-transparent hover:bg-yellow-400 font-bold text-base"
             >
-              <a href="tel:5551234567">
+              <a href="tel:5158050500">
                 <Phone className="mr-2 h-4 w-4" />
-                (555) 123-4567
+                (515) 805-0500
               </a>
             </Button>
           </div>

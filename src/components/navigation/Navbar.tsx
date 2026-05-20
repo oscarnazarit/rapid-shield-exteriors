@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Shield } from 'lucide-react';
+import Image from 'next/image';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -18,12 +19,18 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-yellow-900/20 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b border-yellow-900/20 backdrop-blur-xl">
       <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="flex h-8 w-8 items-center justify-center rounded bg-yellow-500 group-hover:bg-yellow-400 transition-colors">
-            <Shield className="h-4 w-4 text-black" strokeWidth={2.5} />
+          <div className="flex items-center justify-center rounded bg-yellow-500 group-hover:bg-yellow-400 transition-colors">
+            <Image
+              src="/rse_logo.jpg"
+              alt="Rapid Shield Exteriors Logo"
+              width={64}
+              height={64}
+              className="object-contain rounded"
+            />
           </div>
           <span className="font-bold text-lg tracking-tight leading-none">
             Rapid Shield

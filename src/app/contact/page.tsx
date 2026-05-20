@@ -20,19 +20,19 @@ const contactInfo = [
   {
     icon: Phone,
     label: 'Phone',
-    value: '(555) 123-4567',
+    value: '(515) 805-0500',
     sub: 'Mon–Fri, 7am–6pm',
   },
   {
     icon: Mail,
     label: 'Email',
-    value: 'info@rapidshieldexteriors.com',
+    value: 'rapidshieldexteriors@gmail.com',
     sub: 'We respond within 24 hours',
   },
   {
     icon: MapPin,
     label: 'Service Area',
-    value: 'Greater Metro Area',
+    value: 'Greater Des Moines, IA',
     sub: 'Contact us to confirm your location',
   },
   {
@@ -63,6 +63,8 @@ export default function ContactPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const [phoneError, setPhoneError] = useState<string | null>(null);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -73,8 +75,14 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('form submitted', form);
     setLoading(true);
+
+    const phoneValidation = validatePhone(form.phone);
+    if (phoneValidation) {
+      setPhoneError(phoneValidation);
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch('/api/contact', {
@@ -90,6 +98,15 @@ export default function ContactPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const validatePhone = (value: string) => {
+    if (!value) return null; // phone is optional
+    const digits = value.replace(/\D/g, '');
+    if (digits.length !== 10 && digits.length !== 11) {
+      return 'Please enter a valid US phone number';
+    }
+    return null;
   };
 
   return (
@@ -208,7 +225,7 @@ export default function ContactPage() {
                             value={form.name}
                             onChange={handleChange}
                             required
-                            placeholder="Jane Smith"
+                            placeholder="John Smith"
                             className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20"
                           />
                         </div>
@@ -223,7 +240,7 @@ export default function ContactPage() {
                             value={form.email}
                             onChange={handleChange}
                             required
-                            placeholder="jane@example.com"
+                            placeholder="john@example.com"
                             className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20"
                           />
                         </div>
@@ -240,9 +257,13 @@ export default function ContactPage() {
                             type="tel"
                             value={form.phone}
                             onChange={handleChange}
-                            placeholder="(555) 000-0000"
-                            className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20"
+                            onBlur={(e) => setPhoneError(validatePhone(e.target.value))}
+                            placeholder="(515) 000-0000"
+                            className={`bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20 ${
+                              phoneError ? 'border-red-500' : ''
+                            }`}
                           />
+                          {phoneError && <p className="text-red-400 text-xs">{phoneError}</p>}
                         </div>
                         <div className="flex flex-col gap-1.5">
                           <Label className="text-zinc-300 text-sm">Service Needed</Label>

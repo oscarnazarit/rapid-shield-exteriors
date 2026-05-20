@@ -54,15 +54,15 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 text-sm">
               <li className="flex items-start gap-2">
                 <Phone className="h-4 w-4 text-yellow-500 mt-0.5 shrink-0" />
-                <span>(555) 123-4567</span>
+                <span>(515) 805-0500</span>
               </li>
               <li className="flex items-start gap-2">
                 <Mail className="h-4 w-4 text-yellow-500 mt-0.5 shrink-0" />
-                <span>info@rapidshieldexteriors.com</span>
+                <span>rapidshieldexteriors@gmail.com</span>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-yellow-500 mt-0.5 shrink-0" />
-                <span>Serving the Greater Metro Area</span>
+                <span>Des Moines, Iowa</span>
               </li>
             </ul>
           </div>
