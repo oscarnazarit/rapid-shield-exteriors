@@ -34,7 +34,10 @@ export default function Navbar() {
               className="object-contain rounded"
             />
           </div>
-          <span className="font-bold text-lg tracking-tight leading-none">
+          <span
+            className="font-bold text-lg tracking-tight leading-none"
+            style={{ color: palette.text.inverse }}
+          >
             Rapid Shield
             <span
               className="block text-xs font-semibold tracking-widest uppercase"
@@ -52,7 +55,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
-                pathname === link.href ? 'text-[#D1992B]' : 'text-[#636363] hover:text-[#D1992B]'
+                pathname === link.href ? 'text-[#D1992B]' : 'text-[#494848] hover:text-[#D1992B]'
               }`}
             >
               {link.label}
@@ -64,7 +67,7 @@ export default function Navbar() {
         <div className="hidden md:block">
           <Button
             asChild
-            className="bg-[#D1992B] hover:bg-[#B67D0E] text-black font-semibold transition-colors"
+            className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#494848] hover:text-[#494848] font-semibold transition-colors"
           >
             <Link href="/contact">Get a Free Quote</Link>
           </Button>
