@@ -26,7 +26,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2 group">
           <div className="flex items-center justify-center rounded transition-colors">
             <Image
-              src="/rse_logo.jpg"
+              src="/solid-gold-logo.png"
               alt="Rapid Shield Exteriors Logo"
               width={64}
               height={64}
