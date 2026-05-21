@@ -13,14 +13,17 @@ export default function Footer() {
             <Link href="/" className="flex items-center gap-2 w-fit group">
               <div className="flex h-8 w-8 items-center justify-center rounded">
                 <Image
-                  src="/rse_logo.jpg"
+                  src="/solid-gold-logo.png"
                   alt="Rapid Shield Exteriors Logo"
                   width={32}
                   height={32}
                   className="object-contain"
                 />
               </div>
-              <span className="font-bold text-base tracking-tight leading-none">
+              <span
+                className="font-bold text-base tracking-tight leading-none"
+                style={{ color: palette.text.inverse }}
+              >
                 Rapid Shield
                 <span
                   className="block text-xs font-semibold tracking-widest uppercase"
