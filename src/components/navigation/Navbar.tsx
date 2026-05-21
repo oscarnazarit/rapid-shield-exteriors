@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Shield } from 'lucide-react';
 import Image from 'next/image';
+import { palette } from '@/lib/tokens/colors';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -35,7 +36,10 @@ export default function Navbar() {
           </div>
           <span className="font-bold text-lg tracking-tight leading-none">
             Rapid Shield
-            <span className="block text-yellow-500 text-xs font-semibold tracking-widest uppercase">
+            <span
+              className="block text-xs font-semibold tracking-widest uppercase"
+              style={{ color: palette.text.primary }}
+            >
               Exteriors
             </span>
           </span>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import Image from 'next/image';
+import { palette } from '@/lib/tokens/colors';
 
 export default function Footer() {
   return (
@@ -21,7 +22,10 @@ export default function Footer() {
               </div>
               <span className="font-bold text-base tracking-tight leading-none">
                 Rapid Shield
-                <span className="block text-yellow-500 text-xs font-semibold tracking-widest uppercase">
+                <span
+                  className="block text-xs font-semibold tracking-widest uppercase"
+                  style={{ color: palette.text.primary }}
+                >
                   Exteriors
                 </span>
               </span>
@@ -34,8 +38,13 @@ export default function Footer() {
 
           {/* Links */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 uppercase tracking-widest">Navigation</h3>
-            <ul className="flex flex-col gap-2 text-sm">
+            <h3
+              className="font-semibold text-sm mb-4 uppercase tracking-widest"
+              style={{ color: palette.text.primary }}
+            >
+              Navigation
+            </h3>
+            <ul className="flex flex-col gap-2 text-sm" style={{ color: palette.text.secondary }}>
               {[
                 { label: 'Home', href: '/' },
                 { label: 'Services', href: '/services' },
@@ -43,7 +52,10 @@ export default function Footer() {
                 { label: 'Get a Free Quote', href: '/contact' },
               ].map((link) => (
                 <li key={link.href + link.label}>
-                  <Link href={link.href} className="hover:text-yellow-400 transition-colors">
+                  <Link
+                    href={link.href}
+                    className="transition-colors text-[#636363] hover:text-[#C79B3A]"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -53,18 +65,29 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold text-sm mb-4 uppercase tracking-widest">Contact</h3>
+            <h3
+              className="font-semibold text-sm mb-4 uppercase tracking-widest"
+              style={{ color: palette.text.primary }}
+            >
+              Contact
+            </h3>
             <ul className="flex flex-col gap-3 text-sm">
               <li className="flex items-start gap-2">
-                <Phone className="h-4 w-4 text-yellow-500 mt-0.5 shrink-0" />
+                <Phone
+                  className="h-4 w-4 mt-0.5 shrink-0"
+                  style={{ color: palette.text.primary }}
+                />
                 <span>(515) 805-0500</span>
               </li>
               <li className="flex items-start gap-2">
-                <Mail className="h-4 w-4 text-yellow-500 mt-0.5 shrink-0" />
+                <Mail className="h-4 w-4 mt-0.5 shrink-0" style={{ color: palette.text.primary }} />
                 <span>rapidshieldexteriors@gmail.com</span>
               </li>
               <li className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 text-yellow-500 mt-0.5 shrink-0" />
+                <MapPin
+                  className="h-4 w-4 mt-0.5 shrink-0"
+                  style={{ color: palette.text.primary }}
+                />
                 <span>Des Moines, Iowa</span>
               </li>
             </ul>

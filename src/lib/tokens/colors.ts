@@ -3,7 +3,7 @@ export const colors = {
   gold: {
     deep: '#B48E2C', // darkest gold — borders, pressed states
     dark: '#C79B3A', // dark gold — secondary actions
-    primary: '#D1992B', // main brand gold
+    primary: '#D1992B', // main brand gold - same as logo
     rich: '#F2B43B', // vibrant gold — CTAs, highlights
     warm: '#FAC857', // warm mid-gold
     soft: '#F2BE5B', // softer accent
@@ -26,7 +26,7 @@ export const colors = {
 
 export const palette = {
   text: {
-    primary: colors.gray[900],
+    primary: colors.gold.primary, // main brand color for emphasis
     secondary: colors.gray[700],
     disabled: colors.gray[500],
     inverse: colors.gray[900], // text on gold backgrounds
@@ -43,9 +43,9 @@ export const palette = {
   },
   action: {
     primary: colors.gold.rich,
-    primaryHover: colors.gold.light,
+    primaryHover: colors.gold.dark,
     primaryPressed: colors.gold.deep,
-    secondary: colors.gold.dark,
+    secondary: colors.gold.light,
   },
 } as const;
 
