@@ -11,12 +11,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2 w-fit group">
-              <div className="flex h-8 w-8 items-center justify-center rounded">
+              <div className="flex h-10 w-10 items-center justify-center rounded">
                 <Image
                   src="/solid-gold-logo.png"
                   alt="Rapid Shield Exteriors Logo"
-                  width={32}
-                  height={32}
+                  width={40}
+                  height={40}
                   className="object-contain"
                 />
               </div>
@@ -47,7 +47,7 @@ export default function Footer() {
             >
               Navigation
             </h3>
-            <ul className="flex flex-col gap-2 text-sm" style={{ color: palette.text.secondary }}>
+            <ul className="flex flex-col gap-2 text-sm" style={{ color: palette.text.inverse }}>
               {[
                 { label: 'Home', href: '/' },
                 { label: 'Services', href: '/services' },
@@ -80,18 +80,18 @@ export default function Footer() {
                   className="h-4 w-4 mt-0.5 shrink-0"
                   style={{ color: palette.text.primary }}
                 />
-                <span>(515) 805-0500</span>
+                <span style={{ color: palette.text.inverse }}>(515) 805-0500</span>
               </li>
               <li className="flex items-start gap-2">
                 <Mail className="h-4 w-4 mt-0.5 shrink-0" style={{ color: palette.text.primary }} />
-                <span>rapidshieldexteriors@gmail.com</span>
+                <span style={{ color: palette.text.inverse }}>rapidshieldexteriors@gmail.com</span>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin
                   className="h-4 w-4 mt-0.5 shrink-0"
                   style={{ color: palette.text.primary }}
                 />
-                <span>Des Moines, Iowa</span>
+                <span style={{ color: palette.text.inverse }}>Des Moines, Iowa</span>
               </li>
             </ul>
           </div>
