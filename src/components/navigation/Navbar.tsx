@@ -52,9 +52,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
-                pathname === link.href
-                  ? 'text-yellow-400'
-                  : 'var(--text-default) hover:text-yellow-400'
+                pathname === link.href ? 'text-[#D1992B]' : 'text-[#636363] hover:text-[#D1992B]'
               }`}
             >
               {link.label}
@@ -66,7 +64,7 @@ export default function Navbar() {
         <div className="hidden md:block">
           <Button
             asChild
-            className="bg-yellow-500 text-black font-semibold hover:bg-yellow-400 transition-colors"
+            className="bg-[#D1992B] hover:bg-[#B67D0E] text-black font-semibold transition-colors"
           >
             <Link href="/contact">Get a Free Quote</Link>
           </Button>
@@ -97,7 +95,7 @@ export default function Navbar() {
               <div className="mt-4 px-4">
                 <Button
                   asChild
-                  className="w-full bg-yellow-500 text-black font-semibold hover:bg-yellow-400"
+                  className="w-full bg-[#F2B43B] hover:bg-[#C79B3A] text-black font-semibold"
                   onClick={() => setOpen(false)}
                 >
                   <Link href="/contact">Get a Free Quote</Link>

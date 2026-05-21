@@ -1,5 +1,8 @@
 // src/tokens/colors.ts
 export const colors = {
+  // buttons
+  // bg-[#D1992B] hover:bg-[#B67D0E]
+
   gold: {
     deep: '#B48E2C', // darkest gold — borders, pressed states
     dark: '#C79B3A', // dark gold — secondary actions
