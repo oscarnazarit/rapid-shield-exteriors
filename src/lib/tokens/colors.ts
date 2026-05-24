@@ -46,7 +46,7 @@ export const palette = {
     accent: colors.gold.pale,
   },
   action: {
-    primary: colors.gold.rich,
+    primary: colors.gold.primary,
     primaryHover: colors.gold.dark,
     primaryPressed: colors.gold.deep,
     secondary: colors.gold.light,

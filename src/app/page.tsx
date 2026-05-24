@@ -178,14 +178,19 @@ export default function HomePage() {
       </section>
 
       {/* Services preview */}
-      <section className="py-20 md:py-24" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <section className="py-20 md:py-24">
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium uppercase text-xs tracking-wide">
+            <Badge
+              className="mb-4 font-medium uppercase text-xs tracking-wide"
+              style={{ color: palette.text.primary, borderColor: palette.border.accent }}
+            >
               What We Do
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Our Services</h2>
-            <p className="text-zinc-400 mt-3 max-w-xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: palette.text.inverse }}>
+              Our Services
+            </h2>
+            <p className=" mt-3 max-w-xl mx-auto" style={{ color: palette.text.secondary }}>
               From roof to foundation, we keep the exterior of your home in peak condition
               year-round.
             </p>
@@ -196,25 +201,25 @@ export default function HomePage() {
               return (
                 <Card
                   key={service.title}
-                  className="hover:border-yellow-500/40 transition-colors group"
-                  style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}
+                  className="transition-colors group"
+                  style={{ color: palette.text.primary }}
                 >
                   <CardContent className="p-6 flex flex-col gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-yellow-500/10 border border-yellow-500/20 group-hover:bg-yellow-500/20 transition-colors">
-                      <Icon className="h-6 w-6 text-yellow-400" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#D1992B] transition-colors">
+                      <Icon className="h-6 w-6" style={{ color: palette.text.primary }} />
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg mb-2">{service.title}</h3>
                       <p
                         className="text-sm leading-relaxed"
-                        style={{ color: 'var(--text-secondary)' }}
+                        style={{ color: palette.text.inverse }}
                       >
                         {service.description}
                       </p>
                     </div>
                     <Link
                       href={service.href}
-                      className="text-yellow-400 text-sm font-medium hover:text-yellow-300 flex items-center gap-1 mt-auto transition-colors"
+                      className=" text-sm font-medium flex items-center gap-1 mt-auto transition-colors text-[#d1992b] hover:text-[#B48E2C]" // text primary, hover gold deep
                     >
                       Learn more <ArrowRight className="h-3 w-3" />
                     </Link>
