@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import { useEffect, useRef } from 'react';
+import { palette } from '@/lib/tokens/colors';
 
 const FACEBOOK_PAGE_URL = 'https://www.facebook.com/Rapid-Shield-Exteriors-LLC';
 
@@ -32,31 +33,21 @@ export default function OurWorkPage() {
   return (
     <div className="flex flex-col">
       {/* Page header */}
-      <section
-        className="border-b py-16 md:py-20"
-        style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}
-      >
+      <section className="border-b py-16 md:py-20" style={{ borderColor: palette.border.default }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <Badge
-            className="mb-4 border font-medium uppercase text-xs tracking-wide"
-            style={{
-              backgroundColor: 'color-mix(in srgb, var(--accent) 10%, transparent)',
-              color: 'var(--accent)',
-              borderColor: 'color-mix(in srgb, var(--accent) 30%, transparent)',
-            }}
+            className="mb-4 font-medium uppercase text-xs tracking-wide"
+            style={{ color: palette.text.primary, borderColor: palette.border.accent }}
           >
             Our Work
           </Badge>
           <h1
             className="text-4xl md:text-5xl font-bold mb-4"
-            style={{ color: 'var(--text-primary)' }}
+            style={{ color: palette.text.inverse }}
           >
             See It for Yourself
           </h1>
-          <p
-            className="text-lg max-w-xl leading-relaxed"
-            style={{ color: 'var(--text-secondary)' }}
-          >
+          <p className="text-lg max-w-xl leading-relaxed" style={{ color: palette.text.secondary }}>
             Real projects, real results. Browse our latest roofing, siding, and gutter work straight
             from our Facebook page.
           </p>
@@ -64,32 +55,26 @@ export default function OurWorkPage() {
       </section>
 
       {/* Facebook feed */}
-      <section className="py-16 md:py-20 flex-1" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <section className="py-16 md:py-20 flex-1">
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
             {/* Left sidebar */}
             <div className="flex flex-col gap-6">
               <div
                 className="rounded-xl border p-6 flex flex-col gap-4"
-                style={{
-                  backgroundColor: 'var(--bg-secondary)',
-                  borderColor: 'var(--border)',
-                }}
+                style={{ borderColor: palette.border.default }}
               >
-                <div
-                  className="flex h-10 w-10 items-center justify-center rounded-lg"
-                  style={{ backgroundColor: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
-                >
-                  <FacebookIcon className="h-5 w-5" style={{ color: 'var(--accent)' }} />
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#D1992B]">
+                  <FacebookIcon className="h-5 w-5" style={{ color: palette.text.primary }} />
                 </div>
                 <div>
                   <h3
                     className="font-semibold text-base mb-1"
-                    style={{ color: 'var(--text-primary)' }}
+                    style={{ color: palette.text.inverse }}
                   >
                     Follow Along
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  <p className="text-sm leading-relaxed" style={{ color: palette.text.secondary }}>
                     We post project photos, before & afters, and updates regularly on our Facebook
                     page.
                   </p>
@@ -99,7 +84,7 @@ export default function OurWorkPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-75"
-                  style={{ color: 'var(--accent)' }}
+                  style={{ color: palette.text.primary }}
                 >
                   Visit our page <ArrowRight className="h-3 w-3" />
                 </a>
@@ -107,12 +92,9 @@ export default function OurWorkPage() {
 
               <div
                 className="rounded-xl border p-6 flex flex-col gap-3"
-                style={{
-                  backgroundColor: 'var(--bg-secondary)',
-                  borderColor: 'var(--border)',
-                }}
+                style={{ borderColor: palette.border.default }}
               >
-                <h3 className="font-semibold text-base" style={{ color: 'var(--text-primary)' }}>
+                <h3 className="font-semibold text-base" style={{ color: palette.text.inverse }}>
                   What we post
                 </h3>
                 <ul className="flex flex-col gap-2">
@@ -126,11 +108,11 @@ export default function OurWorkPage() {
                     <li
                       key={item}
                       className="flex items-center gap-2 text-sm"
-                      style={{ color: 'var(--text-secondary)' }}
+                      style={{ color: palette.text.secondary }}
                     >
                       <span
                         className="h-1.5 w-1.5 rounded-full shrink-0"
-                        style={{ backgroundColor: 'var(--accent)' }}
+                        style={{ backgroundColor: palette.text.primary }}
                       />
                       {item}
                     </li>
@@ -140,21 +122,17 @@ export default function OurWorkPage() {
 
               <div
                 className="rounded-xl border p-6"
-                style={{
-                  backgroundColor: 'var(--bg-secondary)',
-                  borderColor: 'var(--border)',
-                }}
+                style={{ borderColor: palette.border.default }}
               >
                 <p
                   className="text-sm leading-relaxed mb-4"
-                  style={{ color: 'var(--text-secondary)' }}
+                  style={{ color: palette.text.secondary }}
                 >
                   Seen enough? Get a free quote on your project today.
                 </p>
                 <Button
                   asChild
-                  className="w-full font-bold"
-                  style={{ backgroundColor: 'var(--accent)', color: '#000' }}
+                  className="w-full font-bold bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4]"
                 >
                   <Link href="/contact">Get a Free Quote</Link>
                 </Button>
@@ -165,17 +143,14 @@ export default function OurWorkPage() {
             <div className="lg:col-span-2 flex flex-col gap-4">
               <div
                 className="rounded-xl border overflow-hidden"
-                style={{ borderColor: 'var(--border)', maxWidth: '500px', width: '100%' }}
+                style={{ borderColor: palette.border.default, maxWidth: '500px', width: '100%' }}
               >
                 <div
                   className="flex items-center gap-3 px-5 py-3 border-b"
-                  style={{
-                    backgroundColor: 'var(--bg-secondary)',
-                    borderColor: 'var(--border)',
-                  }}
+                  style={{ borderColor: palette.border.default }}
                 >
-                  <FacebookIcon className="h-4 w-4" style={{ color: 'var(--accent)' }} />
-                  <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
+                  <FacebookIcon className="h-4 w-4" style={{ color: palette.text.primary }} />
+                  <span className="text-sm font-medium" style={{ color: palette.text.inverse }}>
                     Rapid Shield Exteriors LLC
                   </span>
                   <a
@@ -183,7 +158,7 @@ export default function OurWorkPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="ml-auto text-xs hover:opacity-75 transition-opacity"
-                    style={{ color: 'var(--accent)' }}
+                    style={{ color: palette.text.primary }}
                   >
                     Open in Facebook ↗
                   </a>
@@ -191,14 +166,14 @@ export default function OurWorkPage() {
                 <FacebookEmbed />
               </div>
 
-              <p className="text-xs text-center" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-xs text-center" style={{ color: palette.text.secondary }}>
                 Feed not loading?{' '}
                 <a
                   href={FACEBOOK_PAGE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline underline-offset-4 hover:opacity-80 transition-opacity"
-                  style={{ color: 'var(--accent)' }}
+                  style={{ color: palette.text.primary }}
                 >
                   View directly on Facebook
                 </a>
@@ -209,16 +184,18 @@ export default function OurWorkPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-20" style={{ backgroundColor: 'var(--accent)' }}>
+      <section className="py-16 md:py-20" style={{ backgroundColor: palette.background.primary }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-3">Like what you see?</h2>
-          <p className="text-yellow-900 text-lg mb-8 max-w-lg mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">
+            Like what you see?
+          </h2>
+          <p className="text-lg mb-8 max-w-lg mx-auto text-[#494848] dark:text-[#D4D4D4]">
             Get in touch today for a free estimate on your project.
           </p>
           <Button
             asChild
             size="lg"
-            className="bg-black text-white hover:bg-zinc-900 font-bold text-base"
+            className="bg-[#D4D4D4] border-[#D4D4D4] text-black dark:text-[#494848] hover:bg-[#B67D0E] hover:border-[#B67D0E] hover:text-black dark:hover:text-[#494848] font-bold text-base"
           >
             <Link href="/contact">
               Request a Free Quote
