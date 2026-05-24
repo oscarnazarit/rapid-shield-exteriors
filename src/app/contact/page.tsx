@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from 'lucide-react';
+import { palette } from '@/lib/tokens/colors';
 
 const contactInfo = [
   {
@@ -112,13 +113,21 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col">
       {/* Page header */}
-      <section className="border-b border-zinc-800 py-16 md:py-20">
+      <section className="border-b py-16 md:py-20" style={{ borderColor: palette.border.default }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
-          <Badge className="mb-4 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium uppercase text-xs tracking-wide">
+          <Badge
+            className="mb-4 font-medium uppercase text-xs tracking-wide"
+            style={{ color: palette.text.primary, borderColor: palette.border.accent }}
+          >
             Contact Us
           </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Get a Free Quote</h1>
-          <p className="text-zinc-400 text-lg max-w-xl leading-relaxed">
+          <h1
+            className="text-4xl md:text-5xl font-bold mb-4"
+            style={{ color: palette.text.inverse }}
+          >
+            Get a Free Quote
+          </h1>
+          <p className="text-lg max-w-xl leading-relaxed" style={{ color: palette.text.secondary }}>
             Fill out the form and we&apos;ll get back to you within one business day. No obligation,
             no pressure.
           </p>
@@ -132,8 +141,10 @@ export default function ContactPage() {
             {/* Contact info column */}
             <div className="flex flex-col gap-6">
               <div>
-                <h2 className="font-bold text-xl mb-1">Reach us directly</h2>
-                <p className="text-zinc-400 text-sm">
+                <h2 className="font-bold text-xl mb-1" style={{ color: palette.text.inverse }}>
+                  Reach us directly
+                </h2>
+                <p className="text-sm" style={{ color: palette.text.secondary }}>
                   Prefer to talk? Give us a call or send an email.
                 </p>
               </div>
@@ -143,15 +154,22 @@ export default function ContactPage() {
                   const Icon = info.icon;
                   return (
                     <div key={info.label} className="flex items-start gap-3">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-yellow-500/10 border border-yellow-500/20">
-                        <Icon className="h-4 w-4 text-yellow-400" />
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#D1992B]">
+                        <Icon className="h-4 w-4" style={{ color: palette.text.primary }} />
                       </div>
                       <div>
-                        <p className="text-zinc-500 text-xs font-medium uppercase tracking-wide">
+                        <p
+                          className="text-xs font-medium uppercase tracking-wide"
+                          style={{ color: palette.text.secondary }}
+                        >
                           {info.label}
                         </p>
-                        <p className="text-sm font-medium">{info.value}</p>
-                        <p className="text-zinc-500 text-xs">{info.sub}</p>
+                        <p className="text-sm font-medium" style={{ color: palette.text.inverse }}>
+                          {info.value}
+                        </p>
+                        <p className="text-xs" style={{ color: palette.text.secondary }}>
+                          {info.sub}
+                        </p>
                       </div>
                     </div>
                   );
@@ -159,9 +177,14 @@ export default function ContactPage() {
               </div>
 
               {/* Trust signals */}
-              <Card className="border-zinc-800 mt-2">
+              <Card className="ring-[#D1992B] mt-2">
                 <CardContent className="p-5">
-                  <h3 className="font-semibold text-sm mb-4">Our commitment to you</h3>
+                  <h3
+                    className="font-semibold text-sm mb-4"
+                    style={{ color: palette.text.inverse }}
+                  >
+                    Our commitment to you
+                  </h3>
                   <ul className="flex flex-col gap-2.5">
                     {[
                       'Free on-site estimate',
@@ -170,8 +193,10 @@ export default function ContactPage() {
                       'Same-day response',
                     ].map((item) => (
                       <li key={item} className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-yellow-500 shrink-0" />
-                        <span className="text-zinc-400 text-sm">{item}</span>
+                        <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D1992B]" />
+                        <span className="text-sm" style={{ color: palette.text.secondary }}>
+                          {item}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -181,16 +206,21 @@ export default function ContactPage() {
 
             {/* Form column */}
             <div className="lg:col-span-2">
-              <Card className="border-zinc-800">
+              <Card className="ring-[#D1992B]">
                 <CardContent className="p-6 md:p-8">
                   {submitted ? (
                     <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-yellow-500/10 border border-yellow-500/30">
-                        <CheckCircle2 className="h-8 w-8 text-yellow-400" />
+                      <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#D1992B]">
+                        <CheckCircle2 className="h-8 w-8" style={{ color: palette.text.primary }} />
                       </div>
                       <div>
-                        <h3 className="font-bold text-2xl mb-2">Message received!</h3>
-                        <p className="text-zinc-400 max-w-sm">
+                        <h3
+                          className="font-bold text-2xl mb-2"
+                          style={{ color: palette.text.inverse }}
+                        >
+                          Message received!
+                        </h3>
+                        <p className="max-w-sm" style={{ color: palette.text.secondary }}>
                           Thanks for reaching out. We&apos;ll review your request and get back to
                           you within one business day.
                         </p>
@@ -207,7 +237,7 @@ export default function ContactPage() {
                           });
                         }}
                         variant="outline"
-                        className="mt-2 border-zinc-700 text-zinc-300 hover:bg-zinc-800"
+                        className="mt-2 border-[#D1992B] text-[#494848] dark:text-[#D4D4D4] hover:bg-[#B67D0E] hover:text-black dark:hover:text-[#D4D4D4]"
                       >
                         Submit another request
                       </Button>
@@ -216,8 +246,11 @@ export default function ContactPage() {
                     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-1.5">
-                          <Label htmlFor="name" className="text-zinc-300 text-sm">
-                            Full Name <span className="text-yellow-500">*</span>
+                          <Label
+                            htmlFor="name"
+                            className="text-sm text-[#494848] dark:text-[#D4D4D4]"
+                          >
+                            Full Name <span className="text-[#D1992B]">*</span>
                           </Label>
                           <Input
                             id="name"
@@ -226,12 +259,15 @@ export default function ContactPage() {
                             onChange={handleChange}
                             required
                             placeholder="John Smith"
-                            className="border-zinc-700 placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20"
+                            className="border-[#B4B4B4] placeholder:text-[#909090] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20"
                           />
                         </div>
                         <div className="flex flex-col gap-1.5">
-                          <Label htmlFor="email" className="text-zinc-300 text-sm">
-                            Email <span className="text-yellow-500">*</span>
+                          <Label
+                            htmlFor="email"
+                            className="text-sm text-[#494848] dark:text-[#D4D4D4]"
+                          >
+                            Email <span className="text-[#D1992B]">*</span>
                           </Label>
                           <Input
                             id="email"
@@ -241,14 +277,17 @@ export default function ContactPage() {
                             onChange={handleChange}
                             required
                             placeholder="john@example.com"
-                            className="border-zinc-700 placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20"
+                            className="border-[#B4B4B4] placeholder:text-[#909090] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-1.5">
-                          <Label htmlFor="phone" className="text-zinc-300 text-sm">
+                          <Label
+                            htmlFor="phone"
+                            className="text-sm text-[#494848] dark:text-[#D4D4D4]"
+                          >
                             Phone Number
                           </Label>
                           <Input
@@ -259,19 +298,21 @@ export default function ContactPage() {
                             onChange={handleChange}
                             onBlur={(e) => setPhoneError(validatePhone(e.target.value))}
                             placeholder="(515) 000-0000"
-                            className={`border-zinc-700 placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20 ${
+                            className={`border-[#B4B4B4] placeholder:text-[#909090] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20 ${
                               phoneError ? 'border-red-500' : ''
                             }`}
                           />
                           {phoneError && <p className="text-red-400 text-xs">{phoneError}</p>}
                         </div>
                         <div className="flex flex-col gap-1.5">
-                          <Label className="text-zinc-300 text-sm">Service Needed</Label>
+                          <Label className="text-sm text-[#494848] dark:text-[#D4D4D4]">
+                            Service Needed
+                          </Label>
                           <Select value={form.service} onValueChange={handleServiceChange}>
-                            <SelectTrigger className="border-zinc-700 focus:border-yellow-500/50 focus:ring-yellow-500/20">
+                            <SelectTrigger className="border-[#B4B4B4] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20">
                               <SelectValue placeholder="Select a service" />
                             </SelectTrigger>
-                            <SelectContent className="bg-zinc-800 border-zinc-700 text-white">
+                            <SelectContent className="border-[#B4B4B4]">
                               <SelectItem value="roofing">Roofing</SelectItem>
                               <SelectItem value="siding">Siding</SelectItem>
                               <SelectItem value="gutters">Gutters</SelectItem>
@@ -284,8 +325,11 @@ export default function ContactPage() {
                       </div>
 
                       <div className="flex flex-col gap-1.5">
-                        <Label htmlFor="message" className="text-zinc-300 text-sm">
-                          Tell us about your project <span className="text-yellow-500">*</span>
+                        <Label
+                          htmlFor="message"
+                          className="text-sm text-[#494848] dark:text-[#D4D4D4]"
+                        >
+                          Tell us about your project <span className="text-[#D1992B]">*</span>
                         </Label>
                         <Textarea
                           id="message"
@@ -295,14 +339,14 @@ export default function ContactPage() {
                           required
                           rows={5}
                           placeholder="Describe the issue or project, your property type, and any other details that would help us give you an accurate quote..."
-                          className="border-zinc-700 placeholder:text-zinc-500 focus:border-yellow-500/50 focus:ring-yellow-500/20 resize-none"
+                          className="border-[#B4B4B4] placeholder:text-[#909090] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20 resize-none"
                         />
                       </div>
 
                       <Button
                         type="submit"
                         disabled={loading}
-                        className="bg-yellow-500 font-bold hover:bg-yellow-400 transition-colors w-full sm:w-auto sm:self-start"
+                        className="bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-bold transition-colors w-full sm:w-auto sm:self-start"
                         size="lg"
                       >
                         {loading ? (
@@ -315,7 +359,7 @@ export default function ContactPage() {
                         )}
                         {error && <p className="text-red-400 text-sm">{error}</p>}
                       </Button>
-                      <p className="text-zinc-500 text-xs">
+                      <p className="text-xs" style={{ color: palette.text.secondary }}>
                         By submitting this form you agree to be contacted about your request. We
                         never share your information.
                       </p>
