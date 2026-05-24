@@ -67,7 +67,7 @@ export default function Navbar() {
         <div className="hidden md:block">
           <Button
             asChild
-            className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#494848] hover:text-[#494848] font-semibold transition-colors"
+            className="bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold transition-colors"
           >
             <Link href="/contact">Get a Free Quote</Link>
           </Button>
@@ -98,7 +98,7 @@ export default function Navbar() {
               <div className="mt-4 px-4">
                 <Button
                   asChild
-                  className="w-full bg-[#F2B43B] hover:bg-[#C79B3A] text-black font-semibold"
+                  className="w-full bg-[#F2B43B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold"
                   onClick={() => setOpen(false)}
                 >
                   <Link href="/contact">Get a Free Quote</Link>
