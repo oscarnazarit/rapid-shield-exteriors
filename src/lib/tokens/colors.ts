@@ -30,9 +30,9 @@ export const colors = {
 export const palette = {
   text: {
     primary: colors.gold.primary, // main brand color for emphasis
-    secondary: colors.gray[700],
+    secondary: 'var(--color-text-secondary)',
     disabled: colors.gray[500],
-    inverse: colors.gray[900], // text on gold backgrounds
+    inverse: 'var(--color-text-inverse)', // text on gold backgrounds
   },
   border: {
     default: colors.gray[300],

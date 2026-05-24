@@ -123,7 +123,7 @@ export default function HomePage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#494848] hover:text-[#494848] font-semibold transition-colors"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold transition-colors"
               >
                 <Link href="/contact">
                   Get a Free Quote
@@ -133,9 +133,8 @@ export default function HomePage() {
               <Button
                 asChild
                 size="lg"
-                style={{ color: '#494848' }}
                 variant="outline"
-                className="border-[#494848] hover:bg-[#B67D0E] font-semibold"
+                className="border-black dark:border-[#D4D4D4] text-black dark:text-[#D4D4D4] hover:bg-[#B67D0E] hover:text-black dark:hover:text-[#D4D4D4] font-semibold"
               >
                 <Link href="/services">View Our Services</Link>
               </Button>
@@ -156,19 +155,13 @@ export default function HomePage() {
       {/* Stats bar */}
       <section className=" py-8" style={{ backgroundColor: palette.background.primary }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
-          <div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center"
-            style={{ color: palette.text.inverse }}
-          >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-[#494848] dark:text-[#D4D4D4]">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <div
-                  className="text-2xl md:text-3xl font-bold"
-                  style={{ color: palette.text.inverse }}
-                >
+                <div className="text-2xl md:text-3xl font-bold text-[#494848] dark:text-[#D4D4D4]">
                   {stat.value}
                 </div>
-                <div className="font-medium text-sm mt-1" style={{ color: palette.text.inverse }}>
+                <div className="font-medium text-sm mt-1 text-[#494848] dark:text-[#D4D4D4]">
                   {stat.label}
                 </div>
               </div>
@@ -201,7 +194,7 @@ export default function HomePage() {
               return (
                 <Card
                   key={service.title}
-                  className="transition-colors group"
+                  className="transition-colors group ring-1 ring-[#D1992B] hover:ring-[#B67D0E]"
                   style={{ color: palette.text.primary }}
                 >
                   <CardContent className="p-6 flex flex-col gap-4">
@@ -211,7 +204,7 @@ export default function HomePage() {
                     <div>
                       <h3 className="font-semibold text-lg mb-2">{service.title}</h3>
                       <p
-                        className="text-sm leading-relaxed"
+                        className="text-sm leading-relaxed dark:text-[#D4D4D4]"
                         style={{ color: palette.text.inverse }}
                       >
                         {service.description}
@@ -255,7 +248,7 @@ export default function HomePage() {
               </p>
               <Button
                 asChild
-                className="font-semibold h-10 transition-colors bg-[#D1992B] hover:bg-[#B67D0E] text-[#494848] hover:text-[#494848]"
+                className="font-semibold h-10 transition-colors bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4]"
               >
                 <Link href="/contact">Schedule a Free Estimate</Link>
               </Button>
@@ -271,7 +264,9 @@ export default function HomePage() {
                   }}
                 >
                   <CheckCircle2 className="h-5 w-5 text-[#d1992b] shrink-0 mt-0.5" />
-                  <span className="text-[#494848] text-sm leading-snug">{reason}</span>
+                  <span className="text-[#494848] dark:text-[#D4D4D4] text-sm leading-snug">
+                    {reason}
+                  </span>
                 </div>
               ))}
             </div>
@@ -307,7 +302,7 @@ export default function HomePage() {
                     ))}
                   </div>
                   <p
-                    className="text-sm leading-relaxed italic"
+                    className="text-sm leading-relaxed italic dark:text-[#D4D4D4]"
                     style={{ color: palette.text.inverse }}
                   >
                     &ldquo;{t.text}&rdquo;
@@ -316,7 +311,10 @@ export default function HomePage() {
                     className="mt-auto pt-2 border-t"
                     style={{ borderColor: palette.border.accent }}
                   >
-                    <p className="font-semibold text-sm" style={{ color: palette.text.inverse }}>
+                    <p
+                      className="font-semibold text-sm dark:text-[#D4D4D4]"
+                      style={{ color: palette.text.inverse }}
+                    >
                       {t.name}
                     </p>
                     <p className="text-xs" style={{ color: palette.text.secondary }}>
@@ -333,14 +331,11 @@ export default function HomePage() {
       {/* Final CTA */}
       <section className="py-16 md:py-20" style={{ backgroundColor: palette.background.primary }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6 text-center">
-          <ShieldCheck className="h-10 w-10 mx-auto mb-4" style={{ color: palette.text.inverse }} />
-          <h2
-            className="text-3xl md:text-4xl font-bold mb-3"
-            style={{ color: palette.text.inverse }}
-          >
+          <ShieldCheck className="h-10 w-10 mx-auto mb-4 text-[#494848] dark:text-[#D4D4D4]" />
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">
             Ready to get started?
           </h2>
-          <p className="text-lg mb-8 max-w-xl mx-auto" style={{ color: palette.text.inverse }}>
+          <p className="text-lg mb-8 max-w-xl mx-auto text-[#494848] dark:text-[#D4D4D4]">
             Contact us today for a free, no-obligation quote. We&apos;ll come to you and walk
             through every detail.
           </p>
@@ -349,7 +344,7 @@ export default function HomePage() {
               asChild
               size="lg"
               variant="outline"
-              className="bg-[#D1992B] border-[#494848] text-[#494848] hover:bg-[#B67D0E] hover:text-[#494848] font-semibold text-base"
+              className="bg-[#D4D4D4] border-[#D4D4D4] text-black dark:text-[#494848] hover:bg-[#B67D0E] hover:border-[#B67D0E] hover:text-black dark:hover:text-[#494848] font-semibold text-base"
             >
               <Link href="/contact">
                 Request a Free Quote
@@ -359,7 +354,7 @@ export default function HomePage() {
             <Button
               asChild
               size="lg"
-              className="bg-[#D1992B] border-[#494848] text-[#494848] hover:bg-[#B67D0E] hover:text-[#494848] font-semibold text-base"
+              className="bg-[#D4D4D4] border-[#D4D4D4] text-black dark:text-[#494848] hover:bg-[#B67D0E] hover:border-[#B67D0E] hover:text-black dark:hover:text-[#494848] font-semibold text-base"
               variant="outline"
             >
               <a href="tel:5158050500">
