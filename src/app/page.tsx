@@ -154,13 +154,23 @@ export default function HomePage() {
       </section>
 
       {/* Stats bar */}
-      <section className="bg-yellow-500 py-8">
+      <section className=" py-8" style={{ backgroundColor: palette.background.primary }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center"
+            style={{ color: palette.text.inverse }}
+          >
             {stats.map((stat) => (
               <div key={stat.label}>
-                <div className="text-2xl md:text-3xl font-bold text-black">{stat.value}</div>
-                <div className="text-yellow-900 font-medium text-sm mt-1">{stat.label}</div>
+                <div
+                  className="text-2xl md:text-3xl font-bold"
+                  style={{ color: palette.text.inverse }}
+                >
+                  {stat.value}
+                </div>
+                <div className="font-medium text-sm mt-1" style={{ color: palette.text.inverse }}>
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>

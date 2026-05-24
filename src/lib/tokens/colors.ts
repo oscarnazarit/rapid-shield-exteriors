@@ -40,6 +40,7 @@ export const palette = {
     accent: colors.gold.primary,
   },
   background: {
+    primary: colors.gold.primary, // main background color
     page: '#FFFFFF',
     subtle: colors.gray[100],
     accent: colors.gold.pale,
