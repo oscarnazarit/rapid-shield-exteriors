@@ -280,32 +280,48 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 md:py-24 border-t border-zinc-900">
+      <section className="py-20 md:py-24 border-t" style={{ borderColor: palette.border.default }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium uppercase text-xs tracking-wide">
+            <Badge
+              className="mb-4 font-medium uppercase text-xs tracking-wide"
+              style={{ color: palette.text.primary, borderColor: palette.border.accent }}
+            >
               Testimonials
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold">What our customers say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: palette.text.inverse }}>
+              What our customers say
+            </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <Card key={t.name} style={{ borderColor: 'var(--border)' }}>
+              <Card key={t.name} className="ring-[#D1992B]">
                 <CardContent className="p-6 flex flex-col gap-4">
                   <div className="flex gap-0.5">
                     {Array.from({ length: t.rating }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star
+                        key={i}
+                        className="h-4 w-4"
+                        style={{ color: palette.text.primary, fill: palette.text.primary }}
+                      />
                     ))}
                   </div>
                   <p
                     className="text-sm leading-relaxed italic"
-                    style={{ color: 'var(--text-primary)' }}
+                    style={{ color: palette.text.inverse }}
                   >
                     &ldquo;{t.text}&rdquo;
                   </p>
-                  <div className="mt-auto pt-2 border-t" style={{ borderColor: 'var(--border)' }}>
-                    <p className="font-semibold text-sm">{t.name}</p>
-                    <p className="text-zinc-500 text-xs">{t.location}</p>
+                  <div
+                    className="mt-auto pt-2 border-t"
+                    style={{ borderColor: palette.border.accent }}
+                  >
+                    <p className="font-semibold text-sm" style={{ color: palette.text.inverse }}>
+                      {t.name}
+                    </p>
+                    <p className="text-xs" style={{ color: palette.text.secondary }}>
+                      {t.location}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
