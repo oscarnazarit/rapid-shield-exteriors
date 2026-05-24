@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { palette } from '@/lib/tokens/colors';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -83,13 +84,21 @@ export default function ServicesPage() {
   return (
     <div className="flex flex-col">
       {/* Page header */}
-      <section className="border-b border-zinc-800 py-16 md:py-20">
+      <section className="border-b py-16 md:py-20" style={{ borderColor: palette.border.default }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
-          <Badge className="mb-4 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium uppercase text-xs tracking-wide">
+          <Badge
+            className="mb-4 font-medium uppercase text-xs tracking-wide"
+            style={{ color: palette.text.primary, borderColor: palette.border.accent }}
+          >
             Our Services
           </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">What We Do</h1>
-          <p className="text-zinc-400 text-lg max-w-xl leading-relaxed">
+          <h1
+            className="text-4xl md:text-5xl font-bold mb-4"
+            style={{ color: palette.text.inverse }}
+          >
+            What We Do
+          </h1>
+          <p className="text-lg max-w-xl leading-relaxed" style={{ color: palette.text.secondary }}>
             Comprehensive exterior services performed by experienced, licensed professionals. Every
             project, every time.
           </p>
@@ -103,29 +112,33 @@ export default function ServicesPage() {
           <section
             key={service.id}
             id={service.id}
-            className={
-              `py-20 md:py-24 border-t border-zinc-900`
-              // 	${
-              //   isEven ? "bg-zinc-950" : "bg-black"
-              // }`
-            }
+            className="py-20 md:py-24 border-t border-[#B4B4B4]"
           >
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
               {/* Header */}
               <div className="flex items-start gap-4 mb-10">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-yellow-500/10 border border-yellow-500/20">
-                  <Icon className="h-7 w-7 text-yellow-400" />
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-[#D1992B]">
+                  <Icon className="h-7 w-7" style={{ color: palette.text.primary }} />
                 </div>
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-bold">{service.title}</h2>
-                  <p className="text-yellow-400 font-medium mt-1">{service.tagline}</p>
+                  <h2
+                    className="text-3xl md:text-4xl font-bold"
+                    style={{ color: palette.text.inverse }}
+                  >
+                    {service.title}
+                  </h2>
+                  <p className="font-medium mt-1" style={{ color: palette.text.primary }}>
+                    {service.tagline}
+                  </p>
                 </div>
               </div>
 
               {/* Body */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
                 <div>
-                  <p className="text-zinc-400 leading-relaxed mb-8">{service.description}</p>
+                  <p className="leading-relaxed mb-8" style={{ color: palette.text.secondary }}>
+                    {service.description}
+                  </p>
 
                   {/* Sub-services */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
@@ -134,11 +147,21 @@ export default function ServicesPage() {
                       return (
                         <div
                           key={sub.label}
-                          className="border border-zinc-800 rounded-lg p-4 text-center"
+                          className="border border-[#D1992B] rounded-lg p-4 text-center"
                         >
-                          <SubIcon className="h-5 w-5 text-yellow-400 mx-auto mb-2" />
-                          <p className="font-semibold text-sm">{sub.label}</p>
-                          <p className="text-zinc-500 text-xs mt-1">{sub.desc}</p>
+                          <SubIcon
+                            className="h-5 w-5 mx-auto mb-2"
+                            style={{ color: palette.text.primary }}
+                          />
+                          <p
+                            className="font-semibold text-sm"
+                            style={{ color: palette.text.inverse }}
+                          >
+                            {sub.label}
+                          </p>
+                          <p className="text-xs mt-1" style={{ color: palette.text.secondary }}>
+                            {sub.desc}
+                          </p>
                         </div>
                       );
                     })}
@@ -146,7 +169,7 @@ export default function ServicesPage() {
 
                   <Button
                     asChild
-                    className="bg-yellow-500 font-bold hover:bg-yellow-400 transition-colors"
+                    className="bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-bold transition-colors"
                   >
                     <Link href="/contact">
                       Get a {service.title} Quote
@@ -156,14 +179,24 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Checklist */}
-                <Card className="border-zinc-800">
+                <Card className="ring-[#D1992B]">
                   <CardContent className="p-6">
-                    <h3 className="font-semibold mb-5 text-base">What&apos;s included</h3>
+                    <h3
+                      className="font-semibold mb-5 text-base"
+                      style={{ color: palette.text.inverse }}
+                    >
+                      What&apos;s included
+                    </h3>
                     <ul className="flex flex-col gap-3">
                       {service.offerings.map((item) => (
                         <li key={item} className="flex items-start gap-3">
-                          <CheckCircle2 className="h-5 w-5 text-yellow-500 shrink-0 mt-0.5" />
-                          <span className="text-sm leading-snug">{item}</span>
+                          <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5 text-[#D1992B]" />
+                          <span
+                            className="text-sm leading-snug"
+                            style={{ color: palette.text.inverse }}
+                          >
+                            {item}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -176,19 +209,19 @@ export default function ServicesPage() {
       })}
 
       {/* Bottom CTA */}
-      <section className="bg-yellow-500 py-16 md:py-20">
+      <section className="py-16 md:py-20" style={{ backgroundColor: palette.background.primary }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">
             Not sure what you need?
           </h2>
-          <p className="text-yellow-900 text-lg mb-8 max-w-lg mx-auto">
+          <p className="text-lg mb-8 max-w-lg mx-auto text-[#494848] dark:text-[#D4D4D4]">
             We&apos;ll assess your home and recommend the best solution — at no cost and with zero
             pressure.
           </p>
           <Button
             asChild
             size="lg"
-            className="bg-black text-white hover:bg-zinc-900 font-bold text-base"
+            className="bg-[#D4D4D4] border-[#D4D4D4] text-black dark:text-[#494848] hover:bg-[#B67D0E] hover:border-[#B67D0E] hover:text-black dark:hover:text-[#494848] font-bold text-base"
           >
             <Link href="/contact">
               Schedule a Free Inspection
