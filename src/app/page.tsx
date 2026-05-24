@@ -331,11 +331,16 @@ export default function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-yellow-500 py-16 md:py-20">
+      <section className="py-16 md:py-20" style={{ backgroundColor: palette.background.primary }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6 text-center">
-          <ShieldCheck className="h-10 w-10 text-black mx-auto mb-4" />
-          <h2 className="text-3xl md:text-4xl font-bold text-black mb-3">Ready to get started?</h2>
-          <p className="text-yellow-900 text-lg mb-8 max-w-xl mx-auto">
+          <ShieldCheck className="h-10 w-10 mx-auto mb-4" style={{ color: palette.text.inverse }} />
+          <h2
+            className="text-3xl md:text-4xl font-bold mb-3"
+            style={{ color: palette.text.inverse }}
+          >
+            Ready to get started?
+          </h2>
+          <p className="text-lg mb-8 max-w-xl mx-auto" style={{ color: palette.text.inverse }}>
             Contact us today for a free, no-obligation quote. We&apos;ll come to you and walk
             through every detail.
           </p>
@@ -343,7 +348,8 @@ export default function HomePage() {
             <Button
               asChild
               size="lg"
-              className="bg-black text-white hover:bg-zinc-900 font-bold text-base"
+              variant="outline"
+              className="bg-[#D1992B] border-[#494848] text-[#494848] hover:bg-[#B67D0E] hover:text-[#494848] font-semibold text-base"
             >
               <Link href="/contact">
                 Request a Free Quote
@@ -353,8 +359,8 @@ export default function HomePage() {
             <Button
               asChild
               size="lg"
+              className="bg-[#D1992B] border-[#494848] text-[#494848] hover:bg-[#B67D0E] hover:text-[#494848] font-semibold text-base"
               variant="outline"
-              className="border-black text-black bg-transparent hover:bg-yellow-400 font-bold text-base"
             >
               <a href="tel:5158050500">
                 <Phone className="mr-2 h-4 w-4" />
