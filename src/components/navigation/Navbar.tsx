@@ -55,7 +55,9 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
-                pathname === link.href ? 'text-[#D1992B]' : 'text-[#494848] hover:text-[#D1992B]'
+                pathname === link.href
+                  ? 'text-[#D1992B]'
+                  : 'text-[#494848] dark:text-[#D4D4D4] hover:text-[#D1992B] dark:hover:text-[#D1992B]'
               }`}
             >
               {link.label}
