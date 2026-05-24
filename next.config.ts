@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.facebook.com *.fbcdn.net",
               "frame-src 'self' *.facebook.com *.fbcdn.net",
               "img-src 'self' data: blob: *.facebook.com *.fbcdn.net *.fbsbx.com",
-              "font-src 'self' data: *.facebook.com *.fbcdn.net *.fbsbx.com fonts.gstatic.com",
+              "font-src 'self' data: *",
               "style-src 'self' 'unsafe-inline' *.facebook.com *.fbcdn.net",
               "connect-src 'self' *.facebook.com *.fbcdn.net",
             ].join('; '),

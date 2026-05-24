@@ -6,6 +6,7 @@
   --text-primary: #000000;
   --text-secondary: #606060;
   --accent: #f5a623;
+  --border: rgba(0, 0, 0, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,6 +16,7 @@
     --text-primary: #ffffff;
     --text-secondary: #606060;
     --accent: #f5a623;
+    --border: rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -37,5 +39,18 @@ body {
 @media (prefers-color-scheme: dark) {
   :root {
     --grid-line: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.fb-iframe-scale {
+  transform: scale(1);
+}
+
+@media (max-width: 500px) {
+  .fb-iframe-scale {
+    transform: scale(calc(100vw / 500));
+  }
+  .fb-iframe-scale-wrapper {
+    height: calc(700px * (100vw / 500));
   }
 }

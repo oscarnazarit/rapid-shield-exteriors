@@ -144,7 +144,7 @@ export default function HomePage() {
       </section>
 
       {/* Services preview */}
-      <section className="py-20 md:py-24">
+      <section className="py-20 md:py-24" style={{ backgroundColor: 'var(--bg-primary)' }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium uppercase text-xs tracking-wide">
@@ -162,7 +162,8 @@ export default function HomePage() {
               return (
                 <Card
                   key={service.title}
-                  className="border-zinc-800 hover:border-yellow-500/40 transition-colors group"
+                  className="hover:border-yellow-500/40 transition-colors group"
+                  style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}
                 >
                   <CardContent className="p-6 flex flex-col gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-yellow-500/10 border border-yellow-500/20 group-hover:bg-yellow-500/20 transition-colors">
@@ -170,7 +171,12 @@ export default function HomePage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg mb-2">{service.title}</h3>
-                      <p className="text-zinc-400 text-sm leading-relaxed">{service.description}</p>
+                      <p
+                        className="text-sm leading-relaxed"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        {service.description}
+                      </p>
                     </div>
                     <Link
                       href={service.href}
@@ -187,7 +193,7 @@ export default function HomePage() {
       </section>
 
       {/* Why choose us */}
-      <section className="py-20 md:py-24 border-t border-zinc-900">
+      <section className="py-20 md:py-24" style={{ backgroundColor: 'var(--bg-primary)' }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -197,7 +203,7 @@ export default function HomePage() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 The standard for exterior work in the area
               </h2>
-              <p className="text-zinc-400 leading-relaxed mb-8">
+              <p className="leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
                 We&apos;ve built our reputation one rooftop at a time. Every project gets the same
                 focus, care, and expertise — whether it&apos;s a small repair or a full exterior
                 renovation.
@@ -213,7 +219,8 @@ export default function HomePage() {
               {reasons.map((reason) => (
                 <div
                   key={reason}
-                  className="flex items-start gap-3 border border-zinc-800 rounded-lg p-4"
+                  className="flex items-start gap-3 borderrounded-lg p-4"
+                  style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}
                 >
                   <CheckCircle2 className="h-5 w-5 text-yellow-500 shrink-0 mt-0.5" />
                   <span className="text-zinc-400 text-sm leading-snug">{reason}</span>
@@ -235,17 +242,20 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <Card key={t.name} className="border-zinc-800">
+              <Card key={t.name} style={{ borderColor: 'var(--border)' }}>
                 <CardContent className="p-6 flex flex-col gap-4">
                   <div className="flex gap-0.5">
                     {Array.from({ length: t.rating }).map((_, i) => (
                       <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-zinc-600 text-sm leading-relaxed italic">
+                  <p
+                    className="text-sm leading-relaxed italic"
+                    style={{ color: 'var(--text-primary)' }}
+                  >
                     &ldquo;{t.text}&rdquo;
                   </p>
-                  <div className="mt-auto pt-2 border-t border-zinc-800">
+                  <div className="mt-auto pt-2 border-t" style={{ borderColor: 'var(--border)' }}>
                     <p className="font-semibold text-sm">{t.name}</p>
                     <p className="text-zinc-500 text-xs">{t.location}</p>
                   </div>
