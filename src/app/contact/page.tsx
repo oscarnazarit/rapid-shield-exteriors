@@ -312,7 +312,11 @@ export default function ContactPage() {
                             <SelectTrigger className="border-[#B4B4B4] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20">
                               <SelectValue placeholder="Select a service" />
                             </SelectTrigger>
-                            <SelectContent className="border-[#B4B4B4]">
+                            <SelectContent
+                              align="start"
+                              alignItemWithTrigger={false}
+                              className="border-[#B4B4B4] bg-white dark:bg-zinc-900"
+                            >
                               <SelectItem value="roofing">Roofing</SelectItem>
                               <SelectItem value="siding">Siding</SelectItem>
                               <SelectItem value="gutters">Gutters</SelectItem>
