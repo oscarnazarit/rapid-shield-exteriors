@@ -100,17 +100,22 @@ export default function HomePage() {
               style={{
                 color: palette.text.primary,
                 borderColor: palette.border.accent,
-                backgroundColor: `${palette.background.accent}99`, // 60% opacity
               }}
             >
               Licensed &amp; Insured Contractors
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
+            <h1
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
+              style={{ color: palette.text.inverse }}
+            >
               Protect Your Home.
               <br />
               <span style={{ color: palette.text.primary }}>Trust the Shield.</span>
             </h1>
-            <p className="text-zinc-400 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
+            <p
+              className="text-lg md:text-xl leading-relaxed mb-8 max-w-xl"
+              style={{ color: palette.text.inverse }}
+            >
               Expert roofing, siding, and gutter services delivered with precision and care. We
               stand behind every job we do.
             </p>
@@ -128,8 +133,9 @@ export default function HomePage() {
               <Button
                 asChild
                 size="lg"
+                style={{ color: '#494848' }}
                 variant="outline"
-                className="border-zinc-700 hover:bg-[#B67D0E] text-base"
+                className="border-[#494848] hover:bg-[#B67D0E] text-base"
               >
                 <Link href="/services">View Our Services</Link>
               </Button>
