@@ -37,7 +37,7 @@ export const palette = {
   border: {
     default: colors.gray[300],
     subtle: colors.gray[100],
-    accent: colors.gold.deep,
+    accent: colors.gold.primary,
   },
   background: {
     page: '#FFFFFF',

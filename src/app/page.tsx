@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { palette } from '@/lib/tokens/colors';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -91,15 +93,22 @@ export default function HomePage() {
         {/* Gold accent line */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-yellow-500/40" />
 
-        <div className="relative container mx-auto max-w-6xl px-4 md:px-6 py-20 md:py-28 lg:py-36">
-          <div className="max-w-3xl">
-            <Badge className="mb-5 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium tracking-wide uppercase text-xs">
+        <div className="relative container mx-auto max-w-6xl px-4 md:px-6 py-20 md:py-28 lg:py-36 flex flex-col md:flex-row items-center justify-center gap-45">
+          <div className="max-w-xl flex-1">
+            <Badge
+              className="mb-5 font-medium tracking-wide uppercase text-xs"
+              style={{
+                color: palette.text.primary,
+                borderColor: palette.border.accent,
+                backgroundColor: `${palette.background.accent}99`, // 60% opacity
+              }}
+            >
               Licensed &amp; Insured Contractors
             </Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
               Protect Your Home.
               <br />
-              <span className="text-yellow-400">Trust the Shield.</span>
+              <span style={{ color: palette.text.primary }}>Trust the Shield.</span>
             </h1>
             <p className="text-zinc-400 text-lg md:text-xl leading-relaxed mb-8 max-w-xl">
               Expert roofing, siding, and gutter services delivered with precision and care. We
@@ -109,7 +118,7 @@ export default function HomePage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-yellow-500 text-black font-bold hover:bg-yellow-400 transition-colors text-base"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#494848] hover:text-[#494848] font-semibold transition-colors"
               >
                 <Link href="/contact">
                   Get a Free Quote
@@ -120,11 +129,20 @@ export default function HomePage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-zinc-700 hover:bg-yellow-400 text-base"
+                className="border-zinc-700 hover:bg-[#B67D0E] text-base"
               >
                 <Link href="/services">View Our Services</Link>
               </Button>
             </div>
+          </div>
+          <div className="flex-shrink-0">
+            <Image
+              src="/solid-gold-logo.png"
+              alt="Rapid Shield Exteriors Logo"
+              width={420}
+              height={420}
+              className="object-contain rounded"
+            />
           </div>
         </div>
       </section>
