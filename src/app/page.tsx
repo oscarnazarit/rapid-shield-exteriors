@@ -135,7 +135,7 @@ export default function HomePage() {
                 size="lg"
                 style={{ color: '#494848' }}
                 variant="outline"
-                className="border-[#494848] hover:bg-[#B67D0E] text-base"
+                className="border-[#494848] hover:bg-[#B67D0E] font-semibold"
               >
                 <Link href="/services">View Our Services</Link>
               </Button>
@@ -236,20 +236,26 @@ export default function HomePage() {
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-4 bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/10 font-medium uppercase text-xs tracking-wide">
+              <Badge
+                className="mb-4 font-medium uppercase text-xs tracking-wide"
+                style={{ color: palette.text.primary, borderColor: palette.border.accent }}
+              >
                 Why Rapid Shield
               </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2
+                className="text-3xl md:text-4xl font-bold mb-4"
+                style={{ color: palette.text.inverse }}
+              >
                 The standard for exterior work in the area
               </h2>
-              <p className="leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
+              <p className="leading-relaxed mb-8" style={{ color: palette.text.secondary }}>
                 We&apos;ve built our reputation one rooftop at a time. Every project gets the same
                 focus, care, and expertise — whether it&apos;s a small repair or a full exterior
                 renovation.
               </p>
               <Button
                 asChild
-                className="bg-yellow-500 font-bold hover:bg-yellow-400 transition-colors"
+                className="font-semibold h-10 transition-colors bg-[#D1992B] hover:bg-[#B67D0E] text-[#494848] hover:text-[#494848]"
               >
                 <Link href="/contact">Schedule a Free Estimate</Link>
               </Button>
@@ -258,11 +264,14 @@ export default function HomePage() {
               {reasons.map((reason) => (
                 <div
                   key={reason}
-                  className="flex items-start gap-3 borderrounded-lg p-4"
-                  style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}
+                  className="flex items-start gap-3 border rounded-lg p-4"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    borderColor: palette.border.accent,
+                  }}
                 >
-                  <CheckCircle2 className="h-5 w-5 text-yellow-500 shrink-0 mt-0.5" />
-                  <span className="text-zinc-400 text-sm leading-snug">{reason}</span>
+                  <CheckCircle2 className="h-5 w-5 text-[#d1992b] shrink-0 mt-0.5" />
+                  <span className="text-[#494848] text-sm leading-snug">{reason}</span>
                 </div>
               ))}
             </div>
