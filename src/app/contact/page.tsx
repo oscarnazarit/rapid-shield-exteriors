@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import imageCompression from 'browser-image-compression';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -14,8 +15,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from 'lucide-react';
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  CheckCircle2,
+  Send,
+  Paperclip,
+  X,
+  ImageIcon,
+} from 'lucide-react';
 import { palette } from '@/lib/tokens/colors';
+
+const MAX_PHOTOS = 4;
+const MAX_SIZE_MB = 0.6; // compress each image to ≤600 KB before sending
+
+type AttachedPhoto = {
+  name: string;
+  preview: string; // object URL — for thumbnail display only
+  data: string; // base64 — sent to the API
+  originalKB: number;
+  compressedKB: number;
+};
 
 const contactInfo = [
   {
@@ -63,8 +85,56 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   const [phoneError, setPhoneError] = useState<string | null>(null);
+
+  const [photos, setPhotos] = useState<AttachedPhoto[]>([]);
+  const [compressing, setCompressing] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFiles = async (fileList: FileList | null) => {
+    if (!fileList) return;
+    const slots = MAX_PHOTOS - photos.length;
+    if (slots <= 0) return;
+    const incoming = Array.from(fileList).slice(0, slots);
+    setCompressing(true);
+    try {
+      const compressed = await Promise.all(
+        incoming.map(async (file) => {
+          const originalKB = Math.round(file.size / 1024);
+          const blob = await imageCompression(file, {
+            maxSizeMB: MAX_SIZE_MB,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+          });
+          const compressedKB = Math.round(blob.size / 1024);
+          const data = await new Promise<string>((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve((reader.result as string).split(',')[1]);
+            reader.readAsDataURL(blob);
+          });
+          return {
+            name: file.name,
+            preview: URL.createObjectURL(blob),
+            data,
+            originalKB,
+            compressedKB,
+          };
+        })
+      );
+      setPhotos((prev) => [...prev, ...compressed].slice(0, MAX_PHOTOS));
+    } finally {
+      setCompressing(false);
+      // reset input so the same file can be re-added after removal
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
+  const removePhoto = (index: number) => {
+    setPhotos((prev) => {
+      URL.revokeObjectURL(prev[index].preview);
+      return prev.filter((_, i) => i !== index);
+    });
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -89,7 +159,10 @@ export default function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          photos: photos.map(({ name, data }) => ({ name, data })),
+        }),
       });
 
       if (!res.ok) throw new Error('Failed');
@@ -235,6 +308,7 @@ export default function ContactPage() {
                             service: '',
                             message: '',
                           });
+                          setPhotos([]);
                         }}
                         variant="outline"
                         className="mt-2 border-[#D1992B] text-[#494848] dark:text-[#D4D4D4] hover:bg-[#B67D0E] hover:text-black dark:hover:text-[#D4D4D4]"
@@ -347,9 +421,84 @@ export default function ContactPage() {
                         />
                       </div>
 
+                      {/* Photo attachment */}
+                      <div className="flex flex-col gap-2">
+                        <Label className="text-sm text-[#494848] dark:text-[#D4D4D4] flex items-center gap-1.5">
+                          <Paperclip className="h-3.5 w-3.5" />
+                          Attach Photos
+                          <span className="font-normal" style={{ color: palette.text.secondary }}>
+                            (optional — up to {MAX_PHOTOS})
+                          </span>
+                        </Label>
+
+                        {/* Thumbnails */}
+                        {photos.length > 0 && (
+                          <div className="flex flex-wrap gap-2">
+                            {photos.map((photo, i) => (
+                              <div key={i} className="relative group">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={photo.preview}
+                                  alt={photo.name}
+                                  className="h-20 w-20 object-cover rounded-lg border"
+                                  style={{ borderColor: palette.border.default }}
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => removePhoto(i)}
+                                  className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-zinc-800 border border-zinc-600 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <X className="h-3 w-3 text-white" />
+                                </button>
+                                <p
+                                  className="text-xs mt-1 text-center truncate w-20"
+                                  style={{ color: palette.text.secondary }}
+                                  title={photo.name}
+                                >
+                                  {photo.compressedKB < photo.originalKB
+                                    ? `${photo.compressedKB} KB`
+                                    : photo.name}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Add button — hidden once at max */}
+                        {photos.length < MAX_PHOTOS && (
+                          <>
+                            <button
+                              type="button"
+                              disabled={compressing}
+                              onClick={() => fileInputRef.current?.click()}
+                              className="flex items-center gap-2 w-fit px-4 py-2 rounded-lg border text-sm font-medium transition-colors disabled:opacity-50"
+                              style={{
+                                borderColor: palette.border.accent,
+                                color: palette.text.secondary,
+                              }}
+                            >
+                              <ImageIcon className="h-4 w-4" />
+                              {compressing
+                                ? 'Compressing…'
+                                : photos.length === 0
+                                  ? 'Add photos'
+                                  : `Add more (${MAX_PHOTOS - photos.length} left)`}
+                            </button>
+                            <input
+                              ref={fileInputRef}
+                              type="file"
+                              accept="image/*"
+                              multiple
+                              className="hidden"
+                              onChange={(e) => handleFiles(e.target.files)}
+                            />
+                          </>
+                        )}
+                      </div>
+
                       <Button
                         type="submit"
-                        disabled={loading}
+                        disabled={loading || compressing}
                         className="bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-bold transition-colors w-full sm:w-auto sm:self-start"
                         size="lg"
                       >

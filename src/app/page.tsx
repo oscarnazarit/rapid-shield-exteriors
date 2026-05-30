@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { client } from '@/sanity/lib/client';
 import { palette } from '@/lib/tokens/colors';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -15,6 +16,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 
+// These don't change often — keep hardcoded
 const services = [
   {
     icon: Home,
@@ -39,13 +41,6 @@ const services = [
   },
 ];
 
-const stats = [
-  { value: '500+', label: 'Projects Completed' },
-  { value: '15+', label: 'Years of Experience' },
-  { value: '100%', label: 'Licensed & Insured' },
-  { value: '5★', label: 'Average Rating' },
-];
-
 const reasons = [
   'Free, no-obligation estimates',
   'Licensed and fully insured crew',
@@ -55,33 +50,57 @@ const reasons = [
   'Local company, community reputation',
 ];
 
-const testimonials = [
-  {
-    name: 'Sarah M.',
-    location: 'Homeowner',
-    text: "Rapid Shield replaced our entire roof after storm damage. The crew was professional, fast, and left our yard spotless. Couldn't be happier.",
-    rating: 5,
-  },
-  {
-    name: 'James T.',
-    location: 'Property Manager',
-    text: "We've used Rapid Shield for three properties now. Consistently excellent work on gutters and siding. They're our go-to contractor.",
-    rating: 5,
-  },
-  {
-    name: 'Linda K.',
-    location: 'Homeowner',
-    text: 'Fair quote, great communication, and beautiful new siding. The house looks brand new. I highly recommend them to anyone.',
-    rating: 5,
-  },
-];
+export default async function HomePage() {
+  const [settings, testimonials, stats] = await Promise.all([
+    client.fetch(`*[_type == "siteSettings"][0]`),
+    client.fetch(`*[_type == "testimonial"] | order(_createdAt asc)`),
+    client.fetch(`*[_type == "stat"] | order(order asc)`),
+  ]);
 
-export default function HomePage() {
+  // Fall back to hardcoded values until Sanity is populated
+  const heroHeadline = settings?.heroHeadline ?? 'Protect Your Home.';
+  const heroSubtext =
+    settings?.heroSubtext ??
+    'Expert roofing, siding, and gutter services delivered with precision and care. We stand behind every job we do.';
+  const phone = settings?.phone ?? '(515) 805-0500';
+  const phoneHref = `tel:${(settings?.phone ?? '5158050500').replace(/\D/g, '')}`;
+
+  const displayStats = stats?.length
+    ? stats
+    : [
+        { value: '500+', label: 'Projects Completed' },
+        { value: '15+', label: 'Years of Experience' },
+        { value: '100%', label: 'Licensed & Insured' },
+        { value: '5★', label: 'Average Rating' },
+      ];
+
+  const displayTestimonials = testimonials?.length
+    ? testimonials
+    : [
+        {
+          name: 'Sarah M.',
+          location: 'Homeowner',
+          text: "Rapid Shield replaced our entire roof after storm damage. The crew was professional, fast, and left our yard spotless. Couldn't be happier.",
+          rating: 5,
+        },
+        {
+          name: 'James T.',
+          location: 'Property Manager',
+          text: "We've used Rapid Shield for three properties now. Consistently excellent work on gutters and siding. They're our go-to contractor.",
+          rating: 5,
+        },
+        {
+          name: 'Linda K.',
+          location: 'Homeowner',
+          text: 'Fair quote, great communication, and beautiful new siding. The house looks brand new. I highly recommend them to anyone.',
+          rating: 5,
+        },
+      ];
+
   return (
     <div className="flex flex-col">
       {/* Hero */}
       <section className="relative overflow-hidden">
-        {/* Subtle grid texture */}
         <div
           className="absolute inset-0"
           style={{
@@ -90,17 +109,13 @@ export default function HomePage() {
             backgroundSize: '30px 30px',
           }}
         />
-        {/* Gold accent line */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-yellow-500/40" />
 
         <div className="relative container mx-auto max-w-6xl px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-20 md:pb-28 lg:pb-36 flex flex-col md:flex-row items-center justify-center gap-20">
           <div className="max-w-xl flex-1 order-2 md:order-1">
             <Badge
               className="mb-5 font-medium tracking-wide uppercase text-xs"
-              style={{
-                color: palette.text.primary,
-                borderColor: palette.border.accent,
-              }}
+              style={{ color: palette.text.primary, borderColor: palette.border.accent }}
             >
               Licensed &amp; Insured Contractors
             </Badge>
@@ -108,7 +123,7 @@ export default function HomePage() {
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
               style={{ color: palette.text.inverse }}
             >
-              Protect Your Home.
+              {heroHeadline}
               <br />
               <span style={{ color: palette.text.primary }}>Trust the Shield.</span>
             </h1>
@@ -116,8 +131,7 @@ export default function HomePage() {
               className="text-lg md:text-xl leading-relaxed mb-8 max-w-xl"
               style={{ color: palette.text.inverse }}
             >
-              Expert roofing, siding, and gutter services delivered with precision and care. We
-              stand behind every job we do.
+              {heroSubtext}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button
@@ -153,10 +167,10 @@ export default function HomePage() {
       </section>
 
       {/* Stats bar */}
-      <section className=" py-8" style={{ backgroundColor: palette.background.primary }}>
+      <section className="py-8" style={{ backgroundColor: palette.background.primary }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-[#494848] dark:text-[#D4D4D4]">
-            {stats.map((stat) => (
+            {displayStats.map((stat) => (
               <div key={stat.label}>
                 <div className="text-2xl md:text-3xl font-bold text-[#494848] dark:text-[#D4D4D4]">
                   {stat.value}
@@ -183,7 +197,7 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold" style={{ color: palette.text.inverse }}>
               Our Services
             </h2>
-            <p className=" mt-3 max-w-xl mx-auto" style={{ color: palette.text.secondary }}>
+            <p className="mt-3 max-w-xl mx-auto" style={{ color: palette.text.secondary }}>
               From roof to foundation, we keep the exterior of your home in peak condition
               year-round.
             </p>
@@ -212,7 +226,7 @@ export default function HomePage() {
                     </div>
                     <Link
                       href={service.href}
-                      className=" text-sm font-medium flex items-center gap-1 mt-auto transition-colors text-[#d1992b] hover:text-[#B48E2C]" // text primary, hover gold deep
+                      className="text-sm font-medium flex items-center gap-1 mt-auto transition-colors text-[#d1992b] hover:text-[#B48E2C]"
                     >
                       Learn more <ArrowRight className="h-3 w-3" />
                     </Link>
@@ -289,7 +303,7 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
+            {displayTestimonials.map((t) => (
               <Card key={t.name} className="ring-[#D1992B]">
                 <CardContent className="p-6 flex flex-col gap-4">
                   <div className="flex gap-0.5">
@@ -329,39 +343,42 @@ export default function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 md:py-20" style={{ backgroundColor: palette.background.primary }}>
-        <div className="container mx-auto max-w-6xl px-4 md:px-6 text-center">
-          <ShieldCheck className="h-10 w-10 mx-auto mb-4 text-[#494848] dark:text-[#D4D4D4]" />
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">
-            Ready to get started?
-          </h2>
-          <p className="text-lg mb-8 max-w-xl mx-auto text-[#494848] dark:text-[#D4D4D4]">
-            Contact us today for a free, no-obligation quote. We&apos;ll come to you and walk
-            through every detail.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="bg-[#D4D4D4] border-[#D4D4D4] text-black dark:text-[#494848] hover:bg-[#B67D0E] hover:border-[#B67D0E] hover:text-black dark:hover:text-[#494848] font-semibold text-base"
-            >
-              <Link href="/contact">
-                Request a Free Quote
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="bg-[#D4D4D4] border-[#D4D4D4] text-black dark:text-[#494848] hover:bg-[#B67D0E] hover:border-[#B67D0E] hover:text-black dark:hover:text-[#494848] font-semibold text-base"
-              variant="outline"
-            >
-              <a href="tel:5158050500">
-                <Phone className="mr-2 h-4 w-4" />
-                (515) 805-0500
-              </a>
-            </Button>
+      <section className="px-4 md:px-6 py-6 md:py-8">
+        <div className="container mx-auto">
+          <div
+            className="mx-auto max-w-3xl rounded-2xl py-8 md:py-10 px-5 md:px-8 text-center"
+            style={{ backgroundColor: palette.background.primary }}
+          >
+            <ShieldCheck className="h-10 w-10 mx-auto mb-4 text-[#494848] dark:text-[#D4D4D4]" />
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">
+              Ready to get started?
+            </h2>
+            <p className="text-lg mb-5 max-w-xl mx-auto text-[#494848] dark:text-[#D4D4D4]">
+              Contact us today for a free, no-obligation quote. We&apos;ll come to you and walk
+              through every detail.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button
+                asChild
+                size="lg"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-black font-bold text-base"
+              >
+                <Link href="/contact">
+                  Request a Free Quote
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-black font-bold text-base"
+              >
+                <a href={phoneHref}>
+                  <Phone className="mr-2 h-4 w-4" />
+                  {phone}
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

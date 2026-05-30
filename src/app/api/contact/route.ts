@@ -24,13 +24,42 @@ export async function POST(req: Request) {
 
   submittedIPs.set(ip, Date.now());
   try {
-    const { name, email, phone, service, message } = await req.json();
+    const { name, email, phone, service, message, photos } = await req.json();
+
+    // Build nodemailer attachments from base64 strings
+    const attachments = Array.isArray(photos)
+      ? photos
+          .filter((p: { name: string; data: string }) => p?.data && p?.name)
+          .map((p: { name: string; data: string }) => ({
+            filename: p.name,
+            content: p.data,
+            encoding: 'base64' as const,
+          }))
+      : [];
+
+    // Build a small photos HTML block for the email body
+    const photosHtml =
+      attachments.length > 0
+        ? `
+        <!-- Photos note -->
+        <tr>
+          <td style="background:#fafafa;border-top:1px solid #f0f0f0;padding:20px 36px 24px;">
+            <p style="margin:0 0 6px;font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#a1a1aa;">
+              Attached Photos (${attachments.length})
+            </p>
+            <p style="margin:0;font-size:13px;color:#3f3f46;">
+              ${attachments.map((a) => a.filename).join(', ')}
+            </p>
+          </td>
+        </tr>`
+        : '';
 
     await transporter.sendMail({
       from: `"Rapid Shield Website" <${process.env.GMAIL_USER}>`,
       to: process.env.CLIENT_EMAIL,
       replyTo: email,
-      subject: `New Quote Request — ${service || 'General Inquiry'}`,
+      subject: `New Quote Request — ${service || 'General Inquiry'}${attachments.length ? ` (${attachments.length} photo${attachments.length > 1 ? 's' : ''})` : ''}`,
+      attachments,
       html: `
 					<!DOCTYPE html>
 					<html>
@@ -91,6 +120,8 @@ export async function POST(req: Request) {
 								<p style="margin:0;font-size:15px;line-height:1.7;color:#3f3f46;">${message.replace(/\n/g, '<br/>')}</p>
 								</td>
 							</tr>
+
+							${photosHtml}
 
 							<!-- Footer -->
 							<tr>

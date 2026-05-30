@@ -84,7 +84,7 @@ export default function ServicesPage() {
   return (
     <div className="flex flex-col">
       {/* Page header */}
-      <section className="border-b py-16 md:py-20" style={{ borderColor: palette.border.default }}>
+      <section className="border-b py-16" style={{ borderColor: palette.border.default }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <Badge
             className="mb-4 font-medium uppercase text-xs tracking-wide"
@@ -134,7 +134,7 @@ export default function ServicesPage() {
               </div>
 
               {/* Body */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 items-start">
                 <div>
                   <p className="leading-relaxed mb-8" style={{ color: palette.text.secondary }}>
                     {service.description}
@@ -209,25 +209,30 @@ export default function ServicesPage() {
       })}
 
       {/* Bottom CTA */}
-      <section className="py-16 md:py-20" style={{ backgroundColor: palette.background.primary }}>
-        <div className="container mx-auto max-w-6xl px-4 md:px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">
-            Not sure what you need?
-          </h2>
-          <p className="text-lg mb-8 max-w-lg mx-auto text-[#494848] dark:text-[#D4D4D4]">
-            We&apos;ll assess your home and recommend the best solution — at no cost and with zero
-            pressure.
-          </p>
-          <Button
-            asChild
-            size="lg"
-            className="bg-[#D4D4D4] border-[#D4D4D4] text-black dark:text-[#494848] hover:bg-[#B67D0E] hover:border-[#B67D0E] hover:text-black dark:hover:text-[#494848] font-bold text-base"
+      <section className="px-4 md:px-6 py-6">
+        <div className="container mx-auto">
+          <div
+            className="mx-auto max-w-3xl rounded-2xl py-6 md:py-8 px-5 text-center"
+            style={{ backgroundColor: palette.background.primary }}
           >
-            <Link href="/contact">
-              Schedule a Free Inspection
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">
+              Not sure what you need?
+            </h2>
+            <p className="text-lg mb-5 max-w-xl mx-auto text-[#494848] dark:text-[#D4D4D4]">
+              We&apos;ll assess your home and recommend the best solution — at no cost and with zero
+              pressure.
+            </p>
+            <Button
+              asChild
+              size="lg"
+              className="bg-[#D4D4D4] border-[#D4D4D4] text-black dark:text-[#494848] hover:bg-[#B67D0E] hover:border-[#B67D0E] hover:text-black dark:hover:text-[#494848] font-bold text-base"
+            >
+              <Link href="/contact">
+                Schedule a Free Inspection
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
     </div>

@@ -11,11 +11,13 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.facebook.com *.fbcdn.net",
-              "frame-src 'self' *.facebook.com *.fbcdn.net",
-              "img-src 'self' data: blob: *.facebook.com *.fbcdn.net *.fbsbx.com",
+              "frame-src 'self' *.facebook.com *.fbcdn.net https://*.sanity.io",
+              "img-src 'self' data: blob: *.facebook.com *.fbcdn.net *.fbsbx.com https://cdn.sanity.io",
               "font-src 'self' data: *",
               "style-src 'self' 'unsafe-inline' *.facebook.com *.fbcdn.net",
-              "connect-src 'self' *.facebook.com *.fbcdn.net",
+              // Sanity Studio needs to reach its API, asset CDN, uploads, and live (websocket) APIs
+              "connect-src 'self' *.facebook.com *.fbcdn.net https://*.sanity.io wss://*.sanity.io https://*.api.sanity.io https://*.apicdn.sanity.io",
+              "worker-src 'self' blob:",
             ].join('; '),
           },
         ],
