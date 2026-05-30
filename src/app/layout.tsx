@@ -3,6 +3,7 @@ import { Geist } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/navigation/Navbar';
 import Footer from '@/components/Footer';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const geist = Geist({
   subsets: ['latin'],
@@ -21,11 +22,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={geist.variable}>
+    <html lang="en" className={geist.variable} suppressHydrationWarning>
       <body className="antialiased font-sans min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Shield } from 'lucide-react';
+import { Menu, Monitor, Moon, Sun } from 'lucide-react';
 import Image from 'next/image';
 import { palette } from '@/lib/tokens/colors';
 
@@ -19,6 +20,13 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const isHydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+  const activeTheme = isHydrated ? (theme ?? 'system') : 'system';
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-yellow-900/20 backdrop-blur-xl">
@@ -65,8 +73,52 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA button (desktop) */}
-        <div className="hidden md:block">
+        {/* CTA + theme toggle (desktop) */}
+        <div className="hidden md:flex items-center gap-2">
+          <div className="flex items-center rounded-md border border-[#B4B4B4] p-0.5">
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => setTheme('light')}
+              aria-label="Use light mode"
+              className={`h-7 w-7 ${
+                activeTheme === 'light'
+                  ? 'bg-[#D1992B]/15 text-[#D1992B]'
+                  : 'hover:bg-[#D1992B]/10 hover:text-[#D1992B]'
+              }`}
+            >
+              <Sun className="h-4 w-4" />
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => setTheme('dark')}
+              aria-label="Use dark mode"
+              className={`h-7 w-7 ${
+                activeTheme === 'dark'
+                  ? 'bg-[#D1992B]/15 text-[#D1992B]'
+                  : 'hover:bg-[#D1992B]/10 hover:text-[#D1992B]'
+              }`}
+            >
+              <Moon className="h-4 w-4" />
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => setTheme('system')}
+              aria-label="Use system theme"
+              className={`h-7 w-7 ${
+                activeTheme === 'system'
+                  ? 'bg-[#D1992B]/15 text-[#D1992B]'
+                  : 'hover:bg-[#D1992B]/10 hover:text-[#D1992B]'
+              }`}
+            >
+              <Monitor className="h-4 w-4" />
+            </Button>
+          </div>
           <Button
             asChild
             className="bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold transition-colors"
@@ -83,6 +135,44 @@ export default function Navbar() {
           </SheetTrigger>
           <SheetContent side="right" className="bg-zinc-950 border-zinc-800 w-72">
             <div className="flex flex-col gap-1 mt-8">
+              <div className="mx-4 mb-3 grid grid-cols-3 gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setTheme('light')}
+                  className={`border-[#B4B4B4] text-[#D4D4D4] hover:bg-[#D1992B]/10 hover:text-[#D1992B] ${
+                    activeTheme === 'light' ? 'bg-[#D1992B]/15 text-[#D1992B]' : ''
+                  }`}
+                >
+                  <Sun className="h-4 w-4 mr-1" />
+                  Light
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setTheme('dark')}
+                  className={`border-[#B4B4B4] text-[#D4D4D4] hover:bg-[#D1992B]/10 hover:text-[#D1992B] ${
+                    activeTheme === 'dark' ? 'bg-[#D1992B]/15 text-[#D1992B]' : ''
+                  }`}
+                >
+                  <Moon className="h-4 w-4 mr-1" />
+                  Dark
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setTheme('system')}
+                  className={`border-[#B4B4B4] text-[#D4D4D4] hover:bg-[#D1992B]/10 hover:text-[#D1992B] ${
+                    activeTheme === 'system' ? 'bg-[#D1992B]/15 text-[#D1992B]' : ''
+                  }`}
+                >
+                  <Monitor className="h-4 w-4 mr-1" />
+                  System
+                </Button>
+              </div>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
