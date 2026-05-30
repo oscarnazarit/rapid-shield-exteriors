@@ -93,7 +93,7 @@ export default function HomePage() {
         {/* Gold accent line */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-yellow-500/40" />
 
-        <div className="relative container mx-auto max-w-6xl px-4 md:px-6 py-20 md:py-28 lg:py-36 flex flex-col md:flex-row items-center justify-center gap-45">
+        <div className="relative container mx-auto max-w-6xl px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-20 md:pb-28 lg:pb-36 flex flex-col md:flex-row items-center justify-center gap-20">
           <div className="max-w-xl flex-1 order-2 md:order-1">
             <Badge
               className="mb-5 font-medium tracking-wide uppercase text-xs"
