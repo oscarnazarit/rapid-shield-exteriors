@@ -16,6 +16,18 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 
+type Stat = {
+  value: string;
+  label: string;
+};
+
+type Testimonial = {
+  name: string;
+  location: string;
+  text: string;
+  rating: number;
+};
+
 // These don't change often — keep hardcoded
 const services = [
   {
@@ -170,7 +182,7 @@ export default async function HomePage() {
       <section className="py-8" style={{ backgroundColor: palette.background.primary }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-[#494848] dark:text-[#D4D4D4]">
-            {displayStats.map((stat) => (
+            {displayStats.map((stat: Stat) => (
               <div key={stat.label}>
                 <div className="text-2xl md:text-3xl font-bold text-[#494848] dark:text-[#D4D4D4]">
                   {stat.value}
@@ -303,7 +315,7 @@ export default async function HomePage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {displayTestimonials.map((t) => (
+            {displayTestimonials.map((t: Testimonial) => (
               <Card key={t.name} className="ring-[#D1992B]">
                 <CardContent className="p-6 flex flex-col gap-4">
                   <div className="flex gap-0.5">
