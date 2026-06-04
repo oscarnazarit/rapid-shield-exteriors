@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { client } from '@/sanity/lib/client';
 import { palette } from '@/lib/tokens/colors';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -80,7 +81,31 @@ const services = [
   },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const settings = await client.fetch(`*[_type == "siteSettings"][0]`);
+
+  const heading = settings?.servicesHeading ?? 'What We Do';
+  const description =
+    settings?.servicesDescription ??
+    'Comprehensive exterior services performed by experienced, licensed professionals. Every project, every time.';
+
+  // Parse a comma-separated Sanity string into a trimmed string array
+  const parseOfferings = (csv: string | undefined, fallback: string[]) =>
+    csv
+      ? csv
+          .split(',')
+          .map((item) => item.trim())
+          .filter(Boolean)
+      : fallback;
+
+  // Merge Sanity-editable fields into each hardcoded service
+  const displayServices = services.map((s) => ({
+    ...s,
+    tagline: (settings?.[`${s.id}Tagline`] as string | undefined) ?? s.tagline,
+    description: (settings?.[`${s.id}Description`] as string | undefined) ?? s.description,
+    offerings: parseOfferings(settings?.[`${s.id}Offerings`] as string | undefined, s.offerings),
+  }));
+
   return (
     <div className="flex flex-col">
       {/* Page header */}
@@ -96,17 +121,16 @@ export default function ServicesPage() {
             className="text-4xl md:text-5xl font-bold mb-4"
             style={{ color: palette.text.inverse }}
           >
-            What We Do
+            {heading}
           </h1>
           <p className="text-lg max-w-xl leading-relaxed" style={{ color: palette.text.secondary }}>
-            Comprehensive exterior services performed by experienced, licensed professionals. Every
-            project, every time.
+            {description}
           </p>
         </div>
       </section>
 
       {/* Service sections */}
-      {services.map((service, index) => {
+      {displayServices.map((service) => {
         const Icon = service.icon;
         return (
           <section
@@ -208,11 +232,29 @@ export default function ServicesPage() {
         );
       })}
 
+      {/* "Don't see what you need?" note */}
+      <section className="py-6">
+        <div className="container mx-auto max-w-6xl px-4 md:px-6">
+          <p className="text-sm text-center" style={{ color: palette.text.secondary }}>
+            Don&apos;t see what you&apos;re looking for?{' '}
+            <Link
+              href="/contact"
+              className="underline underline-offset-4 font-medium hover:opacity-75 transition-opacity"
+              style={{ color: palette.text.primary }}
+            >
+              Reach out
+            </Link>{' '}
+            — we handle more than what&apos;s listed here and are happy to talk through your
+            project.
+          </p>
+        </div>
+      </section>
+
       {/* Bottom CTA */}
       <section className="px-4 md:px-6 py-6">
         <div className="container mx-auto">
           <div
-            className="mx-auto max-w-3xl rounded-2xl py-6 md:py-8 px-5 text-center"
+            className="w-fit mx-auto rounded-2xl py-10 md:py-14 px-10 md:px-16 text-center"
             style={{ backgroundColor: palette.background.primary }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">

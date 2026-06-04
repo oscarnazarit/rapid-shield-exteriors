@@ -1,51 +1,12 @@
-'use client';
-
-import { useRef, useState } from 'react';
-import imageCompression from 'browser-image-compression';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  CheckCircle2,
-  Send,
-  Paperclip,
-  X,
-  ImageIcon,
-} from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, CheckCircle2 } from 'lucide-react';
 import { palette } from '@/lib/tokens/colors';
-
-const MAX_PHOTOS = 4;
-const MAX_SIZE_MB = 0.6; // compress each image to ≤600 KB before sending
-
-type AttachedPhoto = {
-  name: string;
-  preview: string; // object URL — for thumbnail display only
-  data: string; // base64 — sent to the API
-  originalKB: number;
-  compressedKB: number;
-};
+import { client } from '@/sanity/lib/client';
+import ContactForm from './ContactForm';
 
 const contactInfo = [
-  {
-    icon: Phone,
-    label: 'Phone',
-    value: '(515) 805-0500',
-    sub: 'Mon–Fri, 7am–6pm',
-  },
+  { icon: Phone, label: 'Phone', value: '(515) 805-0500', sub: 'Mon–Fri, 7am–6pm' },
   {
     icon: Mail,
     label: 'Email',
@@ -58,130 +19,16 @@ const contactInfo = [
     value: 'Greater Des Moines, IA',
     sub: 'Contact us to confirm your location',
   },
-  {
-    icon: Clock,
-    label: 'Hours',
-    value: 'Mon–Fri: 7am – 6pm',
-    sub: 'Sat: 8am – 2pm',
-  },
+  { icon: Clock, label: 'Hours', value: 'Mon–Fri: 7am – 6pm', sub: 'Sat: 8am – 2pm' },
 ];
 
-type FormState = {
-  name: string;
-  email: string;
-  phone: string;
-  service: string;
-  message: string;
-};
+export default async function ContactPage() {
+  const settings = await client.fetch(`*[_type == "siteSettings"][0]`);
 
-export default function ContactPage() {
-  const [form, setForm] = useState<FormState>({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: '',
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [phoneError, setPhoneError] = useState<string | null>(null);
-
-  const [photos, setPhotos] = useState<AttachedPhoto[]>([]);
-  const [compressing, setCompressing] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleFiles = async (fileList: FileList | null) => {
-    if (!fileList) return;
-    const slots = MAX_PHOTOS - photos.length;
-    if (slots <= 0) return;
-    const incoming = Array.from(fileList).slice(0, slots);
-    setCompressing(true);
-    try {
-      const compressed = await Promise.all(
-        incoming.map(async (file) => {
-          const originalKB = Math.round(file.size / 1024);
-          const blob = await imageCompression(file, {
-            maxSizeMB: MAX_SIZE_MB,
-            maxWidthOrHeight: 1920,
-            useWebWorker: true,
-          });
-          const compressedKB = Math.round(blob.size / 1024);
-          const data = await new Promise<string>((resolve) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve((reader.result as string).split(',')[1]);
-            reader.readAsDataURL(blob);
-          });
-          return {
-            name: file.name,
-            preview: URL.createObjectURL(blob),
-            data,
-            originalKB,
-            compressedKB,
-          };
-        })
-      );
-      setPhotos((prev) => [...prev, ...compressed].slice(0, MAX_PHOTOS));
-    } finally {
-      setCompressing(false);
-      // reset input so the same file can be re-added after removal
-      if (fileInputRef.current) fileInputRef.current.value = '';
-    }
-  };
-
-  const removePhoto = (index: number) => {
-    setPhotos((prev) => {
-      URL.revokeObjectURL(prev[index].preview);
-      return prev.filter((_, i) => i !== index);
-    });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleServiceChange = (value: string | null) => {
-    setForm((prev) => ({ ...prev, service: value ?? '' }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const phoneValidation = validatePhone(form.phone);
-    if (phoneValidation) {
-      setPhoneError(phoneValidation);
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...form,
-          photos: photos.map(({ name, data }) => ({ name, data })),
-        }),
-      });
-
-      if (!res.ok) throw new Error('Failed');
-      setSubmitted(true);
-    } catch {
-      alert('Something went wrong. Please try again or call us directly.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const validatePhone = (value: string) => {
-    if (!value) return null; // phone is optional
-    const digits = value.replace(/\D/g, '');
-    if (digits.length !== 10 && digits.length !== 11) {
-      return 'Please enter a valid US phone number';
-    }
-    return null;
-  };
+  const heading = settings?.contactHeading ?? 'Get a Free Quote';
+  const description =
+    settings?.contactDescription ??
+    "Fill out the form and we'll get back to you within one business day. No obligation, no pressure.";
 
   return (
     <div className="flex flex-col">
@@ -198,11 +45,10 @@ export default function ContactPage() {
             className="text-4xl md:text-5xl font-bold mb-4"
             style={{ color: palette.text.inverse }}
           >
-            Get a Free Quote
+            {heading}
           </h1>
           <p className="text-lg max-w-xl leading-relaxed" style={{ color: palette.text.secondary }}>
-            Fill out the form and we&apos;ll get back to you within one business day. No obligation,
-            no pressure.
+            {description}
           </p>
         </div>
       </section>
@@ -249,7 +95,6 @@ export default function ContactPage() {
                 })}
               </div>
 
-              {/* Trust signals */}
               <Card className="ring-[#D1992B] mt-2">
                 <CardContent className="p-5">
                   <h3
@@ -277,249 +122,9 @@ export default function ContactPage() {
               </Card>
             </div>
 
-            {/* Form column */}
+            {/* Form column — client component */}
             <div className="lg:col-span-2">
-              <Card className="ring-[#D1992B]">
-                <CardContent className="p-6 md:p-8">
-                  {submitted ? (
-                    <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#D1992B]">
-                        <CheckCircle2 className="h-8 w-8" style={{ color: palette.text.primary }} />
-                      </div>
-                      <div>
-                        <h3
-                          className="font-bold text-2xl mb-2"
-                          style={{ color: palette.text.inverse }}
-                        >
-                          Message received!
-                        </h3>
-                        <p className="max-w-sm" style={{ color: palette.text.secondary }}>
-                          Thanks for reaching out. We&apos;ll review your request and get back to
-                          you within one business day.
-                        </p>
-                      </div>
-                      <Button
-                        onClick={() => {
-                          setSubmitted(false);
-                          setForm({
-                            name: '',
-                            email: '',
-                            phone: '',
-                            service: '',
-                            message: '',
-                          });
-                          setPhotos([]);
-                        }}
-                        variant="outline"
-                        className="mt-2 border-[#D1992B] text-[#494848] dark:text-[#D4D4D4] hover:bg-[#B67D0E] hover:text-black dark:hover:text-[#D4D4D4]"
-                      >
-                        Submit another request
-                      </Button>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="flex flex-col gap-1.5">
-                          <Label
-                            htmlFor="name"
-                            className="text-sm text-[#494848] dark:text-[#D4D4D4]"
-                          >
-                            Full Name <span className="text-[#D1992B]">*</span>
-                          </Label>
-                          <Input
-                            id="name"
-                            name="name"
-                            value={form.name}
-                            onChange={handleChange}
-                            required
-                            placeholder="John Smith"
-                            className="border-[#B4B4B4] placeholder:text-[#909090] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20"
-                          />
-                        </div>
-                        <div className="flex flex-col gap-1.5">
-                          <Label
-                            htmlFor="email"
-                            className="text-sm text-[#494848] dark:text-[#D4D4D4]"
-                          >
-                            Email <span className="text-[#D1992B]">*</span>
-                          </Label>
-                          <Input
-                            id="email"
-                            name="email"
-                            type="email"
-                            value={form.email}
-                            onChange={handleChange}
-                            required
-                            placeholder="john@example.com"
-                            className="border-[#B4B4B4] placeholder:text-[#909090] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="flex flex-col gap-1.5">
-                          <Label
-                            htmlFor="phone"
-                            className="text-sm text-[#494848] dark:text-[#D4D4D4]"
-                          >
-                            Phone Number
-                          </Label>
-                          <Input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            value={form.phone}
-                            onChange={handleChange}
-                            onBlur={(e) => setPhoneError(validatePhone(e.target.value))}
-                            placeholder="(515) 000-0000"
-                            className={`border-[#B4B4B4] placeholder:text-[#909090] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20 ${
-                              phoneError ? 'border-red-500' : ''
-                            }`}
-                          />
-                          {phoneError && <p className="text-red-400 text-xs">{phoneError}</p>}
-                        </div>
-                        <div className="flex flex-col gap-1.5">
-                          <Label className="text-sm text-[#494848] dark:text-[#D4D4D4]">
-                            Service Needed
-                          </Label>
-                          <Select value={form.service} onValueChange={handleServiceChange}>
-                            <SelectTrigger className="border-[#B4B4B4] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20">
-                              <SelectValue placeholder="Select a service" />
-                            </SelectTrigger>
-                            <SelectContent
-                              align="start"
-                              alignItemWithTrigger={false}
-                              className="border-[#B4B4B4] bg-white dark:bg-zinc-900"
-                            >
-                              <SelectItem value="roofing">Roofing</SelectItem>
-                              <SelectItem value="siding">Siding</SelectItem>
-                              <SelectItem value="gutters">Gutters</SelectItem>
-                              <SelectItem value="inspection">Inspection / Assessment</SelectItem>
-                              <SelectItem value="multiple">Multiple Services</SelectItem>
-                              <SelectItem value="other">Other / Not sure</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col gap-1.5">
-                        <Label
-                          htmlFor="message"
-                          className="text-sm text-[#494848] dark:text-[#D4D4D4]"
-                        >
-                          Tell us about your project <span className="text-[#D1992B]">*</span>
-                        </Label>
-                        <Textarea
-                          id="message"
-                          name="message"
-                          value={form.message}
-                          onChange={handleChange}
-                          required
-                          rows={5}
-                          placeholder="Describe the issue or project, your property type, and any other details that would help us give you an accurate quote..."
-                          className="border-[#B4B4B4] placeholder:text-[#909090] focus:border-[#D1992B]/50 focus:ring-[#D1992B]/20 resize-none"
-                        />
-                      </div>
-
-                      {/* Photo attachment */}
-                      <div className="flex flex-col gap-2">
-                        <Label className="text-sm text-[#494848] dark:text-[#D4D4D4] flex items-center gap-1.5">
-                          <Paperclip className="h-3.5 w-3.5" />
-                          Attach Photos
-                          <span className="font-normal" style={{ color: palette.text.secondary }}>
-                            (optional — up to {MAX_PHOTOS})
-                          </span>
-                        </Label>
-
-                        {/* Thumbnails */}
-                        {photos.length > 0 && (
-                          <div className="flex flex-wrap gap-2">
-                            {photos.map((photo, i) => (
-                              <div key={i} className="relative group">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                  src={photo.preview}
-                                  alt={photo.name}
-                                  className="h-20 w-20 object-cover rounded-lg border"
-                                  style={{ borderColor: palette.border.default }}
-                                />
-                                <button
-                                  type="button"
-                                  onClick={() => removePhoto(i)}
-                                  className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-zinc-800 border border-zinc-600 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                                >
-                                  <X className="h-3 w-3 text-white" />
-                                </button>
-                                <p
-                                  className="text-xs mt-1 text-center truncate w-20"
-                                  style={{ color: palette.text.secondary }}
-                                  title={photo.name}
-                                >
-                                  {photo.compressedKB < photo.originalKB
-                                    ? `${photo.compressedKB} KB`
-                                    : photo.name}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-
-                        {/* Add button — hidden once at max */}
-                        {photos.length < MAX_PHOTOS && (
-                          <>
-                            <button
-                              type="button"
-                              disabled={compressing}
-                              onClick={() => fileInputRef.current?.click()}
-                              className="flex items-center gap-2 w-fit px-4 py-2 rounded-lg border text-sm font-medium transition-colors disabled:opacity-50"
-                              style={{
-                                borderColor: palette.border.accent,
-                                color: palette.text.secondary,
-                              }}
-                            >
-                              <ImageIcon className="h-4 w-4" />
-                              {compressing
-                                ? 'Compressing…'
-                                : photos.length === 0
-                                  ? 'Add photos'
-                                  : `Add more (${MAX_PHOTOS - photos.length} left)`}
-                            </button>
-                            <input
-                              ref={fileInputRef}
-                              type="file"
-                              accept="image/*"
-                              multiple
-                              className="hidden"
-                              onChange={(e) => handleFiles(e.target.files)}
-                            />
-                          </>
-                        )}
-                      </div>
-
-                      <Button
-                        type="submit"
-                        disabled={loading || compressing}
-                        className="bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-bold transition-colors w-full sm:w-auto sm:self-start"
-                        size="lg"
-                      >
-                        {loading ? (
-                          'Sending...'
-                        ) : (
-                          <>
-                            Send Request
-                            <Send className="ml-2 h-4 w-4" />
-                          </>
-                        )}
-                        {error && <p className="text-red-400 text-sm">{error}</p>}
-                      </Button>
-                      <p className="text-xs" style={{ color: palette.text.secondary }}>
-                        By submitting this form you agree to be contacted about your request. We
-                        never share your information.
-                      </p>
-                    </form>
-                  )}
-                </CardContent>
-              </Card>
+              <ContactForm />
             </div>
           </div>
         </div>

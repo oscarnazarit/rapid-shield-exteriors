@@ -63,14 +63,15 @@ const reasons = [
 ];
 
 export default async function HomePage() {
-  const [settings, testimonials, stats] = await Promise.all([
-    client.fetch(`*[_type == "siteSettings"][0]`),
-    client.fetch(`*[_type == "testimonial"] | order(_createdAt asc)`),
-    client.fetch(`*[_type == "stat"] | order(order asc)`),
-  ]);
+  const settings = await client.fetch(`*[_type == "siteSettings"][0]`);
+
+  // Stats and testimonials now live inside siteSettings
+  const stats = settings?.stats ?? [];
+  const testimonials = settings?.testimonials ?? [];
 
   // Fall back to hardcoded values until Sanity is populated
   const heroHeadline = settings?.heroHeadline ?? 'Protect Your Home.';
+  const heroHeadlineAccent = settings?.heroHeadlineAccent ?? 'Trust the Shield.';
   const heroSubtext =
     settings?.heroSubtext ??
     'Expert roofing, siding, and gutter services delivered with precision and care. We stand behind every job we do.';
@@ -137,7 +138,7 @@ export default async function HomePage() {
             >
               {heroHeadline}
               <br />
-              <span style={{ color: palette.text.primary }}>Trust the Shield.</span>
+              <span style={{ color: palette.text.primary }}>{heroHeadlineAccent}</span>
             </h1>
             <p
               className="text-lg md:text-xl leading-relaxed mb-8 max-w-xl"
@@ -247,6 +248,17 @@ export default async function HomePage() {
               );
             })}
           </div>
+          <p className="text-sm text-center mt-8" style={{ color: palette.text.secondary }}>
+            Need something not listed?{' '}
+            <Link
+              href="/contact"
+              className="underline underline-offset-4 font-medium hover:opacity-75 transition-opacity"
+              style={{ color: palette.text.primary }}
+            >
+              Just ask
+            </Link>{' '}
+            — we have experience in more than what&apos;s shown here.
+          </p>
         </div>
       </section>
 

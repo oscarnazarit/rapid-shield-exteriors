@@ -1,4 +1,6 @@
-export default {
+// Retired — testimonials are now an array inside siteSettings.
+// This file is kept for reference but is not registered in the schema index.
+const testimonials = {
   name: 'testimonial',
   title: 'Testimonials',
   type: 'document',
@@ -9,3 +11,5 @@ export default {
     { name: 'rating', title: 'Rating', type: 'number' },
   ],
 };
+
+export default testimonials;

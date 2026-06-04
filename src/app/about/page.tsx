@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle2, ShieldCheck, Users, Clock, Star } from 'lucide-react';
 import { palette } from '@/lib/tokens/colors';
+import { client } from '@/sanity/lib/client';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -37,14 +38,52 @@ const values = [
   },
 ];
 
-const stats = [
+const fallbackStats = [
   { value: '500+', label: 'Projects completed' },
   { value: '15+', label: 'Years of experience' },
   { value: '100%', label: 'Licensed & insured' },
   { value: '5★', label: 'Average rating' },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const settings = await client.fetch(`*[_type == "siteSettings"][0]`);
+
+  // Stats come from siteSettings (same source as the Home page)
+  const stats: { value: string; label: string }[] = settings?.stats?.length
+    ? settings.stats
+    : fallbackStats;
+
+  // Page header
+  const pageHeading = settings?.aboutHeading ?? 'Built on Reputation.';
+  const pageHeadingAccent = settings?.aboutHeadingAccent ?? 'Driven by Craft.';
+  const pageDescription =
+    settings?.aboutDescription ??
+    'Rapid Shield Exteriors is a family-owned exterior contracting company serving the Greater Des Moines area. We take pride in treating every home like our own.';
+
+  // Bio paragraphs — now live inside siteSettings
+  const bio1 =
+    settings?.bio1 ??
+    'I got into the exterior contracting business over a decade ago, starting out as a laborer and working my way up to running my own crew. Growing up in Iowa, I saw firsthand how hard winters and severe storms can damage a home — and how much it means to a family to have it properly protected.';
+  const bio2 =
+    settings?.bio2 ??
+    "I started Rapid Shield Exteriors because I wanted to build a company that treated every homeowner the way I'd want to be treated — with honest pricing, clear communication, and quality work that lasts. No high-pressure sales tactics, no shortcuts on materials.";
+  const bio3 =
+    settings?.bio3 ??
+    "Outside of work, I'm a husband and father based in the Des Moines area. I take a lot of pride in this community and the relationships I've built here. When you hire Rapid Shield, you're hiring someone who genuinely cares about the work — and about you.";
+
+  const fallbackBullets = [
+    'Licensed & fully insured in the state of Iowa',
+    'Over [X] years in the exterior contracting industry',
+    'Based in [City], serving the Greater Des Moines area',
+    'Certified installer for [Brand/Manufacturer — e.g. GAF, CertainTeed]',
+  ];
+  const bullets: string[] = settings?.aboutBullets
+    ? settings.aboutBullets
+        .split(',')
+        .map((s: string) => s.trim())
+        .filter(Boolean)
+    : fallbackBullets;
+
   return (
     <div className="flex flex-col">
       {/* Page header */}
@@ -60,13 +99,12 @@ export default function AboutPage() {
             className="text-4xl md:text-5xl font-bold mb-4"
             style={{ color: palette.text.inverse }}
           >
-            Built on Reputation.
+            {pageHeading}
             <br />
-            <span style={{ color: palette.text.primary }}>Driven by Craft.</span>
+            <span style={{ color: palette.text.primary }}>{pageHeadingAccent}</span>
           </h1>
           <p className="text-lg max-w-xl leading-relaxed" style={{ color: palette.text.secondary }}>
-            Rapid Shield Exteriors is a family-owned exterior contracting company serving the
-            Greater Des Moines area. We take pride in treating every home like our own.
+            {pageDescription}
           </p>
         </div>
       </section>
@@ -113,31 +151,13 @@ export default function AboutPage() {
                 className="flex flex-col gap-4 text-base leading-relaxed"
                 style={{ color: palette.text.secondary }}
               >
-                {/* Replace these paragraphs with the client's actual background */}
-                <p>
-                  [Placeholder — share how you got into the roofing/exterior business. Where did you
-                  grow up? Did you learn the trade from a family member or start from scratch? How
-                  many years have you been doing this?]
-                </p>
-                <p>
-                  [Placeholder — why did you start Rapid Shield Exteriors? What makes your approach
-                  different from larger companies? What do you care most about when working on
-                  someone&apos;s home?]
-                </p>
-                <p>
-                  [Placeholder — something personal: family, community ties to Des Moines, what you
-                  do outside of work. This helps homeowners feel they know who they&apos;re hiring.]
-                </p>
+                <p>{bio1}</p>
+                <p>{bio2}</p>
+                <p>{bio3}</p>
               </div>
 
               <ul className="flex flex-col gap-2.5 mt-2">
-                {[
-                  /* Update these bullets with real credentials / milestones */
-                  'Licensed & fully insured in the state of Iowa',
-                  'Over [X] years in the exterior contracting industry',
-                  'Based in [City], serving the Greater Des Moines area',
-                  'Certified installer for [Brand/Manufacturer — e.g. GAF, CertainTeed]',
-                ].map((item) => (
+                {bullets.map((item) => (
                   <li
                     key={item}
                     className="flex items-start gap-2.5 text-sm"
