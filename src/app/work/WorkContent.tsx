@@ -13,14 +13,14 @@ const FACEBOOK_ZOOM = 0.82;
 const LOAD_TIMEOUT_MS = 8000;
 
 const photos = [
-  '/IMG_0638.JPEG',
-  '/IMG_0639.JPEG',
-  '/IMG_0640.JPEG',
-  '/IMG_0641.JPEG',
-  '/IMG_0642.JPEG',
-  '/IMG_0646.JPEG',
-  '/IMG_0647.JPG',
-  '/IMG_0648.JPG',
+  '/pic1.JPEG',
+  '/pic2.JPEG',
+  '/pic3.JPEG',
+  '/pic4.JPEG',
+  '/pic5.JPEG',
+  '/pic6.JPEG',
+  '/pic7.JPEG',
+  '/pic8.JPEG',
 ];
 
 type Tab = 'facebook' | 'photos';

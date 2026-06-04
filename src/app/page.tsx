@@ -5,6 +5,7 @@ import { palette } from '@/lib/tokens/colors';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import HomeGallery from '@/components/HomeGallery';
 import {
   Home,
   Layers,
@@ -386,6 +387,13 @@ export default async function HomePage() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Project gallery */}
+      <section className="pb-20 md:pb-24">
+        <div className="container mx-auto max-w-6xl px-4 md:px-6">
+          <HomeGallery />
         </div>
       </section>
 

@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-zinc-800 text-zinc-400">
       <div className="container mx-auto max-w-6xl px-4 md:px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.5fr_1fr_1fr] gap-y-10 gap-x-12 md:gap-x-16 lg:gap-x-24">
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2 w-fit group">
@@ -36,20 +36,19 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Links */}
+          {/* Services */}
           <div>
             <h3
               className="font-semibold text-sm mb-4 uppercase tracking-widest"
               style={{ color: palette.text.primary }}
             >
-              Navigation
+              Services
             </h3>
             <ul className="flex flex-col gap-2 text-sm">
               {[
-                { label: 'Home', href: '/' },
-                { label: 'Services', href: '/services' },
-                { label: 'Contact', href: '/contact' },
-                { label: 'Get a Free Quote', href: '/contact' },
+                { label: 'Roofing', href: '/services#roofing' },
+                { label: 'Siding', href: '/services#siding' },
+                { label: 'Gutters', href: '/services#gutters' },
               ].map((link) => (
                 <li key={link.href + link.label}>
                   <Link
