@@ -98,7 +98,15 @@ export default function Footer() {
 
         <div className="mt-10 pt-6 border-t border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-zinc-600 dark:text-[#D4D4D4]">
           <p>© {new Date().getFullYear()} Rapid Shield Exteriors. All rights reserved.</p>
-          <p>Licensed & Insured</p>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/privacy-policy"
+              className="transition-colors hover:text-[#C79B3A] dark:hover:text-[#C79B3A]"
+            >
+              Privacy Policy
+            </Link>
+            <p>Licensed &amp; Insured</p>
+          </div>
         </div>
       </div>
     </footer>

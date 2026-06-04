@@ -28,38 +28,41 @@ type Testimonial = {
   rating: number;
 };
 
-// These don't change often — keep hardcoded
-const services = [
+// Icon, title, and link stay fixed — only the description is editable in Sanity
+const serviceCards = [
   {
     icon: Home,
     title: 'Roofing',
-    description:
-      'Full roof replacements, repairs, and inspections using premium materials built to last through any weather.',
     href: '/services#roofing',
+    settingsKey: 'homeRoofingDescription',
+    fallback:
+      'Full roof replacements, repairs, and inspections using premium materials built to last through any weather.',
   },
   {
     icon: Layers,
     title: 'Siding',
-    description:
-      "Enhance your home's curb appeal and insulation with durable vinyl, fiber cement, or wood siding.",
     href: '/services#siding',
+    settingsKey: 'homeSidingDescription',
+    fallback:
+      "Enhance your home's curb appeal and insulation with durable vinyl, fiber cement, or wood siding.",
   },
   {
     icon: Droplets,
     title: 'Gutters',
-    description:
-      'Seamless gutter installation, cleaning, and repairs to protect your foundation from water damage.',
     href: '/services#gutters',
+    settingsKey: 'homeGuttersDescription',
+    fallback:
+      'Seamless gutter installation, cleaning, and repairs to protect your foundation from water damage.',
   },
 ];
 
-const reasons = [
+const fallbackReasons = [
   'Free, no-obligation estimates',
   'Licensed and fully insured crew',
   'Premium materials with manufacturer warranties',
   'Transparent pricing — no hidden fees',
   'On-time project completion guarantee',
-  'Local company, community reputation',
+  'Local company with a community reputation',
 ];
 
 export default async function HomePage() {
@@ -77,6 +80,29 @@ export default async function HomePage() {
     'Expert roofing, siding, and gutter services delivered with precision and care. We stand behind every job we do.';
   const phone = settings?.phone ?? '(515) 805-0500';
   const phoneHref = `tel:${(settings?.phone ?? '5158050500').replace(/\D/g, '')}`;
+
+  // Our Services section
+  const homeServicesDescription =
+    settings?.homeServicesDescription ??
+    'From roof to foundation, we keep the exterior of your home in peak condition year-round.';
+  const services = serviceCards.map((card) => ({
+    icon: card.icon,
+    title: card.title,
+    href: card.href,
+    description: settings?.[card.settingsKey] ?? card.fallback,
+  }));
+
+  // Why Rapid Shield section
+  const whyHeading = settings?.whyHeading ?? 'The standard for exterior work in the area';
+  const whyDescription =
+    settings?.whyDescription ??
+    "We've built our reputation one rooftop at a time. Every project gets the same focus, care, and expertise — whether it's a small repair or a full exterior renovation.";
+  const reasons: string[] = settings?.whyReasons
+    ? settings.whyReasons
+        .split(',')
+        .map((s: string) => s.trim())
+        .filter(Boolean)
+    : fallbackReasons;
 
   const displayStats = stats?.length
     ? stats
@@ -211,8 +237,7 @@ export default async function HomePage() {
               Our Services
             </h2>
             <p className="mt-3 max-w-xl mx-auto" style={{ color: palette.text.secondary }}>
-              From roof to foundation, we keep the exterior of your home in peak condition
-              year-round.
+              {homeServicesDescription}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -257,7 +282,7 @@ export default async function HomePage() {
             >
               Just ask
             </Link>{' '}
-            — we have experience in more than what&apos;s shown here.
+            — we have experience in more than just what&apos;s shown here.
           </p>
         </div>
       </section>
@@ -277,12 +302,10 @@ export default async function HomePage() {
                 className="text-3xl md:text-4xl font-bold mb-4"
                 style={{ color: palette.text.inverse }}
               >
-                The standard for exterior work in the area
+                {whyHeading}
               </h2>
               <p className="leading-relaxed mb-8" style={{ color: palette.text.secondary }}>
-                We&apos;ve built our reputation one rooftop at a time. Every project gets the same
-                focus, care, and expertise — whether it&apos;s a small repair or a full exterior
-                renovation.
+                {whyDescription}
               </p>
               <Button
                 asChild

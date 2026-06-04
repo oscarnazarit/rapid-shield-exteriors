@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import imageCompression from 'browser-image-compression';
 import { Button } from '@/components/ui/button';
@@ -342,7 +343,15 @@ export default function ContactForm() {
             </Button>
             <p className="text-xs" style={{ color: palette.text.secondary }}>
               By submitting this form you agree to be contacted about your request. We never share
-              your information.
+              your information. See our{' '}
+              <Link
+                href="/privacy-policy"
+                className="underline underline-offset-4 hover:opacity-75 transition-opacity"
+                style={{ color: palette.text.primary }}
+              >
+                Privacy Policy
+              </Link>
+              .
             </p>
           </form>
         )}

@@ -49,6 +49,67 @@ const siteSettings = {
       rows: 3,
       group: 'homepage',
     },
+    {
+      name: 'homeServicesDescription',
+      title: 'Our Services — Description',
+      description:
+        'The text shown under the "Our Services" heading. Default: "From roof to foundation, we keep the exterior of your home in peak condition year-round."',
+      type: 'text',
+      rows: 2,
+      group: 'homepage',
+    },
+    {
+      name: 'homeRoofingDescription',
+      title: 'Our Services — Roofing Card Description',
+      description:
+        'Default: "Full roof replacements, repairs, and inspections using premium materials built to last through any weather."',
+      type: 'text',
+      rows: 3,
+      group: 'homepage',
+    },
+    {
+      name: 'homeSidingDescription',
+      title: 'Our Services — Siding Card Description',
+      description:
+        'Default: "Enhance your home\'s curb appeal and insulation with durable vinyl, fiber cement, or wood siding."',
+      type: 'text',
+      rows: 3,
+      group: 'homepage',
+    },
+    {
+      name: 'homeGuttersDescription',
+      title: 'Our Services — Gutters Card Description',
+      description:
+        'Default: "Seamless gutter installation, cleaning, and repairs to protect your foundation from water damage."',
+      type: 'text',
+      rows: 3,
+      group: 'homepage',
+    },
+    {
+      name: 'whyHeading',
+      title: 'Why Rapid Shield — Heading',
+      description: 'Default: "The standard for exterior work in the area"',
+      type: 'string',
+      group: 'homepage',
+    },
+    {
+      name: 'whyDescription',
+      title: 'Why Rapid Shield — Description',
+      description:
+        'Default: "We\'ve built our reputation one rooftop at a time. Every project gets the same focus, care, and expertise — whether it\'s a small repair or a full exterior renovation."',
+      type: 'text',
+      rows: 3,
+      group: 'homepage',
+    },
+    {
+      name: 'whyReasons',
+      title: 'Why Rapid Shield — Reasons',
+      description:
+        'Comma-separated list shown as a checklist. Avoid commas inside an item. Default: "Free no-obligation estimates, Licensed and fully insured crew, Premium materials with manufacturer warranties, Transparent pricing — no hidden fees, On-time project completion guarantee, Local company with a community reputation"',
+      type: 'text',
+      rows: 4,
+      group: 'homepage',
+    },
 
     // ── Testimonials ─────────────────────────────────────────────────
     {
