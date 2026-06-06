@@ -78,6 +78,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           <div className="flex items-center rounded-md border border-[#B4B4B4] p-0.5">
             <Button
+              title="Light mode"
               type="button"
               variant="ghost"
               size="icon-sm"
@@ -92,6 +93,7 @@ export default function Navbar() {
               <Sun className="h-4 w-4" />
             </Button>
             <Button
+              title="Dark mode"
               type="button"
               variant="ghost"
               size="icon-sm"
@@ -106,6 +108,7 @@ export default function Navbar() {
               <Moon className="h-4 w-4" />
             </Button>
             <Button
+              title="System mode"
               type="button"
               variant="ghost"
               size="icon-sm"
