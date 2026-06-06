@@ -30,7 +30,7 @@ export default function Navbar() {
   const activeTheme = isHydrated ? (theme ?? 'system') : 'system';
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-yellow-900/20 bg-white ">
+    <header className="sticky top-0 z-50 w-full border-b border-yellow-900/20 bg-white dark:bg-black">
       <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
