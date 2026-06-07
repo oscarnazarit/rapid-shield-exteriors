@@ -139,7 +139,7 @@ export default function Navbar() {
           </SheetTrigger>
           <SheetContent side="right" className="w-72 bg-white dark:bg-black border-[#B4B4B4]">
             <div className="flex flex-col gap-1 mt-8">
-              <div className="mx-4 mb-3 grid grid-cols-3 gap-2">
+              <div className="mx-4 my-5 mb-3 grid grid-cols-3 gap-2">
                 <Button
                   type="button"
                   variant="outline"
