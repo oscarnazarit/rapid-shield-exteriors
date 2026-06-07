@@ -133,11 +133,11 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger className="md:hidden text-white hover:bg-zinc-800 p-2 rounded-md">
+          <SheetTrigger className="md:hidden p-2 rounded-md text-[#D1992B] hover:bg-[#D1992B]/10 dark:hover:bg-zinc-800">
             <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle menu</span>
           </SheetTrigger>
-          <SheetContent side="right" className="bg-zinc-950 border-zinc-800 w-72">
+          <SheetContent side="right" className="w-72 bg-white dark:bg-black border-[#B4B4B4]">
             <div className="flex flex-col gap-1 mt-8">
               <div className="mx-4 mb-3 grid grid-cols-3 gap-2">
                 <Button
@@ -145,7 +145,7 @@ export default function Navbar() {
                   variant="outline"
                   size="sm"
                   onClick={() => setTheme('light')}
-                  className={`border-[#B4B4B4] text-[#D4D4D4] hover:bg-[#D1992B]/10 hover:text-[#D1992B] ${
+                  className={`border-[#B4B4B4] text-[#494848] dark:text-[#D4D4D4] hover:bg-[#D1992B]/10 hover:text-[#D1992B] ${
                     activeTheme === 'light' ? 'bg-[#D1992B]/15 text-[#D1992B]' : ''
                   }`}
                 >
@@ -157,7 +157,7 @@ export default function Navbar() {
                   variant="outline"
                   size="sm"
                   onClick={() => setTheme('dark')}
-                  className={`border-[#B4B4B4] text-[#D4D4D4] hover:bg-[#D1992B]/10 hover:text-[#D1992B] ${
+                  className={`border-[#B4B4B4] text-[#494848] dark:text-[#D4D4D4] hover:bg-[#D1992B]/10 hover:text-[#D1992B] ${
                     activeTheme === 'dark' ? 'bg-[#D1992B]/15 text-[#D1992B]' : ''
                   }`}
                 >
@@ -169,7 +169,7 @@ export default function Navbar() {
                   variant="outline"
                   size="sm"
                   onClick={() => setTheme('system')}
-                  className={`border-[#B4B4B4] text-[#D4D4D4] hover:bg-[#D1992B]/10 hover:text-[#D1992B] ${
+                  className={`border-[#B4B4B4] text-[#494848] dark:text-[#D4D4D4] hover:bg-[#D1992B]/10 hover:text-[#D1992B] ${
                     activeTheme === 'system' ? 'bg-[#D1992B]/15 text-[#D1992B]' : ''
                   }`}
                 >
@@ -184,8 +184,8 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className={`px-4 py-3 rounded text-base font-medium transition-colors ${
                     pathname === link.href
-                      ? 'text-yellow-400 bg-zinc-900'
-                      : 'text-zinc-300 hover:text-white hover:bg-zinc-900'
+                      ? 'text-[#D1992B] bg-[#D1992B]/10'
+                      : 'text-[#494848] dark:text-[#D4D4D4] hover:text-[#D1992B] hover:bg-[#D1992B]/10'
                   }`}
                 >
                   {link.label}
@@ -194,7 +194,7 @@ export default function Navbar() {
               <div className="mt-4 px-4">
                 <Button
                   asChild
-                  className="w-full bg-[#F2B43B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold"
+                  className="w-full bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold"
                   onClick={() => setOpen(false)}
                 >
                   <Link href="/contact">Get a Free Quote</Link>
