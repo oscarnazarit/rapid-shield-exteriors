@@ -13,6 +13,11 @@ export const metadata: Metadata = {
     'Learn about Rapid Shield Exteriors — our story, our crew, and our commitment to quality exterior work in the Des Moines area.',
 };
 
+type Stat = {
+  value: string;
+  label: string;
+};
+
 const values = [
   {
     icon: ShieldCheck,
@@ -172,7 +177,7 @@ export default async function AboutPage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-black font-bold text-base"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-2D2C2C dark:text-[#D4D4D4] font-bold text-base"
               >
                 <Link href="/contact">
                   Get a Free Quote
@@ -185,18 +190,15 @@ export default async function AboutPage() {
       </section>
 
       {/* Stats bar */}
-      <section
-        className="py-10 border-y"
-        style={{ borderColor: palette.border.default, backgroundColor: palette.background.primary }}
-      >
+      <section className="py-8" style={{ backgroundColor: palette.background.primary }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {stats.map((stat) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-[#2D2C2C] dark:text-[#D4D4D4]">
+            {fallbackStats.map((stat: Stat) => (
               <div key={stat.label}>
-                <div className="text-3xl font-bold mb-1" style={{ color: palette.text.inverse }}>
+                <div className="text-2xl md:text-3xl font-bold text-[#2D2C2C] dark:text-[#D4D4D4]">
                   {stat.value}
                 </div>
-                <div className="text-sm font-medium" style={{ color: palette.text.secondary }}>
+                <div className="font-medium text-sm mt-1 text-[#2D2C2C] dark:text-[#D4D4D4]">
                   {stat.label}
                 </div>
               </div>

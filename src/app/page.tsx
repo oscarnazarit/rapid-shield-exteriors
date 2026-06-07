@@ -413,7 +413,7 @@ export default async function HomePage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] font-bold text-base"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
               >
                 <Link href="/contact">
                   Request a Free Quote
@@ -423,7 +423,7 @@ export default async function HomePage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] font-bold text-base"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
               >
                 <a href={phoneHref}>
                   <Phone className="mr-2 h-4 w-4" />
