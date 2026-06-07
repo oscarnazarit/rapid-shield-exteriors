@@ -177,7 +177,7 @@ export default async function HomePage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold transition-colors"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold transition-colors"
               >
                 <Link href="/contact">
                   Get a Free Quote
@@ -188,7 +188,7 @@ export default async function HomePage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-black dark:border-[#D4D4D4] text-black dark:text-[#D4D4D4] hover:bg-[#B67D0E] hover:text-black dark:hover:text-[#D4D4D4] font-semibold"
+                className="border-black dark:border-[#D4D4D4] text-[#494848] dark:text-[#D4D4D4] hover:bg-[#B67D0E] hover:text-black dark:hover:text-[#D4D4D4] font-semibold"
               >
                 <Link href="/services">View Our Services</Link>
               </Button>
@@ -209,13 +209,13 @@ export default async function HomePage() {
       {/* Stats bar */}
       <section className="py-8" style={{ backgroundColor: palette.background.primary }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-[#494848] dark:text-[#D4D4D4]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-[#2D2C2C] dark:text-[#D4D4D4]">
             {displayStats.map((stat: Stat) => (
               <div key={stat.label}>
-                <div className="text-2xl md:text-3xl font-bold text-[#494848] dark:text-[#D4D4D4]">
+                <div className="text-2xl md:text-3xl font-bold text-[#2D2C2C] dark:text-[#D4D4D4]">
                   {stat.value}
                 </div>
-                <div className="font-medium text-sm mt-1 text-[#494848] dark:text-[#D4D4D4]">
+                <div className="font-medium text-sm mt-1 text-[#2D2C2C] dark:text-[#D4D4D4]">
                   {stat.label}
                 </div>
               </div>
@@ -310,7 +310,7 @@ export default async function HomePage() {
               </p>
               <Button
                 asChild
-                className="font-semibold h-10 transition-colors bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4]"
+                className="font-semibold h-10 transition-colors bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4]"
               >
                 <Link href="/contact">Schedule a Free Estimate</Link>
               </Button>
@@ -326,7 +326,7 @@ export default async function HomePage() {
                   }}
                 >
                   <CheckCircle2 className="h-5 w-5 text-[#d1992b] shrink-0 mt-0.5" />
-                  <span className="text-[#494848] dark:text-[#D4D4D4] text-sm leading-snug">
+                  <span className="text-[#2D2C2C] dark:text-[#D4D4D4] text-sm leading-snug">
                     {reason}
                   </span>
                 </div>
@@ -363,10 +363,7 @@ export default async function HomePage() {
                       />
                     ))}
                   </div>
-                  <p
-                    className="text-sm leading-relaxed italic dark:text-[#D4D4D4]"
-                    style={{ color: palette.text.inverse }}
-                  >
+                  <p className="text-sm leading-relaxed italic text-[#2D2C2C] dark:text-[#D4D4D4]">
                     &ldquo;{t.text}&rdquo;
                   </p>
                   <div
@@ -404,11 +401,11 @@ export default async function HomePage() {
             className="mx-auto max-w-3xl rounded-2xl py-8 md:py-10 px-5 md:px-8 text-center"
             style={{ backgroundColor: palette.background.primary }}
           >
-            <ShieldCheck className="h-10 w-10 mx-auto mb-4 text-[#494848] dark:text-[#D4D4D4]" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">
+            <ShieldCheck className="h-10 w-10 mx-auto mb-4 text-[#2D2C2C] dark:text-[#D4D4D4]" />
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#2D2C2C] dark:text-[#D4D4D4]">
               Ready to get started?
             </h2>
-            <p className="text-lg mb-5 max-w-xl mx-auto text-[#494848] dark:text-[#D4D4D4]">
+            <p className="text-lg mb-5 max-w-xl mx-auto text-[#2D2C2C] dark:text-[#D4D4D4]">
               Contact us today for a free, no-obligation quote. We&apos;ll come to you and walk
               through every detail.
             </p>
@@ -416,7 +413,7 @@ export default async function HomePage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-black font-bold text-base"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] font-bold text-base"
               >
                 <Link href="/contact">
                   Request a Free Quote
@@ -426,7 +423,7 @@ export default async function HomePage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-black font-bold text-base"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] font-bold text-base"
               >
                 <a href={phoneHref}>
                   <Phone className="mr-2 h-4 w-4" />

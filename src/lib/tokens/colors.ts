@@ -14,6 +14,7 @@ export const colors = {
     pale: '#FFF194', // near-yellow — subtle tints, badges
   },
   gray: {
+    darkest: '#2D2C2C', // pure black — used sparingly for maximum contrast
     900: '#494848', // near-black — primary text
     700: '#636363', // secondary text
     500: '#909090', // placeholder, disabled
