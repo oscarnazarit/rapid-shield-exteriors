@@ -153,7 +153,7 @@ export default async function HomePage() {
         <div
           className="absolute inset-0 opacity-100"
           style={{
-            backgroundImage: 'url("/public/cover-photo.JPG")',
+            backgroundImage: 'url("/cover-photo.JPG")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
