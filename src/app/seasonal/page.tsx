@@ -24,15 +24,23 @@ export const metadata: Metadata = {
     'Seasonal services from Rapid Shield Exteriors including snow removal for driveways, sidewalks, parking lots, and festive holiday lighting installation.',
 };
 
+type SeasonalSubService = {
+  key: string;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  fallbackLabel: string;
+  fallbackDesc: string;
+};
+
 const seasonalServices = [
   {
     id: 'snow-removal',
+    settingsPrefix: 'seasonalSnow',
     icon: Snowflake,
-    title: 'Snow Removal',
-    tagline: 'Fast, reliable clearing so your property stays safe and accessible.',
-    description:
+    fallbackTitle: 'Snow Removal',
+    fallbackTagline: 'Fast, reliable clearing so your property stays safe and accessible.',
+    fallbackDescription:
       'When winter weather hits, we keep your property clear and usable. Our crew provides prompt snow removal and ice management for homes and businesses so you can avoid slips, delays, and property damage.',
-    offerings: [
+    fallbackOfferings: [
       'Driveway snow clearing',
       'Sidewalk and walkway shoveling',
       'Parking lot plowing and cleanup',
@@ -40,19 +48,35 @@ const seasonalServices = [
       'Storm-response scheduling',
     ],
     subServices: [
-      { icon: House, label: 'Driveways', desc: 'Clean, safe residential driveway clearing' },
-      { icon: Truck, label: 'Sidewalks', desc: 'Walkway and entry shoveling service' },
-      { icon: Building2, label: 'Parking Lots', desc: 'Commercial lot plowing and cleanup' },
+      {
+        key: 'driveways',
+        icon: House,
+        fallbackLabel: 'Driveways',
+        fallbackDesc: 'Clean, safe residential driveway clearing',
+      },
+      {
+        key: 'sidewalks',
+        icon: Truck,
+        fallbackLabel: 'Sidewalks',
+        fallbackDesc: 'Walkway and entry shoveling service',
+      },
+      {
+        key: 'parkingLots',
+        icon: Building2,
+        fallbackLabel: 'Parking Lots',
+        fallbackDesc: 'Commercial lot plowing and cleanup',
+      },
     ],
   },
   {
     id: 'festive-lighting',
+    settingsPrefix: 'seasonalLighting',
     icon: Lightbulb,
-    title: 'Festive Holiday Lighting',
-    tagline: 'Custom holiday displays without the hassle.',
-    description:
+    fallbackTitle: 'Festive Holiday Lighting',
+    fallbackTagline: 'Custom holiday displays without the hassle.',
+    fallbackDescription:
       'Get a clean, professional holiday lighting setup for your home or business. We handle planning, installation, and takedown so you can enjoy the season without climbing ladders or untangling lights.',
-    offerings: [
+    fallbackOfferings: [
       'Custom roofline and trim lighting',
       'Entryway, porch, and accent lighting',
       'Commercial storefront displays',
@@ -60,24 +84,77 @@ const seasonalServices = [
       'Post-season takedown and organized storage',
     ],
     subServices: [
-      { icon: Sparkles, label: 'Design', desc: 'Layout planning tailored to your property' },
-      { icon: Wrench, label: 'Install', desc: 'Secure, professional seasonal installation' },
       {
-        icon: CalendarDays,
-        label: 'Takedown',
-        desc: 'Removal and pack-up at season end',
+        key: 'design',
+        icon: Sparkles,
+        fallbackLabel: 'Design',
+        fallbackDesc: 'Layout planning tailored to your property',
       },
-    ],
+      {
+        key: 'install',
+        icon: Wrench,
+        fallbackLabel: 'Install',
+        fallbackDesc: 'Secure, professional seasonal installation',
+      },
+      {
+        key: 'takedown',
+        icon: CalendarDays,
+        fallbackLabel: 'Takedown',
+        fallbackDesc: 'Removal and pack-up at season end',
+      },
+    ] as SeasonalSubService[],
   },
 ];
 
 export default async function SeasonalPage() {
   const settings = await client.fetch(`*[_type == "siteSettings"][0]`);
 
+  const parseCsv = (value: string | undefined, fallback: string[]) =>
+    value
+      ? value
+          .split(',')
+          .map((item) => item.trim())
+          .filter(Boolean)
+      : fallback;
+
+  const badge = settings?.seasonalBadge ?? 'Seasonal Services';
   const heading = settings?.seasonalHeading ?? 'Seasonal Services';
   const description =
     settings?.seasonalDescription ??
     'From winter snow removal to festive holiday lighting, we keep your property ready for every season.';
+  const includedHeading = settings?.seasonalIncludedHeading ?? "What's included";
+
+  const ctaHeading = settings?.seasonalCtaHeading ?? 'Need seasonal help this year?';
+  const ctaDescription =
+    settings?.seasonalCtaDescription ??
+    'Tell us what you need and we&apos;ll build a plan that fits your property and timeline.';
+  const ctaButton = settings?.seasonalCtaButton ?? 'Request a Seasonal Quote';
+
+  const displayServices = seasonalServices.map((service) => {
+    const prefix = service.settingsPrefix;
+    return {
+      ...service,
+      title: (settings?.[`${prefix}Title`] as string | undefined) ?? service.fallbackTitle,
+      tagline: (settings?.[`${prefix}Tagline`] as string | undefined) ?? service.fallbackTagline,
+      description:
+        (settings?.[`${prefix}Description`] as string | undefined) ?? service.fallbackDescription,
+      offerings: parseCsv(
+        settings?.[`${prefix}Offerings`] as string | undefined,
+        service.fallbackOfferings
+      ),
+      subServices: service.subServices.map((sub) => ({
+        ...sub,
+        label:
+          (settings?.[`${prefix}${sub.key.charAt(0).toUpperCase() + sub.key.slice(1)}Label`] as
+            | string
+            | undefined) ?? sub.fallbackLabel,
+        desc:
+          (settings?.[`${prefix}${sub.key.charAt(0).toUpperCase() + sub.key.slice(1)}Desc`] as
+            | string
+            | undefined) ?? sub.fallbackDesc,
+      })),
+    };
+  });
 
   return (
     <div className="flex flex-col">
@@ -87,7 +164,7 @@ export default async function SeasonalPage() {
             className="mb-4 font-semibold uppercase text-sm tracking-wide"
             style={{ color: palette.text.primary, borderColor: palette.border.accent }}
           >
-            Seasonal Services
+            {badge}
           </Badge>
           <h1
             className="text-4xl md:text-5xl font-bold mb-4"
@@ -104,7 +181,7 @@ export default async function SeasonalPage() {
         </div>
       </section>
 
-      {seasonalServices.map((service) => {
+      {displayServices.map((service) => {
         const Icon = service.icon;
         return (
           <section
@@ -180,7 +257,7 @@ export default async function SeasonalPage() {
                       className="font-semibold mb-5 text-base"
                       style={{ color: palette.text.inverse }}
                     >
-                      What&apos;s included
+                      {includedHeading}
                     </h3>
                     <ul className="flex flex-col gap-3">
                       {service.offerings.map((item) => (
@@ -210,11 +287,10 @@ export default async function SeasonalPage() {
             style={{ backgroundColor: palette.background.primary }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#2D2C2C] dark:text-[#D4D4D4]">
-              Need seasonal help this year?
+              {ctaHeading}
             </h2>
             <p className="text-lg mb-5 max-w-xl mx-auto text-[#2D2C2C] dark:text-[#D4D4D4]">
-              Tell us what you need and we&apos;ll build a plan that fits your property and
-              timeline.
+              {ctaDescription}
             </p>
             <Button
               asChild
@@ -222,7 +298,7 @@ export default async function SeasonalPage() {
               className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
             >
               <Link href="/contact">
-                Request a Seasonal Quote
+                {ctaButton}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

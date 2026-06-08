@@ -13,6 +13,10 @@ const siteSettings = {
     { name: 'stats', title: 'Stats' },
     { name: 'servicesPage', title: 'Services Page' },
     { name: 'workPage', title: 'Our Work Page' },
+    { name: 'seasonalPage', title: 'Seasonal Page' },
+    { name: 'seasonalSnow', title: 'Seasonal — Snow Removal' },
+    { name: 'seasonalLighting', title: 'Seasonal — Holiday Lighting' },
+    { name: 'seasonalCta', title: 'Seasonal — CTA & Labels' },
     { name: 'aboutHeader', title: 'About Page' },
     { name: 'contactPage', title: 'Contact Page' },
     { name: 'roofing', title: 'Service — Roofing' },
@@ -81,6 +85,15 @@ const siteSettings = {
       title: 'Our Services — Gutters Card Description',
       description:
         'Default: "Seamless gutter installation, cleaning, and repairs to protect your foundation from water damage."',
+      type: 'text',
+      rows: 3,
+      group: 'homepage',
+    },
+    {
+      name: 'homeSeasonalDescription',
+      title: 'Our Services — Seasonal Card Description',
+      description:
+        'Default: "Seasonal support including snow removal for driveways, sidewalks, and parking lots, plus festive holiday lighting installation."',
       type: 'text',
       rows: 3,
       group: 'homepage',
@@ -223,6 +236,199 @@ const siteSettings = {
       type: 'text',
       rows: 2,
       group: 'workPage',
+    },
+
+    // ── Seasonal Page ────────────────────────────────────────────────
+    {
+      name: 'seasonalBadge',
+      title: 'Badge Label',
+      description: 'Default: "Seasonal Services"',
+      type: 'string',
+      group: 'seasonalPage',
+    },
+    {
+      name: 'seasonalHeading',
+      title: 'Heading',
+      description: 'Default: "Seasonal Services"',
+      type: 'string',
+      group: 'seasonalPage',
+    },
+    {
+      name: 'seasonalDescription',
+      title: 'Description',
+      description:
+        'Default: "From winter snow removal to festive holiday lighting, we keep your property ready for every season."',
+      type: 'text',
+      rows: 2,
+      group: 'seasonalPage',
+    },
+
+    // ── Seasonal — Snow Removal ─────────────────────────────────────
+    {
+      name: 'seasonalSnowTitle',
+      title: 'Title',
+      description: 'Default: "Snow Removal"',
+      type: 'string',
+      group: 'seasonalSnow',
+    },
+    {
+      name: 'seasonalSnowTagline',
+      title: 'Tagline',
+      description: 'Default: "Fast, reliable clearing so your property stays safe and accessible."',
+      type: 'string',
+      group: 'seasonalSnow',
+    },
+    {
+      name: 'seasonalSnowDescription',
+      title: 'Description',
+      description: 'Main paragraph for the Snow Removal section.',
+      type: 'text',
+      rows: 4,
+      group: 'seasonalSnow',
+    },
+    {
+      name: 'seasonalSnowOfferings',
+      title: "What's Included",
+      description: 'Comma-separated list for Snow Removal checklist items.',
+      type: 'text',
+      rows: 4,
+      group: 'seasonalSnow',
+    },
+    {
+      name: 'seasonalSnowDrivewaysLabel',
+      title: 'Driveways Card — Label',
+      type: 'string',
+      group: 'seasonalSnow',
+    },
+    {
+      name: 'seasonalSnowDrivewaysDesc',
+      title: 'Driveways Card — Description',
+      type: 'string',
+      group: 'seasonalSnow',
+    },
+    {
+      name: 'seasonalSnowSidewalksLabel',
+      title: 'Sidewalks Card — Label',
+      type: 'string',
+      group: 'seasonalSnow',
+    },
+    {
+      name: 'seasonalSnowSidewalksDesc',
+      title: 'Sidewalks Card — Description',
+      type: 'string',
+      group: 'seasonalSnow',
+    },
+    {
+      name: 'seasonalSnowParkingLotsLabel',
+      title: 'Parking Lots Card — Label',
+      type: 'string',
+      group: 'seasonalSnow',
+    },
+    {
+      name: 'seasonalSnowParkingLotsDesc',
+      title: 'Parking Lots Card — Description',
+      type: 'string',
+      group: 'seasonalSnow',
+    },
+
+    // ── Seasonal — Holiday Lighting ─────────────────────────────────
+    {
+      name: 'seasonalLightingTitle',
+      title: 'Title',
+      description: 'Default: "Festive Holiday Lighting"',
+      type: 'string',
+      group: 'seasonalLighting',
+    },
+    {
+      name: 'seasonalLightingTagline',
+      title: 'Tagline',
+      description: 'Default: "Custom holiday displays without the hassle."',
+      type: 'string',
+      group: 'seasonalLighting',
+    },
+    {
+      name: 'seasonalLightingDescription',
+      title: 'Description',
+      description: 'Main paragraph for the Holiday Lighting section.',
+      type: 'text',
+      rows: 4,
+      group: 'seasonalLighting',
+    },
+    {
+      name: 'seasonalLightingOfferings',
+      title: "What's Included",
+      description: 'Comma-separated list for Holiday Lighting checklist items.',
+      type: 'text',
+      rows: 4,
+      group: 'seasonalLighting',
+    },
+    {
+      name: 'seasonalLightingDesignLabel',
+      title: 'Design Card — Label',
+      type: 'string',
+      group: 'seasonalLighting',
+    },
+    {
+      name: 'seasonalLightingDesignDesc',
+      title: 'Design Card — Description',
+      type: 'string',
+      group: 'seasonalLighting',
+    },
+    {
+      name: 'seasonalLightingInstallLabel',
+      title: 'Install Card — Label',
+      type: 'string',
+      group: 'seasonalLighting',
+    },
+    {
+      name: 'seasonalLightingInstallDesc',
+      title: 'Install Card — Description',
+      type: 'string',
+      group: 'seasonalLighting',
+    },
+    {
+      name: 'seasonalLightingTakedownLabel',
+      title: 'Takedown Card — Label',
+      type: 'string',
+      group: 'seasonalLighting',
+    },
+    {
+      name: 'seasonalLightingTakedownDesc',
+      title: 'Takedown Card — Description',
+      type: 'string',
+      group: 'seasonalLighting',
+    },
+
+    // ── Seasonal — CTA & Labels ─────────────────────────────────────
+    {
+      name: 'seasonalIncludedHeading',
+      title: 'Included Checklist Heading',
+      description: 'Default: "What\'s included"',
+      type: 'string',
+      group: 'seasonalCta',
+    },
+    {
+      name: 'seasonalCtaHeading',
+      title: 'CTA Heading',
+      description: 'Default: "Need seasonal help this year?"',
+      type: 'string',
+      group: 'seasonalCta',
+    },
+    {
+      name: 'seasonalCtaDescription',
+      title: 'CTA Description',
+      description:
+        'Default: "Tell us what you need and we\'ll build a plan that fits your property and timeline."',
+      type: 'text',
+      rows: 2,
+      group: 'seasonalCta',
+    },
+    {
+      name: 'seasonalCtaButton',
+      title: 'CTA Button Label',
+      description: 'Default: "Request a Seasonal Quote"',
+      type: 'string',
+      group: 'seasonalCta',
     },
 
     // ── About Page ────────────────────────────────────────────────────
