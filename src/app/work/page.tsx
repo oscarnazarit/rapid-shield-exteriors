@@ -56,7 +56,7 @@ export default async function OurWorkPage() {
             <Button
               asChild
               size="lg"
-              className=" font-bont text-base bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4]"
+              className="font-bold text-base bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4]"
             >
               <Link href="/contact">
                 Request a Free Quote
