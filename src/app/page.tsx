@@ -142,66 +142,64 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-100"
           style={{
-            backgroundImage:
-              'linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)',
-            backgroundSize: '30px 30px',
+            backgroundImage: 'url("/cover-photo.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-yellow-500/40" />
+        <div className="absolute inset-0 bg-black/5" />
 
-        <div className="relative container mx-auto max-w-6xl px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-20 md:pb-28 lg:pb-36 flex flex-col md:flex-row items-center justify-center gap-20">
-          <div className="max-w-xl flex-1 order-2 md:order-1">
-            <Badge
-              className="mb-5 font-medium tracking-wide uppercase text-xs"
-              style={{ color: palette.text.primary, borderColor: palette.border.accent }}
-            >
-              Licensed &amp; Insured Contractors
-            </Badge>
-            <h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6"
-              style={{ color: palette.text.inverse }}
-            >
-              {heroHeadline}
-              <br />
-              <span style={{ color: palette.text.primary }}>{heroHeadlineAccent}</span>
-            </h1>
-            <p
-              className="text-lg md:text-xl leading-relaxed mb-8 max-w-xl"
-              style={{ color: palette.text.inverse }}
-            >
-              {heroSubtext}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button
-                asChild
-                size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold transition-colors"
-              >
-                <Link href="/contact">
-                  Get a Free Quote
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-black dark:border-[#D4D4D4] text-[#494848] dark:text-[#D4D4D4] hover:bg-[#B67D0E] hover:text-black dark:hover:text-[#D4D4D4] font-semibold"
-              >
-                <Link href="/services">View Our Services</Link>
-              </Button>
+        <div className="relative container mx-auto max-w-6xl px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-20 md:pb-28 lg:pb-36">
+          <div className="rounded-4xl bg-black/38 shadow-[0_0_30px_rgba(0,0,0,0.7)] md:h-[420px] p-5 md:p-8">
+            <div className="h-full flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20">
+              <div className="max-w-xl flex-1 order-2 md:order-1">
+                <Badge
+                  className="mb-5 font-semibold tracking-wide uppercase text-sm"
+                  style={{ color: palette.text.primary, borderColor: palette.border.accent }}
+                >
+                  Licensed &amp; Insured Contractors
+                </Badge>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-6 text-[#D4D4D4] dark:text-[#D4D4D4]">
+                  {heroHeadline}
+                  <br />
+                  <span style={{ color: palette.text.primary }}>{heroHeadlineAccent}</span>
+                </h1>
+                <p className="text-lg md:text-xl leading-relaxed mb-8 max-w-xl text-[#D4D4D4] dark:text-[#D4D4D4]">
+                  {heroSubtext}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold transition-colors"
+                  >
+                    <Link href="/contact">
+                      Get a Free Quote
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="border-[#D4D4D4] dark:border-[#D4D4D4] text-[#D4D4D4] dark:text-[#D4D4D4] hover:bg-[#B67D0E] hover:text-black dark:hover:text-[#D4D4D4] font-semibold"
+                  >
+                    <Link href="/services">View Our Services</Link>
+                  </Button>
+                </div>
+              </div>
+              <div className="flex-shrink-0 order-1 md:order-2">
+                <Image
+                  src="/solid-gold-logo.png"
+                  alt="Rapid Shield Exteriors Logo"
+                  width={420}
+                  height={420}
+                  className="object-contain rounded"
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex-shrink-0 order-1 md:order-2">
-            <Image
-              src="/solid-gold-logo.png"
-              alt="Rapid Shield Exteriors Logo"
-              width={420}
-              height={420}
-              className="object-contain rounded"
-            />
           </div>
         </div>
       </section>
