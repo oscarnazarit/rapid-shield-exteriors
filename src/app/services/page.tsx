@@ -306,7 +306,7 @@ export default async function ServicesPage() {
       <section className="py-6">
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <p className="text-sm font-medium text-center" style={{ color: palette.text.secondary }}>
-            Don't see what you're looking for?{' '}
+            Don&apos;t see what you&apos;re looking for?{' '}
             <Link
               href="/contact"
               className="underline underline-offset-4 font-medium hover:opacity-75 transition-opacity"
