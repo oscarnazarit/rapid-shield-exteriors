@@ -135,7 +135,7 @@ export default function ContactForm() {
   };
 
   return (
-    <Card className="ring-[#D1992B]">
+    <Card className="ring-2 ring-[#D1992B]">
       <CardContent className="p-6 md:p-8">
         {submitted ? (
           <div className="flex flex-col items-center justify-center py-12 text-center gap-4">

@@ -36,7 +36,7 @@ export default async function ContactPage() {
       <section className="border-b py-16 md:py-20" style={{ borderColor: palette.border.default }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <Badge
-            className="mb-4 font-medium uppercase text-xs tracking-wide"
+            className="mb-4 font-semibold uppercase text-sm tracking-wide"
             style={{ color: palette.text.primary, borderColor: palette.border.accent }}
           >
             Contact Us
@@ -73,7 +73,7 @@ export default async function ContactPage() {
                   const Icon = info.icon;
                   return (
                     <div key={info.label} className="flex items-start gap-3">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#D1992B]">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ring-2 ring-[#D1992B]">
                         <Icon className="h-4 w-4" style={{ color: palette.text.primary }} />
                       </div>
                       <div>
@@ -95,7 +95,7 @@ export default async function ContactPage() {
                 })}
               </div>
 
-              <Card className="ring-[#D1992B] mt-2">
+              <Card className="ring-2 ring-[#D1992B] mt-2">
                 <CardContent className="p-5">
                   <h3
                     className="font-semibold text-sm mb-4"
@@ -111,7 +111,7 @@ export default async function ContactPage() {
                       'Same-day response',
                     ].map((item) => (
                       <li key={item} className="flex items-center gap-2">
-                        <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D1992B]" />
+                        <CheckCircle2 className="h-5 w-5 shrink-0 text-[#D1992B]" />
                         <span className="text-sm" style={{ color: palette.text.secondary }}>
                           {item}
                         </span>

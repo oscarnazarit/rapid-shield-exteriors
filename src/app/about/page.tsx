@@ -236,9 +236,8 @@ export default async function AboutPage() {
               <div
                 key={title}
                 className="flex gap-4 rounded-xl ring-2 ring-[#D1992B] hover:bg-[#FAC857]/10 p-6"
-                style={{ borderColor: palette.border.default }}
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#D1992B]">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ring-2 ring-[#D1992B]">
                   <Icon className="h-5 w-5" style={{ color: palette.text.primary }} />
                 </div>
                 <div>
