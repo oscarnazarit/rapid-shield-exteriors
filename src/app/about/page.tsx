@@ -76,6 +76,9 @@ export default async function AboutPage() {
     settings?.bio3 ??
     "Outside of work, I'm a husband and father based in the Des Moines area. I take a lot of pride in this community and the relationships I've built here. When you hire Rapid Shield, you're hiring someone who genuinely cares about the work — and about you.";
 
+  const ownerName = settings?.aboutOwnerName ?? 'Alexis Landeros';
+  const ownerTitle = settings?.aboutOwnerTitle ?? 'Owner & Lead Contractor';
+
   const fallbackBullets = [
     'Licensed & fully insured in the state of Iowa',
     'Over [X] years in the exterior contracting industry',
@@ -147,17 +150,19 @@ export default async function AboutPage() {
                 >
                   Our Story
                 </p>
+                {/* name */}
                 <h2
                   className="text-3xl md:text-4xl font-bold leading-tight"
                   style={{ color: palette.text.inverse }}
                 >
-                  Alexis Landeros
+                  {ownerName}
                 </h2>
+                {/* title of position */}
                 <h2
                   className="text-2xl md:text-3xl font-semibold leading-tight"
                   style={{ color: palette.text.primary }}
                 >
-                  Owner & Lead Contractor
+                  {ownerTitle}
                 </h2>
               </div>
 

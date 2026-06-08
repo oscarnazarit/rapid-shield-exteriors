@@ -456,6 +456,20 @@ const siteSettings = {
       group: 'aboutHeader',
     },
     {
+      name: 'aboutOwnerName',
+      title: 'Owner Name',
+      description: 'Default: "Alexis Landeros"',
+      type: 'string',
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutOwnerTitle',
+      title: 'Owner Title',
+      description: 'Default: "Owner & Lead Contractor"',
+      type: 'string',
+      group: 'aboutHeader',
+    },
+    {
       name: 'bio1',
       title: 'Bio — Paragraph 1',
       description: 'How you got into the business / your background in the trade.',
