@@ -95,7 +95,7 @@ export default async function AboutPage() {
       <section className="border-b py-16 md:py-20" style={{ borderColor: palette.border.default }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <Badge
-            className="mb-4 font-medium uppercase text-xs tracking-wide"
+            className="mb-4 font-semibold uppercase text-sm tracking-wide"
             style={{ color: palette.text.primary, borderColor: palette.border.accent }}
           >
             About Us
@@ -108,7 +108,10 @@ export default async function AboutPage() {
             <br />
             <span style={{ color: palette.text.primary }}>{pageHeadingAccent}</span>
           </h1>
-          <p className="text-lg max-w-xl leading-relaxed" style={{ color: palette.text.secondary }}>
+          <p
+            className="text-lg font-medium max-w-xl leading-relaxed"
+            style={{ color: palette.text.secondary }}
+          >
             {pageDescription}
           </p>
         </div>
@@ -139,21 +142,27 @@ export default async function AboutPage() {
             <div className="lg:col-span-3 flex flex-col gap-6">
               <div>
                 <p
-                  className="text-xs font-semibold uppercase tracking-widest mb-2"
+                  className="text-sm font-semibold uppercase tracking-widest mb-2"
                   style={{ color: palette.text.primary }}
                 >
                   Our Story
                 </p>
                 <h2
-                  className="text-3xl md:text-4xl font-bold mb-4 leading-tight"
+                  className="text-3xl md:text-4xl font-bold leading-tight"
                   style={{ color: palette.text.inverse }}
                 >
-                  Alexis Landeros - Owner & Lead Contractor
+                  Alexis Landeros
+                </h2>
+                <h2
+                  className="text-2xl md:text-3xl font-semibold leading-tight"
+                  style={{ color: palette.text.primary }}
+                >
+                  Owner & Lead Contractor
                 </h2>
               </div>
 
               <div
-                className="flex flex-col gap-4 text-base leading-relaxed"
+                className="flex flex-col gap-4 text-base font-medium leading-relaxed"
                 style={{ color: palette.text.secondary }}
               >
                 <p>{bio1}</p>
@@ -165,10 +174,10 @@ export default async function AboutPage() {
                 {bullets.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-2.5 text-sm"
+                    className="flex items-start gap-2.5 text-sm font-semibold"
                     style={{ color: palette.text.secondary }}
                   >
-                    <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5 text-[#D1992B]" />
+                    <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5 text-[#D1992B]" />
                     {item}
                   </li>
                 ))}
@@ -177,7 +186,7 @@ export default async function AboutPage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-2D2C2C dark:text-[#D4D4D4] font-bold text-base"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
               >
                 <Link href="/contact">
                   Get a Free Quote
@@ -212,7 +221,7 @@ export default async function AboutPage() {
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="text-center mb-12">
             <Badge
-              className="mb-4 font-medium uppercase text-xs tracking-wide"
+              className="mb-4 font-semibold uppercase text-sm tracking-wide"
               style={{ color: palette.text.primary, borderColor: palette.border.accent }}
             >
               What We Stand For
@@ -226,17 +235,20 @@ export default async function AboutPage() {
             {values.map(({ icon: Icon, title, description }) => (
               <div
                 key={title}
-                className="flex gap-4 rounded-xl border p-6"
+                className="flex gap-4 rounded-xl ring-2 ring-[#D1992B] hover:bg-[#FAC857]/10 p-6"
                 style={{ borderColor: palette.border.default }}
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#D1992B]">
                   <Icon className="h-5 w-5" style={{ color: palette.text.primary }} />
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ color: palette.text.inverse }}>
+                  <h3 className="font-bold mb-1" style={{ color: palette.text.primary }}>
                     {title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: palette.text.secondary }}>
+                  <p
+                    className="text-sm font-medium leading-relaxed"
+                    style={{ color: palette.text.secondary }}
+                  >
                     {description}
                   </p>
                 </div>
@@ -253,19 +265,16 @@ export default async function AboutPage() {
             className="mx-auto max-w-3xl rounded-2xl py-8 md:py-10 px-5 md:px-8 text-center"
             style={{ backgroundColor: palette.background.primary }}
           >
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-3"
-              style={{ color: palette.text.inverse }}
-            >
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
               Ready to work together?
             </h2>
-            <p className="text-lg mb-5 max-w-lg mx-auto" style={{ color: palette.text.secondary }}>
+            <p className="text-lg mb-5 max-w-lg mx-auto bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
               Reach out today for a free, no-pressure estimate. We&apos;d love to earn your trust.
             </p>
             <Button
               asChild
               size="lg"
-              className="bg-[#D1992B] hover:bg-[#B67D0E] text-black font-bold text-base"
+              className=" font-bont text-base bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4]"
             >
               <Link href="/contact">
                 Request a Free Quote
