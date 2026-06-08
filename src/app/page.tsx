@@ -173,7 +173,7 @@ export default async function HomePage() {
                   <Button
                     asChild
                     size="lg"
-                    className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold transition-colors"
+                    className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#D4D4D4] dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold transition-colors"
                   >
                     <Link href="/contact">
                       Get a Free Quote
@@ -227,7 +227,7 @@ export default async function HomePage() {
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="text-center mb-12">
             <Badge
-              className="mb-4 font-medium uppercase text-xs tracking-wide"
+              className="mb-4 font-semibold uppercase text-sm tracking-wide"
               style={{ color: palette.text.primary, borderColor: palette.border.accent }}
             >
               What We Do
@@ -235,7 +235,10 @@ export default async function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold" style={{ color: palette.text.inverse }}>
               Our Services
             </h2>
-            <p className="mt-3 max-w-xl mx-auto" style={{ color: palette.text.secondary }}>
+            <p
+              className="mt-3 font-medium max-w-xl mx-auto"
+              style={{ color: palette.text.secondary }}
+            >
               {homeServicesDescription}
             </p>
           </div>
@@ -245,17 +248,17 @@ export default async function HomePage() {
               return (
                 <Card
                   key={service.title}
-                  className="transition-colors group ring-1 ring-[#D1992B] hover:ring-[#B67D0E]"
+                  className="transition-colors group ring-2 ring-[#D1992B] hover:bg-[#FAC857]/10"
                   style={{ color: palette.text.primary }}
                 >
                   <CardContent className="p-6 flex flex-col gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-[#D1992B] transition-colors">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg ring-2 ring-[#D1992B] transition-colors">
                       <Icon className="h-6 w-6" style={{ color: palette.text.primary }} />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg mb-2">{service.title}</h3>
+                      <h3 className="font-bold text-lg mb-2">{service.title}</h3>
                       <p
-                        className="text-sm leading-relaxed dark:text-[#D4D4D4]"
+                        className="text-sm font-semibold leading-relaxed dark:text-[#D4D4D4]"
                         style={{ color: palette.text.inverse }}
                       >
                         {service.description}
@@ -263,7 +266,7 @@ export default async function HomePage() {
                     </div>
                     <Link
                       href={service.href}
-                      className="text-sm font-medium flex items-center gap-1 mt-auto transition-colors text-[#d1992b] hover:text-[#B48E2C]"
+                      className="text-sm font-semibold flex items-center gap-1 mt-auto transition-colors text-[#d1992b] hover:text-[#B48E2C]"
                     >
                       Learn more <ArrowRight className="h-3 w-3" />
                     </Link>
@@ -272,7 +275,10 @@ export default async function HomePage() {
               );
             })}
           </div>
-          <p className="text-sm text-center mt-8" style={{ color: palette.text.secondary }}>
+          <p
+            className="text-sm font-medium text-center mt-8"
+            style={{ color: palette.text.secondary }}
+          >
             Need something not listed?{' '}
             <Link
               href="/contact"
@@ -292,7 +298,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <Badge
-                className="mb-4 font-medium uppercase text-xs tracking-wide"
+                className="mb-4 font-semibold uppercase text-sm tracking-wide"
                 style={{ color: palette.text.primary, borderColor: palette.border.accent }}
               >
                 Why Rapid Shield
@@ -303,7 +309,10 @@ export default async function HomePage() {
               >
                 {whyHeading}
               </h2>
-              <p className="leading-relaxed mb-8" style={{ color: palette.text.secondary }}>
+              <p
+                className="leading-relaxed font-medium mb-8"
+                style={{ color: palette.text.secondary }}
+              >
                 {whyDescription}
               </p>
               <Button
@@ -313,18 +322,14 @@ export default async function HomePage() {
                 <Link href="/contact">Schedule a Free Estimate</Link>
               </Button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 ">
               {reasons.map((reason) => (
                 <div
                   key={reason}
-                  className="flex items-start gap-3 border rounded-lg p-4"
-                  style={{
-                    backgroundColor: 'var(--bg-primary)',
-                    borderColor: palette.border.accent,
-                  }}
+                  className="flex items-start gap-3 ring-2 ring-[#D1992B] rounded-lg p-4 hover:bg-[#FAC857]/10"
                 >
-                  <CheckCircle2 className="h-5 w-5 text-[#d1992b] shrink-0 mt-0.5" />
-                  <span className="text-[#2D2C2C] dark:text-[#D4D4D4] text-sm leading-snug">
+                  <CheckCircle2 className="h-6 w-6 text-[#d1992b] shrink-0 mt-0.5" />
+                  <span className="text-[#2D2C2C] dark:text-[#D4D4D4] text-sm font-semibold leading-snug">
                     {reason}
                   </span>
                 </div>
@@ -339,7 +344,7 @@ export default async function HomePage() {
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <div className="text-center mb-12">
             <Badge
-              className="mb-4 font-medium uppercase text-xs tracking-wide"
+              className="mb-4 font-semibold uppercase text-sm tracking-wide"
               style={{ color: palette.text.primary, borderColor: palette.border.accent }}
             >
               Testimonials
@@ -348,20 +353,20 @@ export default async function HomePage() {
               What our customers say
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 ">
             {displayTestimonials.map((t: Testimonial) => (
-              <Card key={t.name} className="ring-[#D1992B]">
-                <CardContent className="p-6 flex flex-col gap-4">
-                  <div className="flex gap-0.5">
+              <Card key={t.name} className="ring-2 ring-[#D1992B] hover:bg-[#FAC857]/10">
+                <CardContent className="p-4 flex flex-col gap-3">
+                  <div className="flex gap-1.5">
                     {Array.from({ length: t.rating }).map((_, i) => (
                       <Star
                         key={i}
-                        className="h-4 w-4"
+                        className="h-6 w-6"
                         style={{ color: palette.text.primary, fill: palette.text.primary }}
                       />
                     ))}
                   </div>
-                  <p className="text-sm leading-relaxed italic text-[#2D2C2C] dark:text-[#D4D4D4]">
+                  <p className="text-sm font-semibold leading-relaxed italic text-[#2D2C2C] dark:text-[#D4D4D4]">
                     &ldquo;{t.text}&rdquo;
                   </p>
                   <div
@@ -369,7 +374,7 @@ export default async function HomePage() {
                     style={{ borderColor: palette.border.accent }}
                   >
                     <p
-                      className="font-semibold text-sm dark:text-[#D4D4D4]"
+                      className="font-bold text-sm dark:text-[#D4D4D4]"
                       style={{ color: palette.text.inverse }}
                     >
                       {t.name}
