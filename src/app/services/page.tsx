@@ -171,7 +171,7 @@ export default async function ServicesPage() {
                       return (
                         <div
                           key={sub.label}
-                          className="ring-2 ring-[#D1992B] rounded-lg p-4 text-center"
+                          className="ring-2 ring-[#D1992B] rounded-lg p-4 text-center hover:bg-[#FAC857]/10"
                         >
                           <SubIcon
                             className="h-5 w-5 mx-auto mb-2"
