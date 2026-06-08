@@ -112,7 +112,7 @@ export default async function ServicesPage() {
       <section className="border-b py-16" style={{ borderColor: palette.border.default }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <Badge
-            className="mb-4 font-medium uppercase text-xs tracking-wide"
+            className="mb-4 font-semibold uppercase text-sm tracking-wide"
             style={{ color: palette.text.primary, borderColor: palette.border.accent }}
           >
             Our Services
@@ -141,7 +141,7 @@ export default async function ServicesPage() {
             <div className="container mx-auto max-w-6xl px-4 md:px-6">
               {/* Header */}
               <div className="flex items-start gap-4 mb-10">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-[#D1992B]">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl ring-2 ring-[#D1992B]">
                   <Icon className="h-7 w-7" style={{ color: palette.text.primary }} />
                 </div>
                 <div>
@@ -171,7 +171,7 @@ export default async function ServicesPage() {
                       return (
                         <div
                           key={sub.label}
-                          className="border border-[#D1992B] rounded-lg p-4 text-center"
+                          className="ring-2 ring-[#D1992B] rounded-lg p-4 text-center"
                         >
                           <SubIcon
                             className="h-5 w-5 mx-auto mb-2"
@@ -193,7 +193,7 @@ export default async function ServicesPage() {
 
                   <Button
                     asChild
-                    className="bg-[#D1992B] hover:bg-[#B67D0E] text-black dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-bold transition-colors"
+                    className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] hover:text-[#2D2C2C] dark:hover:text-[#D4D4D4] font-bold transition-colors"
                   >
                     <Link href="/contact">
                       Get a {service.title} Quote
@@ -203,7 +203,7 @@ export default async function ServicesPage() {
                 </div>
 
                 {/* Checklist */}
-                <Card className="ring-[#D1992B]">
+                <Card className="ring-2 ring-[#D1992B]">
                   <CardContent className="p-6">
                     <h3
                       className="font-semibold mb-5 text-base"
@@ -235,7 +235,7 @@ export default async function ServicesPage() {
       {/* "Don't see what you need?" note */}
       <section className="py-6">
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
-          <p className="text-sm text-center" style={{ color: palette.text.secondary }}>
+          <p className="text-sm font-medium text-center" style={{ color: palette.text.secondary }}>
             Don&apos;t see what you&apos;re looking for?{' '}
             <Link
               href="/contact"
@@ -257,17 +257,17 @@ export default async function ServicesPage() {
             className="w-fit mx-auto rounded-2xl py-10 md:py-14 px-10 md:px-16 text-center"
             style={{ backgroundColor: palette.background.primary }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#2D2C2C] dark:text-[#D4D4D4]">
               Not sure what you need?
             </h2>
-            <p className="text-lg mb-5 max-w-xl mx-auto text-[#494848] dark:text-[#D4D4D4]">
+            <p className="text-lg mb-5 max-w-xl mx-auto text-[#2D2C2C] dark:text-[#D4D4D4]">
               We&apos;ll assess your home and recommend the best solution — at no cost and with zero
               pressure.
             </p>
             <Button
               asChild
               size="lg"
-              className="bg-[#D4D4D4] border-[#D4D4D4] text-black dark:text-[#494848] hover:bg-[#B67D0E] hover:border-[#B67D0E] hover:text-black dark:hover:text-[#494848] font-bold text-base"
+              className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
             >
               <Link href="/contact">
                 Schedule a Free Inspection
