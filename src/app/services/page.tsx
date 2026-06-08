@@ -8,6 +8,8 @@ import {
   Home,
   Layers,
   Droplets,
+  Snowflake,
+  Lightbulb,
   CheckCircle2,
   ArrowRight,
   Wrench,
@@ -78,6 +80,19 @@ const services = [
       { icon: Wrench, label: 'Repair', desc: 'Sealing, re-hanging, and realigning' },
       { icon: Search, label: 'Cleaning', desc: 'Full flush and debris removal' },
     ],
+  },
+];
+
+const seasonalHighlights = [
+  {
+    icon: Snowflake,
+    title: 'Snow Removal',
+    description: 'Driveways, sidewalks, and parking lots cleared quickly and safely.',
+  },
+  {
+    icon: Lightbulb,
+    title: 'Holiday Lighting',
+    description: 'Professional festive lighting setup and takedown for the holiday season.',
   },
 ];
 
@@ -232,11 +247,66 @@ export default async function ServicesPage() {
         );
       })}
 
+      {/* Seasonal services */}
+      <section className="py-16 border-t" style={{ borderColor: palette.border.default }}>
+        <div className="container mx-auto max-w-6xl px-4 md:px-6">
+          <div className="text-center mb-10">
+            <Badge
+              className="mb-4 font-semibold uppercase text-sm tracking-wide"
+              style={{ color: palette.text.primary, borderColor: palette.border.accent }}
+            >
+              Seasonal
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: palette.text.inverse }}>
+              Seasonal Services
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {seasonalHighlights.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Card key={item.title} className="ring-2 ring-[#D1992B] hover:bg-[#FAC857]/10">
+                  <CardContent className="p-6 flex items-start gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ring-2 ring-[#D1992B]">
+                      <Icon className="h-5 w-5" style={{ color: palette.text.primary }} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1" style={{ color: palette.text.inverse }}>
+                        {item.title}
+                      </h3>
+                      <p
+                        className="text-sm leading-relaxed"
+                        style={{ color: palette.text.secondary }}
+                      >
+                        {item.description}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+
+          <div className="text-center">
+            <Button
+              asChild
+              className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] hover:text-[#2D2C2C] dark:hover:text-[#D4D4D4] font-bold transition-colors"
+            >
+              <Link href="/seasonal">
+                View Seasonal Services
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* "Don't see what you need?" note */}
       <section className="py-6">
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <p className="text-sm font-medium text-center" style={{ color: palette.text.secondary }}>
-            Don&apos;t see what you&apos;re looking for?{' '}
+            Don't see what you're looking for?{' '}
             <Link
               href="/contact"
               className="underline underline-offset-4 font-medium hover:opacity-75 transition-opacity"
@@ -244,7 +314,7 @@ export default async function ServicesPage() {
             >
               Reach out
             </Link>{' '}
-            — we handle more than what&apos;s listed here and are happy to talk through your
+            <br></br> We handle more than what&apos;s listed here and are happy to talk through your
             project.
           </p>
         </div>

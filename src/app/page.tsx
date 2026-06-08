@@ -10,6 +10,7 @@ import {
   Home,
   Layers,
   Droplets,
+  Snowflake,
   ShieldCheck,
   Star,
   Phone,
@@ -54,6 +55,14 @@ const serviceCards = [
     settingsKey: 'homeGuttersDescription',
     fallback:
       'Seamless gutter installation, cleaning, and repairs to protect your foundation from water damage.',
+  },
+  {
+    icon: Snowflake,
+    title: 'Seasonal',
+    href: '/seasonal',
+    settingsKey: 'homeSeasonalDescription',
+    fallback:
+      'Seasonal support including snow removal for driveways, sidewalks, and parking lots, plus festive holiday lighting installation.',
   },
 ];
 
@@ -242,7 +251,7 @@ export default async function HomePage() {
               {homeServicesDescription}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service) => {
               const Icon = service.icon;
               return (

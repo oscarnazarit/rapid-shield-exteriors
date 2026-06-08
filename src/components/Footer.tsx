@@ -49,6 +49,7 @@ export default function Footer() {
                 { label: 'Roofing', href: '/services#roofing' },
                 { label: 'Siding', href: '/services#siding' },
                 { label: 'Gutters', href: '/services#gutters' },
+                { label: 'Seasonal', href: '/seasonal' },
               ].map((link) => (
                 <li key={link.href + link.label}>
                   <Link
