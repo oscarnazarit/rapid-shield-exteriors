@@ -20,7 +20,7 @@ export default async function OurWorkPage() {
       <section className="border-b py-16 md:py-20" style={{ borderColor: palette.border.default }}>
         <div className="container mx-auto max-w-6xl px-4 md:px-6">
           <Badge
-            className="mb-4 font-medium uppercase text-xs tracking-wide"
+            className="mb-4 font-semibold uppercase text-sm tracking-wide"
             style={{ color: palette.text.primary, borderColor: palette.border.accent }}
           >
             Our Work
@@ -47,16 +47,16 @@ export default async function OurWorkPage() {
             className="mx-auto max-w-3xl rounded-2xl py-8 md:py-10 px-5 md:px-8 text-center"
             style={{ backgroundColor: palette.background.primary }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#494848] dark:text-[#D4D4D4]">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
               Like what you see?
             </h2>
-            <p className="text-lg mb-5 max-w-lg mx-auto text-[#494848] dark:text-[#D4D4D4]">
+            <p className="text-lg mb-5 max-w-lg mx-auto bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
               Get in touch today for a free estimate on your project.
             </p>
             <Button
               asChild
               size="lg"
-              className="bg-[#D4D4D4] border-[#D4D4D4] text-black dark:text-[#494848] hover:bg-[#B67D0E] hover:border-[#B67D0E] hover:text-black dark:hover:text-[#494848] font-bold text-base"
+              className=" font-bont text-base bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4]"
             >
               <Link href="/contact">
                 Request a Free Quote

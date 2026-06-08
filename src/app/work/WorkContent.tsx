@@ -91,11 +91,8 @@ export default function WorkContent() {
           {/* Left sidebar — swaps with active tab */}
           <div className="flex flex-col gap-6">
             {activeTab === 'facebook' ? (
-              <div
-                className="rounded-xl border p-6 flex flex-col gap-4"
-                style={{ borderColor: palette.border.default }}
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#D1992B]">
+              <div className="rounded-xl ring-2 ring-[#D1992B] p-6 flex flex-col gap-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg ring-2 ring-[#D1992B]">
                   <FacebookIcon className="h-5 w-5" style={{ color: palette.text.primary }} />
                 </div>
                 <div>
@@ -121,11 +118,8 @@ export default function WorkContent() {
                 </a>
               </div>
             ) : (
-              <div
-                className="rounded-xl border p-6 flex flex-col gap-4"
-                style={{ borderColor: palette.border.default }}
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#D1992B]">
+              <div className="rounded-xl ring-2 ring-[#D1992B] p-6 flex flex-col gap-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg ring-2 ring-[#D1992B]">
                   <Camera className="h-5 w-5" style={{ color: palette.text.primary }} />
                 </div>
                 <div>
@@ -159,8 +153,8 @@ export default function WorkContent() {
                 {photos.map((src, i) => (
                   <div
                     key={src}
-                    className="relative overflow-hidden rounded-xl border"
-                    style={{ borderColor: palette.border.default, aspectRatio: '4/3' }}
+                    className="relative overflow-hidden rounded-xl ring-2 ring-[#D1992B]"
+                    style={{ aspectRatio: '4/3' }}
                   >
                     <Image
                       src={src}
@@ -178,8 +172,8 @@ export default function WorkContent() {
             {activeTab === 'facebook' && (
               <div className="flex flex-col gap-4">
                 <div
-                  className="rounded-xl border overflow-hidden"
-                  style={{ borderColor: palette.border.default, width: '100%' }}
+                  className="rounded-xl ring-2 ring-[#D1992B] overflow-hidden"
+                  style={{ width: '100%' }}
                 >
                   <div
                     className="flex items-center gap-3 px-5 py-3 border-b"
