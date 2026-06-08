@@ -15,8 +15,8 @@ const LOAD_TIMEOUT_MS = 8000;
 const photos = [
   '/pic1.JPEG',
   '/pic2.JPEG',
-  '/pic3.JPEG',
-  '/pic4.JPEG',
+  '/pic3.JPG',
+  '/pic4.JPG',
   '/pic5.JPEG',
   '/pic6.JPEG',
   '/pic7.JPEG',
