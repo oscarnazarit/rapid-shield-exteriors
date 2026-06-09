@@ -2,8 +2,14 @@ import Link from 'next/link';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { palette } from '@/lib/tokens/colors';
+import { client } from '@/sanity/lib/client';
 
-export default function Footer() {
+export default async function Footer() {
+  const settings = await client.fetch(`*[_type == "siteSettings"][0]`);
+  const phone = settings?.phone ?? '(515) 805-0500';
+  const email = settings?.email ?? 'rapidshieldexteriors@gmail.com';
+  const address = settings?.address ?? 'Des Moines, Iowa';
+
   return (
     <footer className="border-t border-zinc-800 text-zinc-400">
       <div className="container mx-auto max-w-6xl px-4 md:px-6 py-12">
@@ -77,20 +83,18 @@ export default function Footer() {
                   className="h-4 w-4 mt-0.5 shrink-0"
                   style={{ color: palette.text.primary }}
                 />
-                <span className="text-[#494848] dark:text-[#D4D4D4]">(515) 805-0500</span>
+                <span className="text-[#494848] dark:text-[#D4D4D4]">{phone}</span>
               </li>
               <li className="flex items-start gap-2">
                 <Mail className="h-4 w-4 mt-0.5 shrink-0" style={{ color: palette.text.primary }} />
-                <span className="text-[#494848] dark:text-[#D4D4D4]">
-                  rapidshieldexteriors@gmail.com
-                </span>
+                <span className="text-[#494848] dark:text-[#D4D4D4]">{email}</span>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin
                   className="h-4 w-4 mt-0.5 shrink-0"
                   style={{ color: palette.text.primary }}
                 />
-                <span className="text-[#494848] dark:text-[#D4D4D4]">Des Moines, Iowa</span>
+                <span className="text-[#494848] dark:text-[#D4D4D4]">{address}</span>
               </li>
             </ul>
           </div>

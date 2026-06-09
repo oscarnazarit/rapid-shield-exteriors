@@ -5,23 +5,6 @@ import { palette } from '@/lib/tokens/colors';
 import { client } from '@/sanity/lib/client';
 import ContactForm from './ContactForm';
 
-const contactInfo = [
-  { icon: Phone, label: 'Phone', value: '(515) 805-0500', sub: 'Mon–Fri, 7am–6pm' },
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'rapidshieldexteriors@gmail.com',
-    sub: 'We respond within 24 hours',
-  },
-  {
-    icon: MapPin,
-    label: 'Service Area',
-    value: 'Greater Des Moines, IA',
-    sub: 'Contact us to confirm your location',
-  },
-  { icon: Clock, label: 'Hours', value: 'Mon–Fri: 7am – 6pm', sub: 'Sat: 8am – 2pm' },
-];
-
 export default async function ContactPage() {
   const settings = await client.fetch(`*[_type == "siteSettings"][0]`);
 
@@ -29,6 +12,28 @@ export default async function ContactPage() {
   const description =
     settings?.contactDescription ??
     "Fill out the form and we'll get back to you within one business day. No obligation, no pressure.";
+
+  const contactInfo = [
+    {
+      icon: Phone,
+      label: 'Phone',
+      value: settings?.phone ?? '(515) 805-0500',
+      sub: 'Mon–Fri, 7am–6pm',
+    },
+    {
+      icon: Mail,
+      label: 'Email',
+      value: settings?.email ?? 'rapidshieldexteriors@gmail.com',
+      sub: 'We respond within 24 hours',
+    },
+    {
+      icon: MapPin,
+      label: 'Service Area',
+      value: settings?.address ?? 'Greater Des Moines, IA',
+      sub: 'Contact us to confirm your location',
+    },
+    { icon: Clock, label: 'Hours', value: 'Mon–Fri: 7am – 6pm', sub: 'Sat: 8am – 2pm' },
+  ];
 
   return (
     <div className="flex flex-col">
