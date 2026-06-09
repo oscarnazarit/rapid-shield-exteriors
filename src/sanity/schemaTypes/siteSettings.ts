@@ -16,7 +16,6 @@ const siteSettings = {
     { name: 'seasonalPage', title: 'Seasonal Page' },
     { name: 'seasonalSnow', title: 'Seasonal — Snow Removal' },
     { name: 'seasonalLighting', title: 'Seasonal — Holiday Lighting' },
-    { name: 'seasonalCta', title: 'Seasonal — CTA & Labels' },
     { name: 'aboutHeader', title: 'About Page' },
     { name: 'contactPage', title: 'Contact Page' },
     { name: 'roofing', title: 'Service — Roofing' },
@@ -123,6 +122,38 @@ const siteSettings = {
       rows: 4,
       group: 'homepage',
     },
+    {
+      name: 'homeCtaHeading',
+      title: 'CTA Heading',
+      description: 'Default: "Ready to get started?"',
+      type: 'string',
+      group: 'homepage',
+    },
+    {
+      name: 'homeCtaDescription',
+      title: 'CTA Description',
+      description:
+        'Default: "Contact us today for a free, no-obligation quote. We\'ll come to you and walk through every detail."',
+      type: 'text',
+      rows: 2,
+      group: 'homepage',
+    },
+    {
+      name: 'homeCtaButton',
+      title: 'CTA Button Label',
+      description: 'Default: "Request a Free Quote"',
+      type: 'string',
+      group: 'homepage',
+    },
+    {
+      name: 'showHomeCta',
+      title: 'Show "Ready to get started?" CTA',
+      description: 'Uncheck to hide the call-to-action banner at the bottom of the Home page.',
+      type: 'boolean',
+      options: { layout: 'checkbox' },
+      initialValue: true,
+      group: 'homepage',
+    },
 
     // ── Testimonials ─────────────────────────────────────────────────
     {
@@ -219,6 +250,38 @@ const siteSettings = {
       rows: 2,
       group: 'servicesPage',
     },
+    {
+      name: 'servicesCtaHeading',
+      title: 'CTA Heading',
+      description: 'Default: "Not sure what you need?"',
+      type: 'string',
+      group: 'servicesPage',
+    },
+    {
+      name: 'servicesCtaDescription',
+      title: 'CTA Description',
+      description:
+        'Default: "We\'ll assess your home and recommend the best solution — at no cost and with zero pressure."',
+      type: 'text',
+      rows: 2,
+      group: 'servicesPage',
+    },
+    {
+      name: 'servicesCtaButton',
+      title: 'CTA Button Label',
+      description: 'Default: "Schedule a Free Inspection"',
+      type: 'string',
+      group: 'servicesPage',
+    },
+    {
+      name: 'showServicesCta',
+      title: 'Show "Not sure what you need?" CTA',
+      description: 'Uncheck to hide the call-to-action banner at the bottom of the Services page.',
+      type: 'boolean',
+      options: { layout: 'checkbox' },
+      initialValue: true,
+      group: 'servicesPage',
+    },
 
     // ── Our Work Page ─────────────────────────────────────────────────
     {
@@ -235,6 +298,37 @@ const siteSettings = {
         'Default: "Real projects, real results. Browse our latest work from the field or follow us on Facebook."',
       type: 'text',
       rows: 2,
+      group: 'workPage',
+    },
+    {
+      name: 'workCtaHeading',
+      title: 'CTA Heading',
+      description: 'Default: "Like what you see?"',
+      type: 'string',
+      group: 'workPage',
+    },
+    {
+      name: 'workCtaDescription',
+      title: 'CTA Description',
+      description: 'Default: "Get in touch today for a free estimate on your project."',
+      type: 'text',
+      rows: 2,
+      group: 'workPage',
+    },
+    {
+      name: 'workCtaButton',
+      title: 'CTA Button Label',
+      description: 'Default: "Request a Free Quote"',
+      type: 'string',
+      group: 'workPage',
+    },
+    {
+      name: 'showWorkCta',
+      title: 'Show "Like what you see?" CTA',
+      description: 'Uncheck to hide the call-to-action banner at the bottom of the Our Work page.',
+      type: 'boolean',
+      options: { layout: 'checkbox' },
+      initialValue: true,
       group: 'workPage',
     },
 
@@ -295,32 +389,14 @@ const siteSettings = {
       group: 'seasonalSnow',
     },
     {
-      name: 'seasonalSnowDrivewaysLabel',
-      title: 'Driveways Card — Label',
-      type: 'string',
-      group: 'seasonalSnow',
-    },
-    {
       name: 'seasonalSnowDrivewaysDesc',
       title: 'Driveways Card — Description',
       type: 'string',
       group: 'seasonalSnow',
     },
     {
-      name: 'seasonalSnowSidewalksLabel',
-      title: 'Sidewalks Card — Label',
-      type: 'string',
-      group: 'seasonalSnow',
-    },
-    {
       name: 'seasonalSnowSidewalksDesc',
       title: 'Sidewalks Card — Description',
-      type: 'string',
-      group: 'seasonalSnow',
-    },
-    {
-      name: 'seasonalSnowParkingLotsLabel',
-      title: 'Parking Lots Card — Label',
       type: 'string',
       group: 'seasonalSnow',
     },
@@ -363,20 +439,8 @@ const siteSettings = {
       group: 'seasonalLighting',
     },
     {
-      name: 'seasonalLightingDesignLabel',
-      title: 'Design Card — Label',
-      type: 'string',
-      group: 'seasonalLighting',
-    },
-    {
       name: 'seasonalLightingDesignDesc',
       title: 'Design Card — Description',
-      type: 'string',
-      group: 'seasonalLighting',
-    },
-    {
-      name: 'seasonalLightingInstallLabel',
-      title: 'Install Card — Label',
       type: 'string',
       group: 'seasonalLighting',
     },
@@ -387,32 +451,26 @@ const siteSettings = {
       group: 'seasonalLighting',
     },
     {
-      name: 'seasonalLightingTakedownLabel',
-      title: 'Takedown Card — Label',
-      type: 'string',
-      group: 'seasonalLighting',
-    },
-    {
       name: 'seasonalLightingTakedownDesc',
       title: 'Takedown Card — Description',
       type: 'string',
       group: 'seasonalLighting',
     },
 
-    // ── Seasonal — CTA & Labels ─────────────────────────────────────
+    // ── Seasonal — CTA & Labels (shown under Seasonal Page) ─────────
     {
       name: 'seasonalIncludedHeading',
       title: 'Included Checklist Heading',
       description: 'Default: "What\'s included"',
       type: 'string',
-      group: 'seasonalCta',
+      group: 'seasonalPage',
     },
     {
       name: 'seasonalCtaHeading',
       title: 'CTA Heading',
       description: 'Default: "Need seasonal help this year?"',
       type: 'string',
-      group: 'seasonalCta',
+      group: 'seasonalPage',
     },
     {
       name: 'seasonalCtaDescription',
@@ -421,14 +479,23 @@ const siteSettings = {
         'Default: "Tell us what you need and we\'ll build a plan that fits your property and timeline."',
       type: 'text',
       rows: 2,
-      group: 'seasonalCta',
+      group: 'seasonalPage',
     },
     {
       name: 'seasonalCtaButton',
       title: 'CTA Button Label',
       description: 'Default: "Request a Seasonal Quote"',
       type: 'string',
-      group: 'seasonalCta',
+      group: 'seasonalPage',
+    },
+    {
+      name: 'showSeasonalCta',
+      title: 'Show "Need seasonal help this year?" CTA',
+      description: 'Uncheck to hide the call-to-action banner at the bottom of the Seasonal page.',
+      type: 'boolean',
+      options: { layout: 'checkbox' },
+      initialValue: true,
+      group: 'seasonalPage',
     },
 
     // ── About Page ────────────────────────────────────────────────────
@@ -502,6 +569,108 @@ const siteSettings = {
       rows: 3,
       group: 'aboutHeader',
     },
+    {
+      name: 'aboutValuesHeading',
+      title: '"The way we work" — Heading',
+      description: 'Default: "The way we work"',
+      type: 'string',
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutValue1Title',
+      title: 'Way We Work — Card 1 Title',
+      description: 'Default: "Quality First"',
+      type: 'string',
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutValue1Desc',
+      title: 'Way We Work — Card 1 Description',
+      description:
+        'Default: "We use premium materials and proven techniques on every job, no matter the size."',
+      type: 'text',
+      rows: 2,
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutValue2Title',
+      title: 'Way We Work — Card 2 Title',
+      description: 'Default: "Local & Trusted"',
+      type: 'string',
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutValue2Desc',
+      title: 'Way We Work — Card 2 Description',
+      description:
+        'Default: "We live and work in this community. Our reputation is built one neighbor at a time."',
+      type: 'text',
+      rows: 2,
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutValue3Title',
+      title: 'Way We Work — Card 3 Title',
+      description: 'Default: "On Time, Every Time"',
+      type: 'string',
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutValue3Desc',
+      title: 'Way We Work — Card 3 Description',
+      description:
+        'Default: "We respect your schedule. Jobs start when we say they will and finish when we commit."',
+      type: 'text',
+      rows: 2,
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutValue4Title',
+      title: 'Way We Work — Card 4 Title',
+      description: 'Default: "Honest Pricing"',
+      type: 'string',
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutValue4Desc',
+      title: 'Way We Work — Card 4 Description',
+      description: 'Default: "No surprises on your bill. We quote accurately and stick to it."',
+      type: 'text',
+      rows: 2,
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutCtaHeading',
+      title: 'CTA Heading',
+      description: 'Default: "Ready to work together?"',
+      type: 'string',
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutCtaDescription',
+      title: 'CTA Description',
+      description:
+        'Default: "Reach out today for a free, no-pressure estimate. We\'d love to earn your trust."',
+      type: 'text',
+      rows: 2,
+      group: 'aboutHeader',
+    },
+    {
+      name: 'aboutCtaButton',
+      title: 'CTA Button Label',
+      description: 'Default: "Request a Free Quote"',
+      type: 'string',
+      group: 'aboutHeader',
+    },
+    {
+      name: 'showAboutCta',
+      title: 'Show "Ready to work together?" CTA',
+      description: 'Uncheck to hide the call-to-action banner at the bottom of the About page.',
+      type: 'boolean',
+      options: { layout: 'checkbox' },
+      initialValue: true,
+      group: 'aboutHeader',
+    },
 
     // ── Contact Page ──────────────────────────────────────────────────
     {
@@ -547,6 +716,27 @@ const siteSettings = {
       rows: 4,
       group: 'roofing',
     },
+    {
+      name: 'roofingReplacementDesc',
+      title: 'Replacement Card — Description',
+      description: 'Default: "Tear-off and full new roof installation"',
+      type: 'string',
+      group: 'roofing',
+    },
+    {
+      name: 'roofingRepairDesc',
+      title: 'Repair Card — Description',
+      description: 'Default: "Targeted fixes for any damage"',
+      type: 'string',
+      group: 'roofing',
+    },
+    {
+      name: 'roofingInspectionDesc',
+      title: 'Inspection Card — Description',
+      description: 'Default: "Detailed assessment and report"',
+      type: 'string',
+      group: 'roofing',
+    },
 
     // ── Service — Siding ──────────────────────────────────────────────
     {
@@ -574,6 +764,27 @@ const siteSettings = {
       rows: 4,
       group: 'siding',
     },
+    {
+      name: 'sidingReplacementDesc',
+      title: 'Replacement Card — Description',
+      description: 'Default: "Full exterior re-siding"',
+      type: 'string',
+      group: 'siding',
+    },
+    {
+      name: 'sidingRepairDesc',
+      title: 'Repair Card — Description',
+      description: 'Default: "Panel replacement and patching"',
+      type: 'string',
+      group: 'siding',
+    },
+    {
+      name: 'sidingTrimDesc',
+      title: 'Trim & Detail Card — Description',
+      description: 'Default: "Soffit, fascia, and corner work"',
+      type: 'string',
+      group: 'siding',
+    },
 
     // ── Service — Gutters ─────────────────────────────────────────────
     {
@@ -599,6 +810,27 @@ const siteSettings = {
         'Comma-separated list of checklist items. e.g. "Seamless aluminum gutter installation, Gutter guard installation, Gutter cleaning"',
       type: 'text',
       rows: 4,
+      group: 'gutters',
+    },
+    {
+      name: 'guttersInstallationDesc',
+      title: 'Installation Card — Description',
+      description: 'Default: "Custom seamless systems"',
+      type: 'string',
+      group: 'gutters',
+    },
+    {
+      name: 'guttersRepairDesc',
+      title: 'Repair Card — Description',
+      description: 'Default: "Sealing, re-hanging, and realigning"',
+      type: 'string',
+      group: 'gutters',
+    },
+    {
+      name: 'guttersCleaningDesc',
+      title: 'Cleaning Card — Description',
+      description: 'Default: "Full flush and debris removal"',
+      type: 'string',
       group: 'gutters',
     },
   ],

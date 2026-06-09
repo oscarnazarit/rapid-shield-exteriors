@@ -18,26 +18,35 @@ type Stat = {
   label: string;
 };
 
+// Icons stay fixed — card titles and descriptions are editable in Sanity
 const values = [
   {
     icon: ShieldCheck,
+    titleKey: 'aboutValue1Title',
+    descKey: 'aboutValue1Desc',
     title: 'Quality First',
     description: 'We use premium materials and proven techniques on every job, no matter the size.',
   },
   {
     icon: Users,
+    titleKey: 'aboutValue2Title',
+    descKey: 'aboutValue2Desc',
     title: 'Local & Trusted',
     description:
       'We live and work in this community. Our reputation is built one neighbor at a time.',
   },
   {
     icon: Clock,
+    titleKey: 'aboutValue3Title',
+    descKey: 'aboutValue3Desc',
     title: 'On Time, Every Time',
     description:
       'We respect your schedule. Jobs start when we say they will and finish when we commit.',
   },
   {
     icon: Star,
+    titleKey: 'aboutValue4Title',
+    descKey: 'aboutValue4Desc',
     title: 'Honest Pricing',
     description: 'No surprises on your bill. We quote accurately and stick to it.',
   },
@@ -91,6 +100,21 @@ export default async function AboutPage() {
         .map((s: string) => s.trim())
         .filter(Boolean)
     : fallbackBullets;
+
+  const showAboutCta = settings?.showAboutCta ?? true;
+  const aboutCtaHeading = settings?.aboutCtaHeading ?? 'Ready to work together?';
+  const aboutCtaDescription =
+    settings?.aboutCtaDescription ??
+    "Reach out today for a free, no-pressure estimate. We'd love to earn your trust.";
+  const aboutCtaButton = settings?.aboutCtaButton ?? 'Request a Free Quote';
+
+  // "The way we work" section — heading + cards (icons stay hardcoded)
+  const valuesHeading = settings?.aboutValuesHeading ?? 'The way we work';
+  const displayValues = values.map((v) => ({
+    ...v,
+    title: (settings?.[v.titleKey] as string | undefined) ?? v.title,
+    description: (settings?.[v.descKey] as string | undefined) ?? v.description,
+  }));
 
   return (
     <div className="flex flex-col">
@@ -232,12 +256,12 @@ export default async function AboutPage() {
               What We Stand For
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold" style={{ color: palette.text.inverse }}>
-              The way we work
+              {valuesHeading}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {values.map(({ icon: Icon, title, description }) => (
+            {displayValues.map(({ icon: Icon, title, description }) => (
               <div
                 key={title}
                 className="flex gap-4 rounded-xl ring-2 ring-[#D1992B] hover:bg-[#FAC857]/10 p-6"
@@ -263,31 +287,33 @@ export default async function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="px-4 md:px-6 py-6 md:py-8">
-        <div className="container mx-auto">
-          <div
-            className="mx-auto max-w-3xl rounded-2xl py-8 md:py-10 px-5 md:px-8 text-center"
-            style={{ backgroundColor: palette.background.primary }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
-              Ready to work together?
-            </h2>
-            <p className="text-lg mb-5 max-w-lg mx-auto bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
-              Reach out today for a free, no-pressure estimate. We&apos;d love to earn your trust.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="font-bold text-base bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4]"
+      {showAboutCta && (
+        <section className="px-4 md:px-6 py-6 md:py-8">
+          <div className="container mx-auto">
+            <div
+              className="mx-auto max-w-3xl rounded-2xl py-8 md:py-10 px-5 md:px-8 text-center"
+              style={{ backgroundColor: palette.background.primary }}
             >
-              <Link href="/contact">
-                Request a Free Quote
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
+                {aboutCtaHeading}
+              </h2>
+              <p className="text-lg mb-5 max-w-lg mx-auto bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
+                {aboutCtaDescription}
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="font-bold text-base bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4]"
+              >
+                <Link href="/contact">
+                  {aboutCtaButton}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }

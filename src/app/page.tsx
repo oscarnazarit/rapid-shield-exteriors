@@ -91,6 +91,14 @@ export default async function HomePage() {
   const phone = settings?.phone ?? '(515) 805-0500';
   const phoneHref = `tel:${(settings?.phone ?? '5158050500').replace(/\D/g, '')}`;
 
+  // CTA banner is optional — defaults to shown if the toggle is unset
+  const showHomeCta = settings?.showHomeCta ?? true;
+  const homeCtaHeading = settings?.homeCtaHeading ?? 'Ready to get started?';
+  const homeCtaDescription =
+    settings?.homeCtaDescription ??
+    "Contact us today for a free, no-obligation quote. We'll come to you and walk through every detail.";
+  const homeCtaButton = settings?.homeCtaButton ?? 'Request a Free Quote';
+
   // Our Services section
   const homeServicesDescription =
     settings?.homeServicesDescription ??
@@ -407,45 +415,46 @@ export default async function HomePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="px-4 md:px-6 py-6 md:py-8">
-        <div className="container mx-auto">
-          <div
-            className="mx-auto max-w-3xl rounded-2xl py-8 md:py-10 px-5 md:px-8 text-center"
-            style={{ backgroundColor: palette.background.primary }}
-          >
-            <ShieldCheck className="h-10 w-10 mx-auto mb-4 text-[#2D2C2C] dark:text-[#D4D4D4]" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#2D2C2C] dark:text-[#D4D4D4]">
-              Ready to get started?
-            </h2>
-            <p className="text-lg mb-5 max-w-xl mx-auto text-[#2D2C2C] dark:text-[#D4D4D4]">
-              Contact us today for a free, no-obligation quote. We&apos;ll come to you and walk
-              through every detail.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
-              >
-                <Link href="/contact">
-                  Request a Free Quote
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
-              >
-                <a href={phoneHref}>
-                  <Phone className="mr-2 h-4 w-4" />
-                  {phone}
-                </a>
-              </Button>
+      {showHomeCta && (
+        <section className="px-4 md:px-6 py-6 md:py-8">
+          <div className="container mx-auto">
+            <div
+              className="mx-auto max-w-3xl rounded-2xl py-8 md:py-10 px-5 md:px-8 text-center"
+              style={{ backgroundColor: palette.background.primary }}
+            >
+              <ShieldCheck className="h-10 w-10 mx-auto mb-4 text-[#2D2C2C] dark:text-[#D4D4D4]" />
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#2D2C2C] dark:text-[#D4D4D4]">
+                {homeCtaHeading}
+              </h2>
+              <p className="text-lg mb-5 max-w-xl mx-auto text-[#2D2C2C] dark:text-[#D4D4D4]">
+                {homeCtaDescription}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
+                >
+                  <Link href="/contact">
+                    {homeCtaButton}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
+                >
+                  <a href={phoneHref}>
+                    <Phone className="mr-2 h-4 w-4" />
+                    {phone}
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }

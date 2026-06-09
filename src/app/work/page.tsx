@@ -13,6 +13,11 @@ export default async function OurWorkPage() {
   const description =
     settings?.workDescription ??
     'Real projects, real results. Browse our latest roofing, siding, and gutter work from the field or follow us on Facebook.';
+  const showWorkCta = settings?.showWorkCta ?? true;
+  const workCtaHeading = settings?.workCtaHeading ?? 'Like what you see?';
+  const workCtaDescription =
+    settings?.workCtaDescription ?? 'Get in touch today for a free estimate on your project.';
+  const workCtaButton = settings?.workCtaButton ?? 'Request a Free Quote';
 
   return (
     <div className="flex flex-col">
@@ -41,31 +46,33 @@ export default async function OurWorkPage() {
       <WorkContent />
 
       {/* CTA */}
-      <section className="px-4 md:px-6 py-6 md:py-8">
-        <div className="container mx-auto">
-          <div
-            className="mx-auto max-w-3xl rounded-2xl py-8 md:py-10 px-5 md:px-8 text-center"
-            style={{ backgroundColor: palette.background.primary }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
-              Like what you see?
-            </h2>
-            <p className="text-lg mb-5 max-w-lg mx-auto bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
-              Get in touch today for a free estimate on your project.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="font-bold text-base bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4]"
+      {showWorkCta && (
+        <section className="px-4 md:px-6 py-6 md:py-8">
+          <div className="container mx-auto">
+            <div
+              className="mx-auto max-w-3xl rounded-2xl py-8 md:py-10 px-5 md:px-8 text-center"
+              style={{ backgroundColor: palette.background.primary }}
             >
-              <Link href="/contact">
-                Request a Free Quote
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
+                {workCtaHeading}
+              </h2>
+              <p className="text-lg mb-5 max-w-lg mx-auto bg-[#D1992B] text-[#2D2C2C] dark:text-[#D4D4D4]">
+                {workCtaDescription}
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="font-bold text-base bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4]"
+              >
+                <Link href="/contact">
+                  {workCtaButton}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }

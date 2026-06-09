@@ -129,6 +129,7 @@ export default async function SeasonalPage() {
     settings?.seasonalCtaDescription ??
     'Tell us what you need and we&apos;ll build a plan that fits your property and timeline.';
   const ctaButton = settings?.seasonalCtaButton ?? 'Request a Seasonal Quote';
+  const showSeasonalCta = settings?.showSeasonalCta ?? true;
 
   const displayServices = seasonalServices.map((service) => {
     const prefix = service.settingsPrefix;
@@ -142,17 +143,15 @@ export default async function SeasonalPage() {
         settings?.[`${prefix}Offerings`] as string | undefined,
         service.fallbackOfferings
       ),
-      subServices: service.subServices.map((sub) => ({
-        ...sub,
-        label:
-          (settings?.[`${prefix}${sub.key.charAt(0).toUpperCase() + sub.key.slice(1)}Label`] as
-            | string
-            | undefined) ?? sub.fallbackLabel,
-        desc:
-          (settings?.[`${prefix}${sub.key.charAt(0).toUpperCase() + sub.key.slice(1)}Desc`] as
-            | string
-            | undefined) ?? sub.fallbackDesc,
-      })),
+      subServices: service.subServices.map((sub) => {
+        const keyCap = sub.key.charAt(0).toUpperCase() + sub.key.slice(1);
+        return {
+          ...sub,
+          // Card title stays hardcoded — only the description is editable.
+          label: sub.fallbackLabel,
+          desc: (settings?.[`${prefix}${keyCap}Desc`] as string | undefined) ?? sub.fallbackDesc,
+        };
+      }),
     };
   });
 
@@ -280,31 +279,33 @@ export default async function SeasonalPage() {
         );
       })}
 
-      <section className="px-4 md:px-6 py-6">
-        <div className="container mx-auto">
-          <div
-            className="w-fit mx-auto rounded-2xl py-10 md:py-14 px-10 md:px-16 text-center"
-            style={{ backgroundColor: palette.background.primary }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#2D2C2C] dark:text-[#D4D4D4]">
-              {ctaHeading}
-            </h2>
-            <p className="text-lg mb-5 max-w-xl mx-auto text-[#2D2C2C] dark:text-[#D4D4D4]">
-              {ctaDescription}
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
+      {showSeasonalCta && (
+        <section className="px-4 md:px-6 py-6">
+          <div className="container mx-auto">
+            <div
+              className="w-fit mx-auto rounded-2xl py-10 md:py-14 px-10 md:px-16 text-center"
+              style={{ backgroundColor: palette.background.primary }}
             >
-              <Link href="/contact">
-                {ctaButton}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#2D2C2C] dark:text-[#D4D4D4]">
+                {ctaHeading}
+              </h2>
+              <p className="text-lg mb-5 max-w-xl mx-auto text-[#2D2C2C] dark:text-[#D4D4D4]">
+                {ctaDescription}
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
+              >
+                <Link href="/contact">
+                  {ctaButton}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }

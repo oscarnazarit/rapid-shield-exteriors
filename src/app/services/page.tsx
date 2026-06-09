@@ -34,9 +34,24 @@ const services = [
       'Free roof inspections',
     ],
     subServices: [
-      { icon: RefreshCcw, label: 'Replacement', desc: 'Tear-off and full new roof installation' },
-      { icon: Wrench, label: 'Repair', desc: 'Targeted fixes for any damage' },
-      { icon: Search, label: 'Inspection', desc: 'Detailed assessment and report' },
+      {
+        icon: RefreshCcw,
+        label: 'Replacement',
+        descKey: 'roofingReplacementDesc',
+        desc: 'Tear-off and full new roof installation',
+      },
+      {
+        icon: Wrench,
+        label: 'Repair',
+        descKey: 'roofingRepairDesc',
+        desc: 'Targeted fixes for any damage',
+      },
+      {
+        icon: Search,
+        label: 'Inspection',
+        descKey: 'roofingInspectionDesc',
+        desc: 'Detailed assessment and report',
+      },
     ],
   },
   {
@@ -55,9 +70,24 @@ const services = [
       'Trim and soffit work',
     ],
     subServices: [
-      { icon: RefreshCcw, label: 'Replacement', desc: 'Full exterior re-siding' },
-      { icon: Wrench, label: 'Repair', desc: 'Panel replacement and patching' },
-      { icon: Layers, label: 'Trim & Detail', desc: 'Soffit, fascia, and corner work' },
+      {
+        icon: RefreshCcw,
+        label: 'Replacement',
+        descKey: 'sidingReplacementDesc',
+        desc: 'Full exterior re-siding',
+      },
+      {
+        icon: Wrench,
+        label: 'Repair',
+        descKey: 'sidingRepairDesc',
+        desc: 'Panel replacement and patching',
+      },
+      {
+        icon: Layers,
+        label: 'Trim & Detail',
+        descKey: 'sidingTrimDesc',
+        desc: 'Soffit, fascia, and corner work',
+      },
     ],
   },
   {
@@ -76,9 +106,24 @@ const services = [
       'Fascia board repair',
     ],
     subServices: [
-      { icon: RefreshCcw, label: 'Installation', desc: 'Custom seamless systems' },
-      { icon: Wrench, label: 'Repair', desc: 'Sealing, re-hanging, and realigning' },
-      { icon: Search, label: 'Cleaning', desc: 'Full flush and debris removal' },
+      {
+        icon: RefreshCcw,
+        label: 'Installation',
+        descKey: 'guttersInstallationDesc',
+        desc: 'Custom seamless systems',
+      },
+      {
+        icon: Wrench,
+        label: 'Repair',
+        descKey: 'guttersRepairDesc',
+        desc: 'Sealing, re-hanging, and realigning',
+      },
+      {
+        icon: Search,
+        label: 'Cleaning',
+        descKey: 'guttersCleaningDesc',
+        desc: 'Full flush and debris removal',
+      },
     ],
   },
 ];
@@ -103,6 +148,12 @@ export default async function ServicesPage() {
   const description =
     settings?.servicesDescription ??
     'Comprehensive exterior services performed by experienced, licensed professionals. Every project, every time.';
+  const showServicesCta = settings?.showServicesCta ?? true;
+  const servicesCtaHeading = settings?.servicesCtaHeading ?? 'Not sure what you need?';
+  const servicesCtaDescription =
+    settings?.servicesCtaDescription ??
+    "We'll assess your home and recommend the best solution — at no cost and with zero pressure.";
+  const servicesCtaButton = settings?.servicesCtaButton ?? 'Schedule a Free Inspection';
 
   // Parse a comma-separated Sanity string into a trimmed string array
   const parseOfferings = (csv: string | undefined, fallback: string[]) =>
@@ -113,12 +164,17 @@ export default async function ServicesPage() {
           .filter(Boolean)
       : fallback;
 
-  // Merge Sanity-editable fields into each hardcoded service
+  // Merge Sanity-editable fields into each hardcoded service.
+  // Card labels stay hardcoded; only each card's description is editable.
   const displayServices = services.map((s) => ({
     ...s,
     tagline: (settings?.[`${s.id}Tagline`] as string | undefined) ?? s.tagline,
     description: (settings?.[`${s.id}Description`] as string | undefined) ?? s.description,
     offerings: parseOfferings(settings?.[`${s.id}Offerings`] as string | undefined, s.offerings),
+    subServices: s.subServices.map((sub) => ({
+      ...sub,
+      desc: (settings?.[sub.descKey] as string | undefined) ?? sub.desc,
+    })),
   }));
 
   return (
@@ -321,32 +377,33 @@ export default async function ServicesPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="px-4 md:px-6 py-6">
-        <div className="container mx-auto">
-          <div
-            className="w-fit mx-auto rounded-2xl py-10 md:py-14 px-10 md:px-16 text-center"
-            style={{ backgroundColor: palette.background.primary }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#2D2C2C] dark:text-[#D4D4D4]">
-              Not sure what you need?
-            </h2>
-            <p className="text-lg mb-5 max-w-xl mx-auto text-[#2D2C2C] dark:text-[#D4D4D4]">
-              We&apos;ll assess your home and recommend the best solution — at no cost and with zero
-              pressure.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
+      {showServicesCta && (
+        <section className="px-4 md:px-6 py-6">
+          <div className="container mx-auto">
+            <div
+              className="w-fit mx-auto rounded-2xl py-10 md:py-14 px-10 md:px-16 text-center"
+              style={{ backgroundColor: palette.background.primary }}
             >
-              <Link href="/contact">
-                Schedule a Free Inspection
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#2D2C2C] dark:text-[#D4D4D4]">
+                {servicesCtaHeading}
+              </h2>
+              <p className="text-lg mb-5 max-w-xl mx-auto text-[#2D2C2C] dark:text-[#D4D4D4]">
+                {servicesCtaDescription}
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#2D2C2C] dark:text-[#D4D4D4] font-bold text-base"
+              >
+                <Link href="/contact">
+                  {servicesCtaButton}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }
