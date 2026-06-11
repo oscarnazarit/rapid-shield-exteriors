@@ -5,7 +5,15 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { palette } from '@/lib/tokens/colors';
 
-const photos = ['/pic1.JPEG', '/pic2.JPEG', '/pic3.JPG', '/pic4.JPG', '/pic8.JPEG'];
+const photos = [
+  '/pic1.JPEG',
+  '/pic2.JPEG',
+  '/pic3.JPG',
+  '/pic4.JPG',
+  '/pic8.JPEG',
+  '/pic9.JPG',
+  '/pic10.JPG',
+];
 
 export default function HomeGallery() {
   const scrollerRef = useRef<HTMLDivElement>(null);
