@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' *.facebook.com *.fbcdn.net",
               "frame-src 'self' *.facebook.com *.fbcdn.net https://*.sanity.io",
-              "img-src 'self' data: blob: *.facebook.com *.fbcdn.net *.fbsbx.com https://cdn.sanity.io",
+              "img-src 'self' data: blob: *.facebook.com *.fbcdn.net *.fbsbx.com https://cdn.sanity.io https://*.bbb.org",
               "font-src 'self' data: *",
               "style-src 'self' 'unsafe-inline' *.facebook.com *.fbcdn.net",
               // Sanity Studio needs to reach its API, asset CDN, uploads, and live (websocket) APIs

@@ -75,6 +75,26 @@ const fallbackReasons = [
   'Local company with a community reputation',
 ];
 
+function BbbSeal({ className = '' }: { className?: string }) {
+  return (
+    <a
+      href="https://www.bbb.org/us/ia/des-moines/profile/roofing-contractors/rapid-shield-exteriors-llc-0664-32159661/#sealclick"
+      target="_blank"
+      rel="nofollow noopener noreferrer"
+      className={`group items-center justify-center overflow-hidden rounded-md ring-2 ring-[rgb(37,89,117)] bg-white px-2 py-1.5 ${className}`}
+    >
+      <span className="pointer-events-none absolute inset-0 bg-[rgb(37,89,117)]/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="https://seal-iowa.bbb.org/seals/blue-seal-293-61-bbb-32159661.png"
+        style={{ border: 0 }}
+        alt="Rapid Shield Exteriors, LLC BBB Business Review"
+        className="relative h-10 w-auto"
+      />
+    </a>
+  );
+}
+
 export default async function HomePage() {
   const settings = await client.fetch(`*[_type == "siteSettings"][0]`);
 
@@ -168,6 +188,12 @@ export default async function HomePage() {
         />
         <div className="absolute inset-0 bg-black/5" />
 
+        {/* Seal centered in the band below the dark card.
+            Band height matches the container's bottom padding (pb-20 / md:pb-28 / lg:pb-36). */}
+        <div className="flex absolute inset-x-0 bottom-0 h-20 md:h-28 lg:h-36 items-center justify-center z-10">
+          <BbbSeal className="relative inline-flex" />
+        </div>
+
         <div className="relative container mx-auto max-w-6xl px-4 md:px-6 pt-12 md:pt-16 lg:pt-20 pb-20 md:pb-28 lg:pb-36">
           <div className="rounded-4xl bg-black/38 shadow-[0_0_30px_rgba(0,0,0,0.7)] md:h-[420px] p-5 md:p-8">
             <div className="h-full flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20">
@@ -189,7 +215,6 @@ export default async function HomePage() {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
                     asChild
-                    size="lg"
                     className="bg-[#D1992B] hover:bg-[#B67D0E] text-[#D4D4D4] dark:text-[#D4D4D4] hover:text-black dark:hover:text-[#D4D4D4] font-semibold transition-colors"
                   >
                     <Link href="/contact">
@@ -199,7 +224,6 @@ export default async function HomePage() {
                   </Button>
                   <Button
                     asChild
-                    size="lg"
                     variant="outline"
                     className="border-[#D4D4D4] dark:border-[#D4D4D4] text-[#D4D4D4] dark:text-[#D4D4D4] hover:bg-[#B67D0E] hover:text-black dark:hover:text-[#D4D4D4] font-semibold"
                   >
